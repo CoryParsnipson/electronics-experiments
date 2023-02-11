@@ -14,6 +14,8 @@ This is a PCB for a speaker amplifier heavily based on a [product by Adafruit](h
 
 The IC used here is a variant of the MAX98357 Audio Power Amplifier [MAX98357AETE+T](https://www.newark.com/maxim-integrated-products/max98357aete-t/audio-power-amp-d-40-to-85deg/dp/82AC2949), a 16 pin TQFN package that must be soldered using surface mount techniques. (I used a hot air gun and solder paste).
 
+Software: KiCAD 6
+
 #### SD\_MODE
 
 The first large modification is three jumpers with resistors to bias input voltage going into the SD\_MODE input. SD\_MODE controls whether or not the amplifier outputs a stereo average, left channel, or right channel of the input sound data. The resistor values are calculated based on 3.3V input rail. Refer to the [datasheet](https://cdn-shop.adafruit.com/product-files/3006/MAX98357A-MAX98357B.pdf) for more information.
@@ -31,6 +33,8 @@ For more detailed explanation, refer to [the blog posts here](https://forums.som
 ![AS01808AO Speaker Enclosure](/images/as01808ao-enclosure-2.jpg?raw=true)
 
 This is an experiment to mount an AS01808AO micro speaker to a PCB and have 3d printed enclosure parts bolted on. It works surprisingly well.
+
+Software: KiCAD 6
 
 The theory behind this is that speaker enclosures need very specific conditions to make the sound quality good. This enclosure is a basic attempt to create a sealed cavity behind the speaker to let the soundwaves resonate. This in theory should let low frequency signals propagate better. The bigger the cavity, the better. And the better sealed and isolated the back half is from the front, the better. In professional settings, the enclosure shape and size is carefully simulated and calculated using specialized software that models the reflection of soundwaves.
 
