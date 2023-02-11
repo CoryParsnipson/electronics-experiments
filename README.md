@@ -6,9 +6,9 @@ Educational and experimental PCB designs for Raspberry pi related products and p
 
 ### max98357-amp
 
-![Amp PCB 3d preview](https://github.com/CoryParsnipson/electronics-experiments/blog/main/images/max98357-amp-1.png?raw=true)
+![Amp PCB 3d preview](/images/max98357-amp-1.png?raw=true)
 
-![Amp PCB image](https://github.com/CoryParsnipson/electronics-experiments/blog/main/images/max98357-amp-2.png?raw=true)
+![Amp PCB image](/images/max98357-amp-2.png?raw=true)
 
 This is a PCB for a speaker amplifier heavily based on a [product by Adafruit](https://learn.adafruit.com/adafruit-max98357-i2s-class-d-mono-amp). The PCB design is essentially exactly the same but with extra resistors wiring to bias certain input pins for convenience of testing different configurations.
 
@@ -26,9 +26,9 @@ For more detailed explanation, refer to [the blog posts here](https://forums.som
 
 ### as01808ao-enclosure
 
-![AS01808AO Speaker Enclosure Concept](https://github.com/CoryParsnipson/electronics-experiments/blog/main/images/as01808ao-enclosure-1.png?raw=true)
+![AS01808AO Speaker Enclosure Concept](/images/as01808ao-enclosure-1.png?raw=true)
 
-![AS01808AO Speaker Enclosure](https://github.com/CoryParsnipson/electronics-experiments/blog/main/images/as01808ao-enclosure-2.jpg?raw=true)
+![AS01808AO Speaker Enclosure](/images/as01808ao-enclosure-2.jpg?raw=true)
 
 This is an experiment to mount an AS01808AO micro speaker to a PCB and have 3d printed enclosure parts bolted on. It works surprisingly well.
 
