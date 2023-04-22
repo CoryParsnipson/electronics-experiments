@@ -10,7 +10,7 @@ This is an experiment to mount an AS01808AO micro speaker to a PCB and have 3d p
 
 ### KiCAD Version
 
-Current version: KiCAD 6.0.7.
+Current version: KiCAD 7.0.2.
 
 This was originally made with KiCAD 6.0.7.
 
