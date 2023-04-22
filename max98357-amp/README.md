@@ -6,7 +6,7 @@ This is a PCB for a speaker amplifier heavily based on a [product by Adafruit](h
 
 ### KiCAD Version
 
-Current version: KiCAD 6.0.7.
+Current version: KiCAD 7.0.2.
 
 This was originally made with KiCAD 6.0.7.
 
