@@ -1,10 +1,8 @@
 # max98357-amp
 
-## Summary
-
 This is a PCB for a speaker amplifier heavily based on a [product by Adafruit](https://learn.adafruit.com/adafruit-max98357-i2s-class-d-mono-amp). The PCB design is essentially exactly the same but with extra resistors wiring to bias certain input pins for convenience of testing different configurations.
 
-### KiCAD Version
+## KiCAD Version
 
 Current version: KiCAD 7.0.2.
 
@@ -12,13 +10,13 @@ This was originally made with KiCAD 6.0.7.
 
 ## Description
 
-![Amp PCB 3d preview](/images/max98357-amp-1.png?raw=true)
+![Amp PCB 3d preview](/images/max98357-amp/kicad-viewer.png?raw=true)
 
 The IC used here is a variant of the MAX98357 Audio Power Amplifier [MAX98357AETE+T](https://www.newark.com/maxim-integrated-products/max98357aete-t/audio-power-amp-d-40-to-85deg/dp/82AC2949), a 16 pin TQFN package that must be soldered using surface mount techniques. (I used a hot air gun and solder paste).
 
 ### SD\_MODE
 
-![Amp PCB image](/images/max98357-amp-2.png?raw=true)
+![Amp PCB image](/images/max98357-amp/schematic.png?raw=true)
 
 The first large modification is three jumpers with resistors to bias input voltage going into the SD\_MODE input. SD\_MODE controls whether or not the amplifier outputs a stereo average, left channel, or right channel of the input sound data. The resistor values are calculated based on 3.3V input rail. Refer to the [datasheet](https://cdn-shop.adafruit.com/product-files/3006/MAX98357A-MAX98357B.pdf) for more information.
 

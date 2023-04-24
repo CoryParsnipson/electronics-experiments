@@ -1,12 +1,8 @@
 # as01808ao-enclosure
 
-![AS01808AO Speaker Enclosure Concept](/images/as01808ao-enclosure-1.png?raw=true)
-
-![AS01808AO Speaker Enclosure](/images/as01808ao-enclosure-2.jpg?raw=true)
-
-## Summary
-
 This is an experiment to mount an AS01808AO micro speaker to a PCB and have 3d printed enclosure parts bolted on. It works surprisingly well.
+
+![AS01808AO Speaker Enclosure](/images/as01808ao-enclosure/enclosure-finished.jpg?raw=true)
 
 ### KiCAD Version
 
@@ -17,6 +13,8 @@ This was originally made with KiCAD 6.0.7.
 ## Description
 
 The theory behind this is that speaker enclosures need very specific conditions to make the sound quality good. This enclosure is a basic attempt to create a sealed cavity behind the speaker to let the soundwaves resonate. This in theory should let low frequency signals propagate better. The bigger the cavity, the better. And the better sealed and isolated the back half is from the front, the better. In professional settings, the enclosure shape and size is carefully simulated and calculated using specialized software that models the reflection of soundwaves.
+
+![AS01808AO Speaker Enclosure Concept](/images/as01808ao-enclosure/cad-exploded-view.png?raw=true)
 
 The result was actually noticeable! Compared to the same speaker mounted flush to a piece of wood, the sound volume was qualitatively louder and had a more rounded propagation quality. The bass was improved as well.
 
