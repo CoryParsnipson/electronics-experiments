@@ -1,0 +1,606 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L power:+5V #PWR0102
+U 1 1 60F57EF8
+P 950 900
+F 0 "#PWR0102" H 950 750 50  0001 C CNN
+F 1 "+5V" H 965 1073 50  0000 C CNN
+F 2 "" H 950 900 50  0001 C CNN
+F 3 "" H 950 900 50  0001 C CNN
+	1    950  900 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	950  900  950  1100
+Wire Wire Line
+	950  1100 1300 1100
+Text Label 1700 1100 0    50   ~ 0
+vcc
+$Comp
+L power:PWR_FLAG #FLG0101
+U 1 1 60F7A60D
+P 1300 1100
+F 0 "#FLG0101" H 1300 1175 50  0001 C CNN
+F 1 "PWR_FLAG" H 1300 1273 50  0000 C CNN
+F 2 "" H 1300 1100 50  0001 C CNN
+F 3 "~" H 1300 1100 50  0001 C CNN
+	1    1300 1100
+	1    0    0    -1  
+$EndComp
+Connection ~ 1300 1100
+Wire Wire Line
+	1300 1100 1900 1100
+$Comp
+L power:GND #PWR0105
+U 1 1 60F7B852
+P 950 1600
+F 0 "#PWR0105" H 950 1350 50  0001 C CNN
+F 1 "GND" H 955 1427 50  0000 C CNN
+F 2 "" H 950 1600 50  0001 C CNN
+F 3 "" H 950 1600 50  0001 C CNN
+	1    950  1600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	950  1600 950  1400
+Wire Wire Line
+	950  1400 1300 1400
+$Comp
+L power:PWR_FLAG #FLG0102
+U 1 1 60F7EDD7
+P 1300 1400
+F 0 "#FLG0102" H 1300 1475 50  0001 C CNN
+F 1 "PWR_FLAG" H 1300 1573 50  0000 C CNN
+F 2 "" H 1300 1400 50  0001 C CNN
+F 3 "~" H 1300 1400 50  0001 C CNN
+	1    1300 1400
+	1    0    0    -1  
+$EndComp
+Connection ~ 1300 1400
+Wire Wire Line
+	1300 1400 1900 1400
+Wire Wire Line
+	8600 1800 10000 1800
+Wire Wire Line
+	8800 2200 9650 2200
+Wire Wire Line
+	8600 2600 9300 2600
+Text Label 8950 2600 0    50   ~ 0
+vcc
+Wire Wire Line
+	9300 3000 9300 3100
+$Comp
+L power:GND #PWR0108
+U 1 1 60FAB9FA
+P 9300 3100
+F 0 "#PWR0108" H 9300 2850 50  0001 C CNN
+F 1 "GND" H 9305 2927 50  0000 C CNN
+F 2 "" H 9300 3100 50  0001 C CNN
+F 3 "" H 9300 3100 50  0001 C CNN
+	1    9300 3100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9300 2600 9300 2700
+Text Label 7000 3000 0    50   ~ 0
+vd33
+Wire Wire Line
+	7300 3000 6950 3000
+Connection ~ 8800 2200
+Wire Wire Line
+	8800 2500 8600 2500
+Wire Wire Line
+	8800 2200 8800 2500
+Text Label 8950 2200 0    50   ~ 0
+vd33
+Wire Wire Line
+	9650 2600 9650 2700
+$Comp
+L power:GND #PWR0107
+U 1 1 60F99FBE
+P 9650 2700
+F 0 "#PWR0107" H 9650 2450 50  0001 C CNN
+F 1 "GND" H 9655 2527 50  0000 C CNN
+F 2 "" H 9650 2700 50  0001 C CNN
+F 3 "" H 9650 2700 50  0001 C CNN
+	1    9650 2700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9650 2200 9650 2300
+Wire Wire Line
+	8800 2000 8800 2200
+Wire Wire Line
+	8600 2000 8800 2000
+Text Label 8950 1800 0    50   ~ 0
+vd18
+Wire Wire Line
+	10000 2200 10000 2300
+$Comp
+L power:GND #PWR0106
+U 1 1 60F8A934
+P 10000 2300
+F 0 "#PWR0106" H 10000 2050 50  0001 C CNN
+F 1 "GND" H 10005 2127 50  0000 C CNN
+F 2 "" H 10000 2300 50  0001 C CNN
+F 3 "" H 10000 2300 50  0001 C CNN
+	1    10000 2300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10000 1800 10000 1900
+Text Label 7000 2900 0    50   ~ 0
+vd18
+Wire Wire Line
+	7300 2900 6950 2900
+Wire Wire Line
+	6250 3300 6250 3400
+Text Label 6150 2850 0    50   ~ 0
+vcc
+Text Label 6200 3850 0    50   ~ 0
+vcc
+Text Label 8750 4550 0    50   ~ 0
+vcc
+Wire Wire Line
+	8550 4550 8950 4550
+Wire Wire Line
+	6000 3850 6400 3850
+Wire Wire Line
+	6000 2850 6350 2850
+Wire Wire Line
+	9000 4450 8550 4450
+Wire Wire Line
+	9000 3100 9000 4450
+Wire Wire Line
+	8600 3100 9000 3100
+Wire Wire Line
+	8900 3000 8600 3000
+Wire Wire Line
+	8900 4350 8900 3000
+Wire Wire Line
+	8550 4350 8900 4350
+Wire Wire Line
+	8550 3950 8550 4250
+Wire Wire Line
+	8750 3950 8550 3950
+Wire Wire Line
+	8750 4050 8750 3950
+$Comp
+L power:GND #PWR0104
+U 1 1 60F72C96
+P 8750 4050
+F 0 "#PWR0104" H 8750 3800 50  0001 C CNN
+F 1 "GND" H 8755 3877 50  0000 C CNN
+F 2 "" H 8750 4050 50  0001 C CNN
+F 3 "" H 8750 4050 50  0001 C CNN
+	1    8750 4050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6050 2550 6000 2550
+Wire Wire Line
+	6050 2250 6050 2550
+Wire Wire Line
+	6200 2250 6050 2250
+Wire Wire Line
+	6200 2350 6200 2250
+Wire Wire Line
+	6050 3550 6000 3550
+Wire Wire Line
+	6050 3300 6050 3550
+Wire Wire Line
+	6250 3300 6050 3300
+$Comp
+L power:GND #PWR0103
+U 1 1 60F7163A
+P 6250 3400
+F 0 "#PWR0103" H 6250 3150 50  0001 C CNN
+F 1 "GND" H 6255 3227 50  0000 C CNN
+F 2 "" H 6250 3400 50  0001 C CNN
+F 3 "" H 6250 3400 50  0001 C CNN
+	1    6250 3400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0101
+U 1 1 60F70E6B
+P 6200 2350
+F 0 "#PWR0101" H 6200 2100 50  0001 C CNN
+F 1 "GND" H 6205 2177 50  0000 C CNN
+F 2 "" H 6200 2350 50  0001 C CNN
+F 3 "" H 6200 2350 50  0001 C CNN
+	1    6200 2350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6600 2500 7300 2500
+Wire Wire Line
+	6600 3750 6600 2500
+Wire Wire Line
+	6000 3750 6600 3750
+Wire Wire Line
+	6700 2600 7300 2600
+Wire Wire Line
+	6700 3650 6700 2600
+Wire Wire Line
+	6000 3650 6700 3650
+Wire Wire Line
+	6300 2100 7300 2100
+Wire Wire Line
+	6300 2750 6300 2100
+Wire Wire Line
+	6000 2750 6300 2750
+Wire Wire Line
+	6400 2200 7300 2200
+Wire Wire Line
+	6400 2650 6400 2200
+Wire Wire Line
+	6000 2650 6400 2650
+NoConn ~ 7650 4350
+NoConn ~ 7650 4250
+NoConn ~ 5100 3650
+NoConn ~ 5100 3550
+NoConn ~ 5100 2650
+NoConn ~ 5100 2550
+$Comp
+L CU01SAV1S00:CU01SAV1S00 J3
+U 1 1 60F6A84A
+P 7650 4250
+F 0 "J3" H 8100 4515 50  0000 C CNN
+F 1 "CU01SAV1S00" H 8100 4424 50  0000 C CNN
+F 2 "CU01SAV1S00:CU01SAV1S00" H 8400 4350 50  0001 L CNN
+F 3 "https://media.digikey.com/pdf/Data%20Sheets/Cvilux%20USA%20PDFs/CU0112S.pdf" H 8400 4250 50  0001 L CNN
+F 4 "USB TYPE-A SINGLE PORT STRAIGHT" H 8400 4150 50  0001 L CNN "Description"
+F 5 "14" H 8400 4050 50  0001 L CNN "Height"
+F 6 "CviLux Corporation" H 8400 3950 50  0001 L CNN "Manufacturer_Name"
+F 7 "CU01SAV1S00" H 8400 3850 50  0001 L CNN "Manufacturer_Part_Number"
+	1    7650 4250
+	1    0    0    -1  
+$EndComp
+$Comp
+L CU01SAV1S00:CU01SAV1S00 J2
+U 1 1 60F6A259
+P 5100 3550
+F 0 "J2" H 5550 3815 50  0000 C CNN
+F 1 "CU01SAV1S00" H 5550 3724 50  0000 C CNN
+F 2 "CU01SAV1S00:CU01SAV1S00" H 5850 3650 50  0001 L CNN
+F 3 "https://media.digikey.com/pdf/Data%20Sheets/Cvilux%20USA%20PDFs/CU0112S.pdf" H 5850 3550 50  0001 L CNN
+F 4 "USB TYPE-A SINGLE PORT STRAIGHT" H 5850 3450 50  0001 L CNN "Description"
+F 5 "14" H 5850 3350 50  0001 L CNN "Height"
+F 6 "CviLux Corporation" H 5850 3250 50  0001 L CNN "Manufacturer_Name"
+F 7 "CU01SAV1S00" H 5850 3150 50  0001 L CNN "Manufacturer_Part_Number"
+	1    5100 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L CU01SAV1S00:CU01SAV1S00 J1
+U 1 1 60F68D2D
+P 5100 2550
+F 0 "J1" H 5550 2815 50  0000 C CNN
+F 1 "CU01SAV1S00" H 5550 2724 50  0000 C CNN
+F 2 "CU01SAV1S00:CU01SAV1S00" H 5850 2650 50  0001 L CNN
+F 3 "https://media.digikey.com/pdf/Data%20Sheets/Cvilux%20USA%20PDFs/CU0112S.pdf" H 5850 2550 50  0001 L CNN
+F 4 "USB TYPE-A SINGLE PORT STRAIGHT" H 5850 2450 50  0001 L CNN "Description"
+F 5 "14" H 5850 2350 50  0001 L CNN "Height"
+F 6 "CviLux Corporation" H 5850 2250 50  0001 L CNN "Manufacturer_Name"
+F 7 "CU01SAV1S00" H 5850 2150 50  0001 L CNN "Manufacturer_Part_Number"
+	1    5100 2550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR01
+U 1 1 60F60EE3
+P 6950 1650
+F 0 "#PWR01" H 6950 1400 50  0001 C CNN
+F 1 "GND" H 6955 1477 50  0000 C CNN
+F 2 "" H 6950 1650 50  0001 C CNN
+F 3 "" H 6950 1650 50  0001 C CNN
+	1    6950 1650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6950 1650 6950 1550
+Wire Wire Line
+	6950 1550 7200 1550
+Wire Wire Line
+	7200 1550 7200 1800
+$Comp
+L power:GND #PWR02
+U 1 1 60F60494
+P 7050 3550
+F 0 "#PWR02" H 7050 3300 50  0001 C CNN
+F 1 "GND" H 7055 3377 50  0000 C CNN
+F 2 "" H 7050 3550 50  0001 C CNN
+F 3 "" H 7050 3550 50  0001 C CNN
+	1    7050 3550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7050 3450 7050 3550
+Wire Wire Line
+	7050 3100 7050 3150
+Wire Wire Line
+	7300 3100 7050 3100
+NoConn ~ 7300 2800
+NoConn ~ 7300 2700
+NoConn ~ 7300 2400
+NoConn ~ 7300 2300
+NoConn ~ 8600 2400
+NoConn ~ 8600 2100
+NoConn ~ 8600 2900
+NoConn ~ 8600 2800
+NoConn ~ 8600 2700
+NoConn ~ 8600 2300
+NoConn ~ 8600 2200
+NoConn ~ 8600 1900
+Wire Wire Line
+	6350 1600 6400 1600
+Wire Wire Line
+	6350 2000 6350 1600
+Wire Wire Line
+	7300 2000 6350 2000
+Wire Wire Line
+	6750 1900 7300 1900
+Wire Wire Line
+	6750 1600 6750 1900
+Wire Wire Line
+	6700 1600 6750 1600
+Wire Wire Line
+	7200 1800 7300 1800
+$Comp
+L Device:R_US R1
+U 1 1 60F53E5B
+P 7050 3300
+F 0 "R1" H 7118 3346 50  0000 L CNN
+F 1 "R_US" H 7118 3255 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 7090 3290 50  0001 C CNN
+F 3 "~" H 7050 3300 50  0001 C CNN
+	1    7050 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C3
+U 1 1 60F52FD1
+P 9300 2850
+F 0 "C3" H 9415 2896 50  0000 L CNN
+F 1 "C" H 9415 2805 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 9338 2700 50  0001 C CNN
+F 3 "~" H 9300 2850 50  0001 C CNN
+	1    9300 2850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C2
+U 1 1 60F52DBE
+P 9650 2450
+F 0 "C2" H 9765 2496 50  0000 L CNN
+F 1 "C" H 9765 2405 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 9688 2300 50  0001 C CNN
+F 3 "~" H 9650 2450 50  0001 C CNN
+	1    9650 2450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C1
+U 1 1 60F51B21
+P 10000 2050
+F 0 "C1" H 10115 2096 50  0000 L CNN
+F 1 "C" H 10115 2005 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 10038 1900 50  0001 C CNN
+F 3 "~" H 10000 2050 50  0001 C CNN
+	1    10000 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Crystal Y1
+U 1 1 60F4FF2B
+P 6550 1600
+F 0 "Y1" H 6550 1868 50  0000 C CNN
+F 1 "Crystal" H 6550 1777 50  0000 C CNN
+F 2 "Crystal:Crystal_HC49-4H_Vertical" H 6550 1600 50  0001 C CNN
+F 3 "~" H 6550 1600 50  0001 C CNN
+	1    6550 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L FE1.1S:FE1.1S IC1
+U 1 1 60F4CD5C
+P 7300 1800
+F 0 "IC1" H 7950 2065 50  0000 C CNN
+F 1 "FE1.1S" H 7950 1974 50  0000 C CNN
+F 2 "FE1.1S:SOP64P600X175-28N" H 8450 1900 50  0001 L CNN
+F 3 "https://cdn-shop.adafruit.com/product-files/2991/FE1.1s+Data+Sheet+(Rev.+1.0).pdf" H 8450 1800 50  0001 L CNN
+F 4 "USB 2.0 HIGH SPEED 4-PORT HUB CONTROLLER" H 8450 1700 50  0001 L CNN "Description"
+F 5 "1.75" H 8450 1600 50  0001 L CNN "Height"
+F 6 "JFD IC" H 8450 1500 50  0001 L CNN "Manufacturer_Name"
+F 7 "FE1.1S" H 8450 1400 50  0001 L CNN "Manufacturer_Part_Number"
+F 8 "" H 8450 1300 50  0001 L CNN "Mouser Part Number"
+F 9 "" H 8450 1200 50  0001 L CNN "Mouser Price/Stock"
+F 10 "" H 8450 1100 50  0001 L CNN "Arrow Part Number"
+F 11 "" H 8450 1000 50  0001 L CNN "Arrow Price/Stock"
+	1    7300 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L rpi-shell:dpad-cross-trace U1
+U 1 1 60F6F767
+P 2150 4250
+F 0 "U1" H 2100 5015 50  0000 C CNN
+F 1 "dpad-cross-trace" H 2100 4924 50  0000 C CNN
+F 2 "dpad:3ds_dpad_cross" H 2150 3200 50  0001 C CNN
+F 3 "" H 2150 3200 50  0001 C CNN
+	1    2150 4250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_MEC_5E SW2
+U 1 1 60F7D205
+P 2100 5750
+F 0 "SW2" H 2100 6135 50  0000 C CNN
+F 1 "SW_MEC_5G" H 2100 6044 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-10xx" H 2100 5950 50  0001 C CNN
+F 3 "http://www.apem.com/int/index.php?controller=attachment&id_attachment=488" H 2100 5950 50  0001 C CNN
+	1    2100 5750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_MEC_5E SW4
+U 1 1 60F7F2BB
+P 2600 6250
+F 0 "SW4" H 2600 6635 50  0000 C CNN
+F 1 "SW_MEC_5G" H 2600 6544 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-10xx" H 2600 6450 50  0001 C CNN
+F 3 "http://www.apem.com/int/index.php?controller=attachment&id_attachment=488" H 2600 6450 50  0001 C CNN
+	1    2600 6250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_MEC_5E SW1
+U 1 1 60F8092C
+P 1600 6250
+F 0 "SW1" H 1600 6635 50  0000 C CNN
+F 1 "SW_MEC_5G" H 1600 6544 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-10xx" H 1600 6450 50  0001 C CNN
+F 3 "http://www.apem.com/int/index.php?controller=attachment&id_attachment=488" H 1600 6450 50  0001 C CNN
+	1    1600 6250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_MEC_5E SW3
+U 1 1 60F81E81
+P 2100 6700
+F 0 "SW3" H 2100 7085 50  0000 C CNN
+F 1 "SW_MEC_5G" H 2100 6994 50  0000 C CNN
+F 2 "Button_Switch_THT:SW_TH_Tactile_Omron_B3F-10xx" H 2100 6900 50  0001 C CNN
+F 3 "http://www.apem.com/int/index.php?controller=attachment&id_attachment=488" H 2100 6900 50  0001 C CNN
+	1    2100 6700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x05 J4
+U 1 1 60FB88DA
+P 3450 4350
+F 0 "J4" H 3530 4392 50  0000 L CNN
+F 1 "Conn_01x05" H 3530 4301 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 3450 4350 50  0001 C CNN
+F 3 "~" H 3450 4350 50  0001 C CNN
+	1    3450 4350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3250 4150 3100 4150
+Wire Wire Line
+	3100 4150 3100 3800
+Wire Wire Line
+	3100 3800 2500 3800
+Wire Wire Line
+	2750 4050 3050 4050
+Wire Wire Line
+	3050 4050 3050 4250
+Wire Wire Line
+	3050 4250 3250 4250
+Wire Wire Line
+	3250 4350 3050 4350
+Wire Wire Line
+	3050 4350 3050 4450
+Wire Wire Line
+	3050 4450 2750 4450
+Wire Wire Line
+	3250 4450 3100 4450
+Wire Wire Line
+	3100 4450 3100 4650
+Wire Wire Line
+	3100 4650 2550 4650
+Wire Wire Line
+	1450 4250 1400 4250
+Wire Wire Line
+	1400 4250 1400 4900
+Wire Wire Line
+	1400 4900 3200 4900
+Wire Wire Line
+	3200 4900 3200 4550
+Wire Wire Line
+	3200 4550 3250 4550
+Wire Wire Line
+	1900 5750 1300 5750
+Wire Wire Line
+	1300 5750 1300 6250
+Wire Wire Line
+	1300 6250 1400 6250
+Wire Wire Line
+	1300 6250 1300 6700
+Wire Wire Line
+	1300 6700 1900 6700
+Connection ~ 1300 6250
+Wire Wire Line
+	1300 6700 1300 6900
+Wire Wire Line
+	1300 6900 2400 6900
+Connection ~ 1300 6700
+Wire Wire Line
+	2300 6700 3050 6700
+Wire Wire Line
+	3050 6700 3050 6350
+Wire Wire Line
+	2400 6250 2400 6900
+Connection ~ 2400 6900
+Wire Wire Line
+	3050 6350 3250 6350
+$Comp
+L Connector_Generic:Conn_01x05 J5
+U 1 1 60FB98B9
+P 3450 6250
+F 0 "J5" H 3530 6292 50  0000 L CNN
+F 1 "Conn_01x05" H 3530 6201 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 3450 6250 50  0001 C CNN
+F 3 "~" H 3450 6250 50  0001 C CNN
+	1    3450 6250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3100 6450 3250 6450
+Wire Wire Line
+	2400 6900 3100 6900
+Wire Wire Line
+	3100 6900 3100 6450
+Wire Wire Line
+	2800 6250 3250 6250
+Wire Wire Line
+	1800 6250 2150 6250
+Wire Wire Line
+	2150 6250 2150 5850
+Wire Wire Line
+	2150 5850 2900 5850
+Wire Wire Line
+	2900 5850 2900 6150
+Wire Wire Line
+	2900 6150 3250 6150
+Wire Wire Line
+	2300 5750 3050 5750
+Wire Wire Line
+	3050 5750 3050 6050
+Wire Wire Line
+	3050 6050 3250 6050
+NoConn ~ 2400 6150
+NoConn ~ 2800 6150
+NoConn ~ 2300 6600
+NoConn ~ 1900 6600
+NoConn ~ 1400 6150
+NoConn ~ 1800 6150
+NoConn ~ 1900 5650
+NoConn ~ 2300 5650
+$EndSCHEMATC

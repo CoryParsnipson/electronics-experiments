@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name FE1.1S)(type Legacy)(uri ${KIPRJMOD}/lib/symbols/fe1.1s/FE1.1S.lib)(options "")(descr ""))
+  (lib (name CU01SAV1S00)(type Legacy)(uri ${KIPRJMOD}/lib/symbols/CU01SAV1S00/CU01SAV1S00.lib)(options "")(descr ""))
+  (lib (name rpi-shell)(type Legacy)(uri ${KIPRJMOD}/lib/symbols/dpad/rpi-shell.lib)(options "")(descr ""))
+)

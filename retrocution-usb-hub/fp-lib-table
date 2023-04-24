@@ -1,0 +1,5 @@
+(fp_lib_table
+  (lib (name FE1.1S)(type KiCad)(uri ${KIPRJMOD}/lib/footprints/FE1.1S.pretty)(options "")(descr ""))
+  (lib (name CU01SAV1S00)(type KiCad)(uri ${KIPRJMOD}/lib/footprints/CU01SAV1S00.pretty)(options "")(descr ""))
+  (lib (name dpad)(type KiCad)(uri ${KIPRJMOD}/lib/footprints/dpad.pretty)(options "")(descr ""))
+)
