@@ -16,7 +16,7 @@ This project was to learn how to create a PCB using KiCAD. The USB hub project w
 
 ![Schematic](/images/retrocution-usb-hub/usb-hub-schematic.png?raw=true)
 
-![Bare PCB](/images/retrocution-usb-hub/base-pcbs.jpg?raw=true)
+![Bare PCB](/images/retrocution-usb-hub/bare-pcbs.jpg?raw=true)
 
 ### USB Hub Design
 
