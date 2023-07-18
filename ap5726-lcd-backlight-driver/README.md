@@ -111,6 +111,7 @@ In KiCAD, I used copper fill zones to encapsulate VCC and GND, as depicted in th
 ### Testing
 
 ![The AP5726 is physically very small](/images/ap5726-lcd-backlight-driver/ap5726-scale.jpg?raw=true)
+
 The AP5726 is physically *very* small.
 
 ![Mostly assembled breakout board](/images/ap5726-lcd-backlight-driver/assembled-pcb.jpg?raw=true)
