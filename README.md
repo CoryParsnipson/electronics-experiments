@@ -4,6 +4,16 @@ Educational and experimental PCB designs for Raspberry pi related products and p
 
 ## Project List
 
+### 555-timer-pwm-with-digipot
+
+This is a hardware PWM output generator. This will give you a fixed frequency, variable duty-cycle PWM signal without using a microcontroller. This uses a 555-timer in astable oscillation mode that provides a 5% - 100% duty cycle. This allows you to control small motors and dim LED lights (see `ap5726-lcd-backlight-driver`).
+
+### ap5726-lcd-backlight-driver
+
+![AP5726 LED driver with LED mock fixture](/images/ap5726-lcd-backlight-driver/working-breadboard.jpg?raw=true)
+
+This is a breakout board for testing the AP5726 white-LED driver (used for driving 5-7in LCD screen modules). This DC-DC converter is specifically designed to drive LEDs in series while supplying a constant 40mA current and up to 35V.
+
 ### as01808ao-enclosure
 
 ![AS01808AO Enclosure](/images/banner/as01808ao-enclosure.jpg?raw=true)
