@@ -108,8 +108,6 @@ In KiCAD, I used copper fill zones to encapsulate VCC and GND, as depicted in th
 
 ![AP5726 PCB Layout](/images/ap5726-lcd-backlight-driver/ap5726-breakout-layout.png?raw=true)
 
-### Testing
-
 ![The AP5726 is physically very small](/images/ap5726-lcd-backlight-driver/ap5726-scale.jpg?raw=true)
 
 The AP5726 is physically *very* small.
@@ -118,7 +116,9 @@ The AP5726 is physically *very* small.
 
 ![KiCAD Visualizer vs real life board](/images/ap5726-lcd-backlight-driver/visualizer-vs-irl.png?raw=true)
 
-The components are small and it is recommended to assemble the board using flux and a soldering iron with an SMD tip.
+The components are small and it is recommended to assemble the board using flux and a soldering iron with an SMD tip. You will also need a hotplate or hot air rework station to solder the LQH44PN220 inductor, since the pads are completely underneath the component.
+
+### Testing
 
 ![Working PCB with breadboard LED mock fixture](/images/ap5726-lcd-backlight-driver/working-breadboard.jpg?raw=true)
 
