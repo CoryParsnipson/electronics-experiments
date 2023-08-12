@@ -170,7 +170,7 @@ If I disconnect the digipot and use a 10k resistor and a short circuit to connec
 
 If I put the 10k resistor across RW and RH, this will simulate minimum duty cycle:
 
-![Minimum Duty Period Debug](/images/555-timer-pwm-with-digipot/debug-min-period-measurement.jpg?raw=true)
+![Minimum Duty Period Debug](/images/555-timer-pwm-with-digipot/debug-period-measurement.jpg?raw=true)
 ![Minimum Duty Cycle Debug](/images/555-timer-pwm-with-digipot/debug-min-cycle-measurement.jpg?raw=true)
 
 The period here is 910 us and the duty cycle is high for 50 us. That corresponds to a 5.47% duty cycle. Very close to the calculated value!
@@ -199,7 +199,9 @@ There are a few things one can implement to improve upon this design, however, n
 
 ### Possible Alternatives
 
-* Use a microcontroller to generate the PWM signal. Using an extra wire from a Raspberry Pi and generating a PWM signal from it works really well, at the cost of requiring an entire Raspberry Pi and an extra wire to generate the signal. If one wants to embed an microcontroller into the PCB so that the user will not have to supply their own microcontroller, one can use an [ATTiny25](https://www.microchip.com/en-us/product/attiny25). This microcontroller does not require any external components and can run off 3.3V. So the user simply needs to incorporate the footprint onto the PCB and then write fireware to configure I2C, non-volatile memory storage, and enable PWM generation on one of the pins.
+* Use a microcontroller to generate the PWM signal. Using an extra wire from a Raspberry Pi and generating a PWM signal from it works really well, at the cost of requiring an entire Raspberry Pi and an extra wire to generate the signal. If one wants to embed an microcontroller into the PCB so that the user will not have to supply their own microcontroller, one can use an [ATTiny25](https://www.microchip.com/en-us/product/attiny25). This microcontroller does not require any external components and can run off 3.3V. So the user simply needs to incorporate the footprint onto the PCB and then write fireware to configure I2C, non-volatile memory storage, and enable PWM generation on one of the pins.  
+  
+  [Here](https://www.allaboutcircuits.com/technical-articles/introduction-to-microcontroller-timers-pwm-timers/) is a good explanation of how a microcontroller is able to generate a PWM signal.
 
 * Use [multi-op-amps in an astable vibrator configuration](https://www.ti.com/lit/an/sboa212a/sboa212a.pdf?ts=1691788479469). This is similar to using a 555-timer, except the design is more complicated. The benefits are that the frequency will be more stable with the op-amps and the wiper resistance of the digipot will not matter because you can use a comparator op-amp to adjust to the digipot's output range.
 
@@ -213,3 +215,4 @@ There are a few things one can implement to improve upon this design, however, n
 1. [MCP4561T-103E (Alternative digipot with low wiper resistance)](https://ww1.microchip.com/downloads/en/DeviceDoc/22107B.pdf)
 1. [Negating Wiper Resistance with Negative Resistance](https://www.electronicdesign.com/technologies/components/article/21758411/negative-resistance-nulls-potentiometers-wiper-resistance)
 1. [ATTiny25](https://www.microchip.com/en-us/product/attiny25)
+1. [How do Microcontroller generate PWM signals?](https://www.allaboutcircuits.com/technical-articles/introduction-to-microcontroller-timers-pwm-timers/)
