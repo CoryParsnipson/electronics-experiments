@@ -44,22 +44,22 @@ The schematic was created by following the block diagram for the frequency indep
 
 ### Component Selection
 
-#### Selection of C, R\_A, and R\_B
+#### Selection of C, R<sub>A</sub>, and R<sub>B</sub>
 
-As explained by [1] and [2], the frequency and duty cycle that the oscillator will assume can be adjusted by selecting values for the three main components, the capacitor C, the fixed resistor R\_A, and the potentiometer R\_B.
+As explained by [1] and [2], the frequency and duty cycle that the oscillator will assume can be adjusted by selecting values for the three main components, the capacitor C, the fixed resistor R<sub>A</sub>, and the potentiometer R<sub>B</sub>.
 
-![Duty Cycle = R\_A / (R\_A + R\_B)](/images/555-timer-pwm-with-digipot/formula-duty-cycle.png?raw=true)
+![Duty Cycle = R<sub>A</sub> / (R<sub>A</sub> + R<sub>B</sub>)](/images/555-timer-pwm-with-digipot/formula-duty-cycle.png?raw=true)
 
-The duty cycle is solely determined by the ratio of both resistors. Where R\_A is the "top" resistor, in series with the capacitor charging path, and R\_B is the bottom resistor, in series with the discharge path. As you can see from the formula, the duty cycle can theoretically go up to 100%, but R\_A is constraining the lower limit. We want this to be small.
+The duty cycle is solely determined by the ratio of both resistors. Where R<sub>A</sub> is the "top" resistor, in series with the capacitor charging path, and R<sub>B</sub> is the bottom resistor, in series with the discharge path. As you can see from the formula, the duty cycle can theoretically go up to 100%, but R<sub>A</sub> is constraining the lower limit. We want this to be small.
 
-* R\_A = 499 ohms
-* R\_B = 10k ohms (total potentiometer resistance value)
+* R<sub>A</sub> = 499 ohms
+* R<sub>B</sub> = 10k ohms (total potentiometer resistance value)
 
 These resistor values can give us a minimum 5% duty cycle. This most likely is not enough to completely turn off the LEDs. That is something I wish I knew before I started, that this particular design is not able to achieve a full duty cycle range. (As a note, other methods of generating PWM signals can achieve a full 0-100% duty cycle range.)
 
 The last component to select is the value of the charging/discharging capacitor. This capacitor has the most influence on frequency.
 
-![Frequency = 1.25 / ((R\_A + R\_B) * C)](/images/555-timer-pwm-with-digipot/formula-frequency.png?raw=true)
+![Frequency = 1.25 / ((R<sub>A</sub> + R<sub>B</sub>) * C)](/images/555-timer-pwm-with-digipot/formula-frequency.png?raw=true)
 
 The frequency we want should be <= 2 kHz, because this design is being made to control the enable signal of the AP5726 white led driver, and that chip is expecting an unfiltered PWM signal to be under 2 kHz. Going with the previous select resistor values, and a capacitor that is 0.1 uF, we get an expected frequency of 1190 Hz.
 
@@ -190,7 +190,7 @@ This design uses too many expensive components. The DS3502 (and similar) digipot
 There are a few things one can implement to improve upon this design, however, none of them change the fact that it is unsuitable for real world usage.
 
 * **Replace DS3502 digipot with one that has smaller wiper resistance**  
-  For instance, the [MCP4561T-103E](https://ww1.microchip.com/downloads/en/DeviceDoc/22107B.pdf) not only has a nominal wiper resistance of 75 ohms but it has 257 steps instead of the DS3502's 127. This will probably improve the duty cycle range drastically. Combined with using a slightly smaller charging resistor (R\_A), you could get to the theoretical 5% minimum duty cycle.
+  For instance, the [MCP4561T-103E](https://ww1.microchip.com/downloads/en/DeviceDoc/22107B.pdf) not only has a nominal wiper resistance of 75 ohms but it has 257 steps instead of the DS3502's 127. This will probably improve the duty cycle range drastically. Combined with using a slightly smaller charging resistor (R<sub>A</sub>), you could get to the theoretical 5% minimum duty cycle.
      
 * **Implement negative resistance op amp circuit**  
   Negating the wiper resistance of a digipot has [been thought of before](https://electronics.stackexchange.com/questions/159212/very-low-wiper-resistance-digital-pots-anyone-know-of-any). One may attempt to use an op amp to create a circuit that would negate the wiper resistance of the digipot. Article [here](https://www.electronicdesign.com/technologies/components/article/21758411/negative-resistance-nulls-potentiometers-wiper-resistance).  
