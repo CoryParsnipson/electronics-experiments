@@ -6,6 +6,8 @@ Educational and experimental PCB designs for Raspberry pi related products and p
 
 ### 555-timer-pwm-with-digipot
 
+![50% Duty Cycle Output Signal](/images/555-timer-pwm-with-digipot/50p-duty-cycle.jpg?raw=true)
+
 This is a hardware PWM output generator. This will give you a fixed frequency, variable duty-cycle PWM signal without using a microcontroller. This uses a 555-timer in astable oscillation mode that provides a 5% - 100% duty cycle. This allows you to control small motors and dim LED lights (see `ap5726-lcd-backlight-driver`).
 
 ### ap5726-lcd-backlight-driver
