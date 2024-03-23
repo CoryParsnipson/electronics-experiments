@@ -22,6 +22,12 @@ This is a breakout board for testing the AP5726 white-LED driver (used for drivi
 
 This is an experiment to mount an AS01808AO micro speaker to a PCB and have 3d printed enclosure parts bolted on. It works surprisingly well.
 
+### attiny-402-i2c-pwm-generator
+
+![ATTiny 402 I2C PWM Generator](/images/banner/attiny-402-i2c-pwm-generator.jpg?raw=true)
+
+This is a project to use the new ATTiny series microcontroller to make an I2C controlled PWM signal that can be varied by frequency and duty cycle.
+
 ### max98357-amp
 
 ![max98357 Amplifier](/images/banner/max98357-amp.png?raw=true)
