@@ -144,13 +144,21 @@ void setFrequency(unsigned long freqInHz, uint16_t* period) {
 // address, and then write the rest of the data sequentially into the
 // register file.
 void onI2CWrite(int num_bytes) {
+  // onI2CWrite is called before every I2C read. If this is true, was_ctrl_write
+  // is set to true
+  bool was_ctrl_write = true;
+
   // reset this value to zero in case previous read used it before
   Wire.getBytesRead();
 
   // get base write address, modulo with number of registers so we
   // don't write off the end of the array
-  serial_write_pointer = Wire.read() % NUM_REG;
+  serial_write_pointer = (uint8_t)Wire.read();
   --num_bytes;
+
+  if (num_bytes > 0) {
+    was_ctrl_write = false;
+  }
 
   // now for the rest of the parameters, write into registers
   while (num_bytes > 0) {
@@ -165,13 +173,15 @@ void onI2CWrite(int num_bytes) {
     );
 
     ++serial_write_pointer;
-    serial_write_pointer = serial_write_pointer % NUM_REG;
+    serial_write_pointer = serial_write_pointer;
     --num_bytes;
 
     EEPROM.update(serial_write_pointer, device_registers[serial_write_pointer]);  
   }
-  
-  updateLocalVariables((uint8_t*)device_registers);
+
+  if (!was_ctrl_write) {
+    updateLocalVariables((uint8_t*)device_registers);  
+  }
 }
 
 // Handler for I2C reads. When this chip receives a command like this:
@@ -187,7 +197,7 @@ void onI2CRead() {
   // called first, with length 0 data. This is to set the write pointer. Then
   // when the read is called afterwards, we just need to retrive the write pointer
   // value here.
-  serial_write_pointer = (serial_write_pointer + Wire.getBytesRead()) % NUM_REG;
+  serial_write_pointer = (serial_write_pointer + Wire.getBytesRead());
 
   // read the register value out at pointer address
   uint8_t read_val = device_registers[serial_write_pointer];
