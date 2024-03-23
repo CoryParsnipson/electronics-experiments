@@ -10,7 +10,7 @@ This is not the latest version as of the time of this writing, but according to 
 
 ## Description
 
-![ATTiny 402 I2C PWM Generator](/iamges/attiny-402-i2c-pwm-generator/test-blink.jpg?raw=true)
+![ATTiny 402 I2C PWM Generator](/images/attiny-402-i2c-pwm-generator/test-blink.jpg?raw=true)
 
 Unlike Arduino, which is extremely user-friendly, the ATTiny microcontrollers require a bit of setup to use. However, they are inexpensive, self-contained, and have a small physical footprint, making them excellent choices for certain applications (such as this one, which needs to be glued to the back of an LCD screen inside an enclosure with very limited space).
 
