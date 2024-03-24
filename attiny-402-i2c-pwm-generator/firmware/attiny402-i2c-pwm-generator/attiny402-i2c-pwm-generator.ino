@@ -18,6 +18,8 @@
 // ------------------------------------------------------------------------
 // I2C defines
 // ------------------------------------------------------------------------
+// IMPORTANT: if you change this, don't forget to modify the initializer
+// list of device_registers and write_mask global variables to match.
 #define NUM_REG    5
 
 // This is the I2C address to listen for commands on. Picked at random
@@ -144,10 +146,6 @@ void setFrequency(unsigned long freqInHz, uint16_t* period) {
 // address, and then write the rest of the data sequentially into the
 // register file.
 void onI2CWrite(int num_bytes) {
-  // onI2CWrite is called before every I2C read. If this is true, was_ctrl_write
-  // is set to true
-  bool was_ctrl_write = true;
-
   // reset this value to zero in case previous read used it before
   Wire.getBytesRead();
 
@@ -156,8 +154,12 @@ void onI2CWrite(int num_bytes) {
   serial_write_pointer = (uint8_t)Wire.read();
   --num_bytes;
 
-  if (num_bytes > 0) {
-    was_ctrl_write = false;
+  if (num_bytes == 0) {
+    // on I2C read, an I2C write will be called to set the serial_write_pointer.
+    // In those cases, the num_bytes will only be 1 instead of 2+. If that
+    // happens, we get here so we can exit before doing an actual write
+    SERIAL_MSG("[I2C] set ptr to %d", serial_write_pointer);
+    return;
   }
 
   // now for the rest of the parameters, write into registers
@@ -176,12 +178,10 @@ void onI2CWrite(int num_bytes) {
     serial_write_pointer = serial_write_pointer;
     --num_bytes;
 
-    EEPROM.update(serial_write_pointer, device_registers[serial_write_pointer]);  
+    EEPROM.write(serial_write_pointer, device_registers[serial_write_pointer]);  
   }
 
-  if (!was_ctrl_write) {
-    updateLocalVariables((uint8_t*)device_registers);  
-  }
+  updateLocalVariables((uint8_t*)device_registers);  
 }
 
 // Handler for I2C reads. When this chip receives a command like this:
@@ -208,7 +208,7 @@ void onI2CRead() {
 
 void readEEPROM(uint8_t* registers, uint8_t num_regs) {
   for (uint8_t addr = 0; addr < num_regs; ++addr) {
-    registers[addr] = EEPROM[addr];
+    registers[addr] = EEPROM.read(addr);
   }
 }
 
