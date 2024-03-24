@@ -62,9 +62,16 @@
       Serial.println(serial_msg_buffer); \
     } while (false);
     
+  // if serial is enabled, the ATTiny will be restarted once about 200ms
+  // after power-on. This means, the sketch will run for ~200ms and then
+  // be abruptly reset and start running for real the second time.
+  // Delay here so that we don't unintentionally power-cycle during
+  // EEPROM write or something.
   #define SERIAL_INIT(x) \
     Serial.begin(x); \
-    while (!Serial) {} // wait for Serial to initialize
+    while (!Serial) {} \
+    delay(2000);
+
 #else
   #define SERIAL_MSG(...)
   #define SERIAL_INIT(x)
@@ -77,6 +84,7 @@ volatile uint8_t device_registers[NUM_REG] = {0x00, 0x00, 0x00, 0x00, 0x00};
 const uint8_t write_mask[NUM_REG] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 volatile uint8_t serial_write_pointer = 0;
 uint16_t period = 0xFFFF;
+bool eeprom_writeback_needed = false;
 
 void setup() {
   SERIAL_INIT(SERIAL_BAUD_RATE);
@@ -108,7 +116,16 @@ void setup() {
   );
 }
 
-void loop() {}
+void loop() {
+  if (eeprom_writeback_needed) {
+    writeEEPROM((uint8_t*)device_registers, NUM_REG);
+    updateLocalVariables((uint8_t*)device_registers);
+    eeprom_writeback_needed = false;
+  }
+
+  // if a delay is not here, the eeprom writeback does not execute for some reason
+  delay(10);
+}
 
 bool isDualSlope() {
   return TCA0.SINGLE.CTRLB | TCA_SINGLE_WGMODE_DSTOP_gc | TCA_SINGLE_WGMODE_DSBOTH_gc | TCA_SINGLE_WGMODE_DSBOTTOM_gc;
@@ -178,10 +195,8 @@ void onI2CWrite(int num_bytes) {
     serial_write_pointer = serial_write_pointer;
     --num_bytes;
 
-    EEPROM.write(serial_write_pointer, device_registers[serial_write_pointer]);  
+    eeprom_writeback_needed = true;
   }
-
-  updateLocalVariables((uint8_t*)device_registers);  
 }
 
 // Handler for I2C reads. When this chip receives a command like this:
@@ -209,6 +224,15 @@ void onI2CRead() {
 void readEEPROM(uint8_t* registers, uint8_t num_regs) {
   for (uint8_t addr = 0; addr < num_regs; ++addr) {
     registers[addr] = EEPROM.read(addr);
+    SERIAL_MSG("[EEPROM] read reg[%d] = 0x%02X", addr, registers[addr]);
+  }
+}
+
+void writeEEPROM(uint8_t* registers, uint8_t num_regs) {
+  // FIXME: should we disable interrupts in this function?
+  for (uint8_t addr = 0; addr < num_regs; ++addr) {
+    EEPROM.update(addr, registers[addr]);
+    SERIAL_MSG("[EEPROM] write reg[%d] = 0x%02X", addr, registers[addr]);
   }
 }
 
