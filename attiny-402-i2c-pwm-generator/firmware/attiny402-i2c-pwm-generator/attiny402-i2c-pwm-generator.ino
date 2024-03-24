@@ -38,12 +38,18 @@
 // If the value at this bit is:
 //   0 = 16 bit res (0 to 65535)
 //   1 = 8 bit (0 to 255)
+//
+// In 8-bit mode, only REG_ADDR_PWM_REQ_LOW is used as duty
+// cycle.
 #define REG_CTRL_DUTY_CYCLE_RESOLUTION 0
 
 // REG_CTRL_INVERT_MODE
-// This will invert the phase of the PWM. If this is set to 0, the
-// PWM signal will be high if the counter is < the CMP value. If set
-// to 1, the opposite will be true.
+// If this mode is set to 1, then duty cycle = 0x0000 will be
+// full brightness (i.e. PWM out is high when counter >= CMP)
+// and duty cycle = 0xFFFF will be off.
+//
+// If this mode is set to 0, then duty cycle = 0x0000 will be
+// off and 0xFFFF will be full brightness.
 #define REG_CTRL_INVERT_MODE 1
 
 // ------------------------------------------------------------------------
@@ -112,7 +118,10 @@ void setup() {
   SERIAL_MSG(
     "[PWM] init (f: %ld, d: 0x%X)",
     getFrequency((uint8_t*)device_registers),
-    getDutyCycle((uint8_t*)device_registers)
+    getDutyCycle(
+      (uint8_t*)device_registers,
+      (device_registers[REG_ADDR_CTRL] >> REG_CTRL_DUTY_CYCLE_RESOLUTION) & 0x01
+    )
   );
 }
 
@@ -236,7 +245,13 @@ void writeEEPROM(uint8_t* registers, uint8_t num_regs) {
   }
 }
 
-uint16_t getDutyCycle(uint8_t* registers) {
+uint16_t getDutyCycle(uint8_t* registers, bool use_8_bits) {
+  if (use_8_bits) {
+    uint16_t duty_cycle = registers[REG_ADDR_PWM_DUTY_LOW];
+    duty_cycle *= 257; // scale 8 bit value to 16 bit value
+    return duty_cycle;
+  }
+
   uint16_t duty_cycle = registers[REG_ADDR_PWM_DUTY_HIGH];
   duty_cycle = (duty_cycle << 8) | registers[REG_ADDR_PWM_DUTY_LOW];
   return duty_cycle;
@@ -264,12 +279,25 @@ uint32_t getFrequency(uint8_t* registers) {
 }
 
 void updateLocalVariables(uint8_t* registers) {
+  bool invert_mode = (registers[REG_ADDR_CTRL] >> REG_CTRL_INVERT_MODE) & 0x01;
+  SERIAL_MSG("[I2C] Invert mode: %d", invert_mode);
+
+  bool duty_cycle_8_bit_mode = (registers[REG_ADDR_CTRL] >> REG_CTRL_DUTY_CYCLE_RESOLUTION) & 0x01;
+  SERIAL_MSG("[I2C] Duty cycle 8 bit mode: %d", duty_cycle_8_bit_mode);
+
   setFrequency(getFrequency(registers), &period);
-  setDutyCycle(getDutyCycle(registers), period);
+
+  uint16_t duty_cycle = getDutyCycle(registers, duty_cycle_8_bit_mode);
+  if (!invert_mode) {
+    // by default, 0x0000 -> full brightness and 0xFFFF -> off, so we 
+    // invert duty cycle on non-invert mode
+    duty_cycle = 0xFFFF - duty_cycle;
+  }
+  setDutyCycle(duty_cycle, period);
 
   SERIAL_MSG(
     "[PWM] set (f: %ld, d: 0x%X)",
     getFrequency((uint8_t*)device_registers),
-    getDutyCycle((uint8_t*)device_registers)
+    getDutyCycle((uint8_t*)device_registers, duty_cycle_8_bit_mode)
   );
 }
