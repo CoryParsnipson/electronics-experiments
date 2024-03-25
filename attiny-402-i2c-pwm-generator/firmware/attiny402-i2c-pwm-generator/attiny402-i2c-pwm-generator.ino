@@ -288,9 +288,7 @@ void updateLocalVariables(uint8_t* registers) {
   setFrequency(getFrequency(registers), &period);
 
   uint16_t duty_cycle = getDutyCycle(registers, duty_cycle_8_bit_mode);
-  if (!invert_mode) {
-    // by default, 0x0000 -> full brightness and 0xFFFF -> off, so we 
-    // invert duty cycle on non-invert mode
+  if (invert_mode) {
     duty_cycle = 0xFFFF - duty_cycle;
   }
   setDutyCycle(duty_cycle, period);
