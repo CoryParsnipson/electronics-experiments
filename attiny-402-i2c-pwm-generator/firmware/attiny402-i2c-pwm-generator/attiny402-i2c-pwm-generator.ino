@@ -190,6 +190,11 @@ void onI2CWrite(int num_bytes) {
 
   // now for the rest of the parameters, write into registers
   while (num_bytes > 0) {
+    if (serial_write_pointer >= NUM_REG) {
+      SERIAL_MSG("[I2C] invalid wr addr (%d)", serial_write_pointer);
+      return;
+    }
+    
     uint8_t orig_data = device_registers[serial_write_pointer] & ~write_mask[serial_write_pointer];
     device_registers[serial_write_pointer] = (Wire.read() & write_mask[serial_write_pointer]) | orig_data;
 
@@ -222,6 +227,10 @@ void onI2CRead() {
   // when the read is called afterwards, we just need to retrive the write pointer
   // value here.
   serial_write_pointer = (serial_write_pointer + Wire.getBytesRead());
+  if (serial_write_pointer >= NUM_REG) {
+    SERIAL_MSG("[I2C] invalid rd addr (%d)", serial_write_pointer);
+    return;
+  }
 
   // read the register value out at pointer address
   uint8_t read_val = device_registers[serial_write_pointer];
