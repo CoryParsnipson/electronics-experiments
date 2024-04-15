@@ -8,6 +8,22 @@
   #error "This sketch takes over TCA0, don't use for millis here. Pin mappings on 8-pin parts are different."
 #endif
 
+#ifndef MILLIS_USE_TIMERB0
+  #error "This sketch is written for use with TCB0 as millis timing source."
+#endif
+
+// ------------------------------------------------------------------------
+// EEPROM defines
+// ------------------------------------------------------------------------
+// if there are no register updates for WRITEBACK_TIMEOUT_MS, then write
+// the register values back to EEPROM
+#define WRITEBACK_TIMEOUT_MS 10000
+
+// if there are no EEPROM writes for WRITEBACK_MAX_TIMEOUT_MS, then write
+// the register values back to EEPROM even if the registers are still
+// being updated
+#define WRITEBACK_MAX_TIMEOUT_MS 60000
+
 // ------------------------------------------------------------------------
 // PWM defines
 // ------------------------------------------------------------------------
@@ -91,6 +107,8 @@ const uint8_t write_mask[NUM_REG] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 volatile uint8_t serial_write_pointer = 0;
 uint16_t period = 0xFFFF;
 bool eeprom_writeback_needed = false;
+unsigned long last_writeback_ms = 0;
+unsigned long last_writeback_timeout_ms = 0;
 
 void setup() {
   SERIAL_INIT(SERIAL_BAUD_RATE);
@@ -98,7 +116,7 @@ void setup() {
   Wire.begin(I2C_ADDR);
   Wire.onReceive(onI2CWrite);
   Wire.onRequest(onI2CRead);
-  
+
   pinMode(PWM_OUTPUT_PIN, OUTPUT);
   takeOverTCA0();
   
@@ -115,6 +133,10 @@ void setup() {
   readEEPROM((uint8_t*)device_registers, NUM_REG);
   updateLocalVariables((uint8_t*)device_registers);
 
+  // initialize writeback timeouts
+  last_writeback_ms = millis();
+  last_writeback_timeout_ms = last_writeback_ms;
+
   SERIAL_MSG(
     "[PWM] init (f: %ld, d: 0x%X)",
     getFrequency((uint8_t*)device_registers),
@@ -126,14 +148,20 @@ void setup() {
 }
 
 void loop() {
+  delay(5);
   if (eeprom_writeback_needed) {
-    writeEEPROM((uint8_t*)device_registers, NUM_REG);
-    updateLocalVariables((uint8_t*)device_registers);
-    eeprom_writeback_needed = false;
-  }
+    unsigned long curr_time = millis();
+    bool do_short_writeback = curr_time >= last_writeback_ms + WRITEBACK_TIMEOUT_MS;
+    bool do_long_writeback = curr_time >= last_writeback_timeout_ms + WRITEBACK_MAX_TIMEOUT_MS;
 
-  // if a delay is not here, the eeprom writeback does not execute for some reason
-  delay(10);
+    if (do_short_writeback || do_long_writeback) {
+      eeprom_writeback_needed = false;
+      if (do_long_writeback) {
+        last_writeback_timeout_ms = curr_time;  
+      }
+      writeEEPROM((uint8_t*)device_registers, NUM_REG);
+    }
+  }
 }
 
 bool isDualSlope() {
@@ -206,9 +234,11 @@ void onI2CWrite(int num_bytes) {
     );
 
     ++serial_write_pointer;
-    serial_write_pointer = serial_write_pointer;
     --num_bytes;
 
+    updateLocalVariables((uint8_t*)device_registers);
+
+    last_writeback_ms = millis(); // reset writeback timer
     eeprom_writeback_needed = true;
   }
 }
