@@ -148,7 +148,7 @@ void setup() {
 }
 
 void loop() {
-  delay(5);
+  delay(1);
   if (eeprom_writeback_needed) {
     unsigned long curr_time = millis();
     bool do_short_writeback = curr_time >= last_writeback_ms + WRITEBACK_TIMEOUT_MS;
