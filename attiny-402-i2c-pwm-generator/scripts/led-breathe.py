@@ -71,6 +71,10 @@ if __name__ == "__main__":
 	MAX_DUTY_CYCLE = 0xFFFF
 	MIN_DUTY_CYCLE = 0
 
+	mapping = {}
+	for x in range(MIN_DUTY_CYCLE, MAX_DUTY_CYCLE + 1, interval):
+		mapping[x] = floor(scale_inverse_log(x, MIN_DUTY_CYCLE, MAX_DUTY_CYCLE))
+
 	while True:
 		if duty_cycle > (MAX_DUTY_CYCLE - interval):
 			going_up = False
@@ -82,8 +86,6 @@ if __name__ == "__main__":
 		else:
 			duty_cycle -= interval
 
-		scaled = scale_inverse_log(duty_cycle, MIN_DUTY_CYCLE, MAX_DUTY_CYCLE)
-		scaled = floor(scaled)
-
+		scaled = mapping[duty_cycle]
 		i2c_write(i2cbus, DEVICE_ADDR, PWM_DUTY_LOW_ADDR, scaled, True)
-		time.sleep(0.05)
+		time.sleep(0.025)
