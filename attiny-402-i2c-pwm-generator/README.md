@@ -59,9 +59,33 @@ It would turn out, over the course of programming the firmware, that we would ne
 
 The megatinycore I2C library that I use itself takes up about 1.7 KB just from the inclusion, ruling out any possibility of staying on the ATTiny202. While the bespoke code of the firmware itself is almost negligible, we also need more space for the EEPROM library, PWM functions, registers, and the printf library...
 
-### How to Program a new series ATTiny
+### How to Program a 0-series ATTiny
 
-TBD
+The newer ATTiny microcontrollers use the Unified Program and Debug Interface (UPDI) to flash firmware. Fortunately, we are able to use several variants of the Arduino as the programmer. And the UPDI physical connection only requires 1 pin.
+
+The Arduino Nano is a popular choice to use as a programmer, though the Arduino Uno works too and it is what this project uses. The Arduino Pro Micro will also work, but [requires modifications](https://www.electronics-lab.com/microupdi-pro-micro-based-updi-programmer/), so it is recommended to avoid if possible.
+
+#### Program the Arduino to act as UPDI Programmer
+
+First we need to flash firmware to the Arduino so it can act as a UPDI programmer for the ATTiny. We will use [ElTangas' repo](https://github.com/ElTangas/jtag2updi) and clone this sketch to our local computer and flash the Arduino as normal. We want to use `jtag2updi/source/jtag2updi.ino`.
+
+#### Hardware Pin Assignment for ATTiny UPDI Programming
+
+To set up the programmer, we must connect 5V and GND of the Arduino to the ATTiny, then hook up the D6 pin of the Arduino to the UPDI pin of the ATTiny via a 4.7 kOhm resistor.
+
+Once the Arduino has been programmed with the jtag2updi sketch, we also need to add a 10uF capacitor across the ground and reset pins so that it will not go low and cause the Arduino itself to be reprogrammed during flashing.
+
+See this diagram (substitute Arduino Uno here, the UPDI pin is also D6 on that):
+
+![Minimal UPDI set up with Arduino Nano](images/attiny-402-i2c-pwm-generator/attiny-0-arduino-updi-programming-wiring.png?raw=true)
+
+Since we are using the ATTIny402, the UPDI pin is 6, as we can see from this pinout chart:
+
+![ATTiny x02 pinout](images/attiny-402-i2c-pwm-generator/attiny-x02-pinout.jpg?raw=true)
+
+Very good and concise instructions can be found on the internet and I found this 8 minute youtube video by bitluni quite helpful, if more direction is needed:
+
+[![How to Program ATTiny using Arduino and UPDI Tutorial](https://img.youtube.com/vi/AL9vK_xMt4E/0.jpg)](https://www.youtube.com/watch?v=AL9vK_xMt4E)
 
 ### Dev Setup
 
@@ -88,3 +112,6 @@ firmware
 ## References/Further Reading
 
 * [Introduction into simple yet powerful tinyAVR 0-series ATtiny microcontrollers](https://daumemo.com/introduction-into-simple-yet-powerful-tinyavr-0-series-attiny-microcontrollers/)
+* [Programming the new ATtiny from Arduion using UPDI \[Beginner Tutorial\]](https://www.youtube.com/watch?v=AL9vK_xMt4E)
+* [MicroUPDI - Pro-Micro Based UPDI Programmer](https://www.electronics-lab.com/microupdi-pro-micro-based-updi-programmer/)
+* [jtag2updi](https://github.com/ElTangas/jtag2updi)
