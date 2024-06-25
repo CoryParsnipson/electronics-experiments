@@ -2,7 +2,7 @@
 
 This is a project to use the new ATTiny series microcontroller to make an I2C controlled PWM signal that can be varied by frequency and duty cycle.
 
-The PWM generator will be a sub-component needed for another project, the [ap5726-lcd-backlight-driver](../ap5726-lcd-backlight-driver), that can take a PWM signal <= 2 kHz to dim the backlight output.
+The PWM generator will be a sub-component needed for another project, the [ap5726-lcd-backlight-driver](/ap5726-lcd-backlight-driver), that can take a PWM signal <= 2 kHz to dim the backlight output.
 
 The requirements of this project are:
 
@@ -35,11 +35,29 @@ This is not the latest version as of the time of this writing, but according to 
 
 ![ATTiny 402 I2C PWM Generator](/images/attiny-402-i2c-pwm-generator/test-blink.jpg?raw=true)
 
-Unlike Arduino, which is extremely user-friendly, the ATTiny microcontrollers require a bit of setup to use. However, they are inexpensive, self-contained, and have a small physical footprint, making them excellent choices for certain applications--such as this one, which needs to be glued to the back of an LCD screen inside an enclosure with very limited space.
+Unlike Arduino, which is extremely user-friendly, the ATTiny microcontrollers require a bit of setup to use. However, they are inexpensive, need very few additional components, and have a small physical footprint, making them excellent choices for certain applications--such as this one, which needs to be glued to the back of an LCD screen inside an enclosure with very limited space.
 
 ### ATTiny Family Overview
 
-TBD
+The ATTiny, also known as tinyAVR, family is confusing because AVR released many generations of these devices. Popular *older* generation devices have names like ATTiny85, with the two suffix digits being the old naming scheme.
+
+ATTiny released a new family of devices around 2018, that we will call "the 0-series", since the naming scheme follows a pattern of `ATTiny<x>0<y>`:
+
+[ATTiny 0 series overview chart](/images/attiny-402-i2c-pwm-generator/attiny-0-series-chart.png?raw=true)
+
+The number before the zero indicates how many KB of flash memory is included in the chip and the number after the zero indicates how many pins are on the chip. Very logical!
+
+This family of microcontrollers contains many improvements over the old generation, including the price, unification of features, and UPDI programming interface. Every entry in this family has almost exact feature parity with all other part numbers, making it much simpler to understand.
+
+More information about the 0-series can be found in [this article](https://daumemo.com/introduction-into-simple-yet-powerful-tinyavr-0-series-attiny-microcontrollers/).
+
+#### ATTiny Part Selection for This Project
+
+Since we are concerned with space and price, we start at the smallest, cheapest part: the ATTiny202. This tiny chip has 8 pins and 2 KB of flash memory.
+
+It would turn out, over the course of programming the firmware, that we would need to upgrade to at least the ATTiny402. At 4KB of memory, with everything else being identical, we have just enough memory to be comfortable (though, tbh, more memory would be helpful for debugging).
+
+The megatinycore I2C library that I use itself takes up about 1.7 KB just from the inclusion, ruling out any possibility of staying on the ATTiny202. While the bespoke code of the firmware itself is almost negligible, we also need more space for the EEPROM library, PWM functions, registers, and the printf library...
 
 ### How to Program a new series ATTiny
 
@@ -69,4 +87,4 @@ firmware
 
 ## References/Further Reading
 
-TBD
+* [Introduction into simple yet powerful tinyAVR 0-series ATtiny microcontrollers](https://daumemo.com/introduction-into-simple-yet-powerful-tinyavr-0-series-attiny-microcontrollers/)
