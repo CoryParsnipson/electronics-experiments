@@ -69,7 +69,7 @@ The Arduino Nano is a popular choice to use as a programmer, though the Arduino 
 
 The final product will be surface mount, so a surface mount ATTiny402 was obtained. For breadboarding purposes, this complicates things by requiring an extra step for mounting the SMT part to a breakout board. I used the [SOIC-8 breakout PCB from Adafruit](https://www.adafruit.com/product/1212) for this task.
 
-![SOIC-8 PCB Breakout for SMT parts](/images/attiny-402-i2c-pwm-generator/soic-8-breakout.jpg?raw=true)
+![SOIC-8 PCB Breakout for SMT parts](/images/attiny-402-i2c-pwm-generator/soic-8-breakout.jpeg?raw=true)
 
 #### Program the Arduino to act as UPDI Programmer
 
