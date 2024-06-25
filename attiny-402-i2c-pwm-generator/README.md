@@ -65,6 +65,12 @@ The newer ATTiny microcontrollers use the Unified Program and Debug Interface (U
 
 The Arduino Nano is a popular choice to use as a programmer, though the Arduino Uno works too and it is what this project uses. The Arduino Pro Micro will also work, but [requires modifications](https://www.electronics-lab.com/microupdi-pro-micro-based-updi-programmer/), so it is recommended to avoid if possible.
 
+#### Mount SMT ATTiny402 Part to a Breakout Board for Breadboard Prototyping
+
+The final product will be surface mount, so a surface mount ATTiny402 was obtained. For breadboarding purposes, this complicates things by requiring an extra step for mounting the SMT part to a breakout board. I used the [SOIC-8 breakout PCB from Adafruit](https://www.adafruit.com/product/1212) for this task.
+
+![SOIC-8 PCB Breakout for SMT parts](/images/attiny-402-i2c-pwm-generator/soic-8-breakout.jpg?raw=true)
+
 #### Program the Arduino to act as UPDI Programmer
 
 First we need to flash firmware to the Arduino so it can act as a UPDI programmer for the ATTiny. We will use [ElTangas' repo](https://github.com/ElTangas/jtag2updi) and clone this sketch to our local computer and flash the Arduino as normal. We want to use `jtag2updi/source/jtag2updi.ino`.
@@ -77,19 +83,30 @@ Once the Arduino has been programmed with the jtag2updi sketch, we also need to 
 
 See this diagram (substitute Arduino Uno here, the UPDI pin is also D6 on that):
 
-![Minimal UPDI set up with Arduino Nano](images/attiny-402-i2c-pwm-generator/attiny-0-arduino-updi-programming-wiring.png?raw=true)
+![Minimal UPDI set up with Arduino Nano](/images/attiny-402-i2c-pwm-generator/attiny-0-arduino-updi-programming-wiring.png?raw=true)
 
 Since we are using the ATTIny402, the UPDI pin is 6, as we can see from this pinout chart:
 
-![ATTiny x02 pinout](images/attiny-402-i2c-pwm-generator/attiny-x02-pinout.jpg?raw=true)
+![ATTiny x02 pinout](/images/attiny-402-i2c-pwm-generator/attiny-x02-pinout.jpg?raw=true)
 
 Very good and concise instructions can be found on the internet and I found this 8 minute youtube video by bitluni quite helpful, if more direction is needed:
 
 [![How to Program ATTiny using Arduino and UPDI Tutorial](https://img.youtube.com/vi/AL9vK_xMt4E/0.jpg)](https://www.youtube.com/watch?v=AL9vK_xMt4E)
 
+#### Using the megatinycore Arduino Library for ATTiny Development
+
+The last part of the puzzle is to set up the megatinycore library for ATTiny development. This is a collection of C libraries that really help with microcontroller abstractions of the ATTiny 0-series.
+
+TBD
+
 ### Dev Setup
 
-For this we are using a breakout board from Adafruit and a breadboard to lay down a temporary circuit for testing. The UPDI programming can be done using an Arduino Uno and hooking up a wire to Pin 6 through the breadboard, but when the ATTiny is surface mounted directly to a custom PCB design, we will need to figure out a different way to program it.
+We are using an ATTiny402 on a breadboard, similar to the set up described in the previous section. The output of the ATTiny's PWM signal is a single discrete LED for initial testing, and then to the EN pin of an AP5726 LCD backlight that is hooked up to 2 parallel rows of 6 LEDs each (to simulate a 5\" LCD screen backlight). This way, we can observe the PWM signal output affecting an analogue of our desired application.
+
+![Single LED Arduino UPDI test set up](/images/attiny-402-i2c-pwm-generator/test-blink.jpg?raw=true)
+*Image of Arduino Uno being used as a UPDI programmer for the ATTiny402 (SMT soldered to a [breakout board from Adafruit](https://www.adafruit.com/product/1212))*
+
+Additionally, the I2C signals of the ATTiny are hooked up to a Raspberry Pi CM3, which is itself on a development motherboard. The Raspberry Pi acts as an I2C host, and we can communicate with the ATTiny through the bundled `i2c-get` and `i2c-set` linux utilities. It would also work to use a "normal" Windows development computer as an I2C host, but the Raspberry Pi is easier to interface with and secondly the final product will be to include it as an RPi peripheral.
 
 TBD
 
@@ -109,9 +126,54 @@ firmware
 └───attiny402-i2c-reg
 ```
 
+The final PWM generator firmware is called `attiny402-i2c-pwm-generator`. The rest of the sketches are intermediate tests or copied from tutorials/documentation as incremental attempts to construct the final product.
+
+#### megatinycore Settings
+
+Go over programmer settings
+
+TBD
+
+#### UART Debug Messages  (attiny202-serial-test)
+
+Arduino and Attiny don't have a debugger you can step through (or at least, not to my knowledge), so debug log messages were invaluable. Unfortunately, this requires a printf library and that takes up a lot of space.
+
+Even on the 402, you will only be able to enable one or two log messages at a time, so debug wisely...
+
+TBD
+
+#### PWM generation on ATTiny (attiny202-tca0-pwm-test)
+
+The PWM code uses the TCA0 timer on the microcontroller to give an extremely accurate, 16 bit resolution PWM signal. You do not need to generate the signal manually, simply configure the TCA0 register. This also handles value changing as well, by flopping the previous value until the cycle finishes and then changing when a new period starts, for greater accuracy.
+
+TBD
+
+#### EEPROM (attiny402-eeprom-test)
+
+The EEPROM is really simple. From the programmer's perspective, it looks like a 128 entry array of bytes.
+
+TBD
+
+#### I2C Reading and Writing and Register Modeling (attiny402-i2c-reg)
+
+This is taken almost wholesale from the megatinycore documentation about how to write a register file I2C device. This is pretty much exactly what we want for the firmware, so the final product starts here and makes a bunch of modifications.
+
+Describe read process.
+
+Describe write process.
+
+TBD
+
+### I2C PWM Firwmare Documentation
+
+Include usage documentation, register configuration, and interesting facts about the implementation (periodic EEPROM writeback, register file config, local variable update, etc)
+
+TBD
+
 ## References/Further Reading
 
 * [Introduction into simple yet powerful tinyAVR 0-series ATtiny microcontrollers](https://daumemo.com/introduction-into-simple-yet-powerful-tinyavr-0-series-attiny-microcontrollers/)
+* [Adafruit SMT Breakout PCB for SOIC-8](https://www.adafruit.com/product/1212)
 * [Programming the new ATtiny from Arduion using UPDI \[Beginner Tutorial\]](https://www.youtube.com/watch?v=AL9vK_xMt4E)
 * [MicroUPDI - Pro-Micro Based UPDI Programmer](https://www.electronics-lab.com/microupdi-pro-micro-based-updi-programmer/)
 * [jtag2updi](https://github.com/ElTangas/jtag2updi)
