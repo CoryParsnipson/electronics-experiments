@@ -2,6 +2,29 @@
 
 This is a project to use the new ATTiny series microcontroller to make an I2C controlled PWM signal that can be varied by frequency and duty cycle.
 
+The PWM generator will be a sub-component needed for another project, the [ap5726-lcd-backlight-driver](../ap5726-lcd-backlight-driver), that can take a PWM signal <= 2 kHz to dim the backlight output.
+
+The requirements of this project are:
+
+* Duty cycle must be able to be varied between exactly 0% (completely off) to 100% (full brightness) via I2C
+* Frequency should be slightly less than 2 kHz, but ideally larger than 1000 Hz to reduce signal noise
+* The duty cycle should be written to non-volatile memory so it can be restored on power-cycle
+* The PWM signal should start automatically, with no outside input on power up (we want the LCD screen to turn on during power-up and not have to worry about programming the LCD backlight on start up)
+
+As of the time of this writing, I was able to implement a firmware that could give the above capabilities and more:
+
+* Able to communicate to and from the device using I2C. The I2C device address is programmable.
+* Duty cycle and frequency are both able to be programmed via I2C.
+* Duty cycle has full range of 0 to 100, since it uses the microcontroller timer
+* Duty cycle and frequency are written to EEPROM and automatically restored on power up
+* There is an additional configuration register that allows you to configure other variables.
+  * You can invert the duty cycle (0 = full brightness, 100 = off)
+  * You can change the duty cycle resolution between 8 bits and 16 bits. In 8 bit mode, you only need to write the lower register of the duty cycle.
+  * There is plenty of extra space for more configuration additions later if necessary
+* EEPROM is written in intervals to avoid wearing out the EEPROM prematurely
+
+For some context, prior to this project, considerable research was done into trying to find a dedicated part that will generate a somewhat configurable PWM signal. Many dedicated ICs you can buy are domain specific, with the most common being for power supply switching or modulating colors in RGB LEDs. In the former application, those parts were expensive and overkill and for the latter application, all parts were constrained to low frequencies (<=152 Hz) and could not be configured to remember the duty cycle and automatically restore it after power cycling.
+
 ## Arduino IDE Version
 
 Current version: 1.8.13
@@ -12,7 +35,7 @@ This is not the latest version as of the time of this writing, but according to 
 
 ![ATTiny 402 I2C PWM Generator](/images/attiny-402-i2c-pwm-generator/test-blink.jpg?raw=true)
 
-Unlike Arduino, which is extremely user-friendly, the ATTiny microcontrollers require a bit of setup to use. However, they are inexpensive, self-contained, and have a small physical footprint, making them excellent choices for certain applications (such as this one, which needs to be glued to the back of an LCD screen inside an enclosure with very limited space).
+Unlike Arduino, which is extremely user-friendly, the ATTiny microcontrollers require a bit of setup to use. However, they are inexpensive, self-contained, and have a small physical footprint, making them excellent choices for certain applications--such as this one, which needs to be glued to the back of an LCD screen inside an enclosure with very limited space.
 
 ### ATTiny Family Overview
 
