@@ -43,7 +43,7 @@ The ATTiny, also known as tinyAVR, family is confusing because AVR released many
 
 ATTiny released a new family of devices around 2018, that we will call "the 0-series", since the naming scheme follows a pattern of `ATTiny<x>0<y>`:
 
-[ATTiny 0 series overview chart](/images/attiny-402-i2c-pwm-generator/attiny-0-series-chart.png?raw=true)
+![ATTiny 0 series overview chart](/images/attiny-402-i2c-pwm-generator/attiny-0-series-chart.png?raw=true)
 
 The number before the zero indicates how many KB of flash memory is included in the chip and the number after the zero indicates how many pins are on the chip. Very logical!
 
