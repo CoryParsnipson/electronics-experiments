@@ -133,9 +133,13 @@ There are several methods described by the AP5726 datasheet that can be used to 
 1. Using a DC Voltage (or a filtered PWM signal). This is done by supplying a DC voltage to the FB pin via a 100k resistor, and hooking up a 5k resistor to the LED anode. There is a diagram on page 11 of the AP5726 datasheet portraying this. A PWM signal filtered with a low pass filter can be used to supply the DC voltage.
 1. Logic signal. If one needs only a few discrete brightness level, then using discrete transistors and digital signals into their gates may work.
 
-Using a PWM signal seems like the easiest, most flexible way to provide dimming. One may use the PWM output capabilities of an Arduino or Raspberry Pi. Unfortunately for this design, it is intended to be connected to a Raspberry Pi that is already using the analog outputs for speaker audio. Thus, the PWM signal generation must be handled by separate hardware. The [555-timer-pwm-generator](../555-timer-pwm-with-digipot) project was created to serve this purpose.
+Using a PWM signal seems like the easiest, most flexible way to provide dimming. One may use the PWM output capabilities of an Arduino or Raspberry Pi. Unfortunately for this design, it is intended to be connected to a Raspberry Pi that is already using the analog outputs for speaker audio. Thus, the PWM signal generation must be handled by separate hardware.
 
-[To be continued...]
+The [555-timer-pwm-generator](/555-timer-pwm-with-digipot) project was created to serve this purpose, but unfortunately the inherent design using a 555 timer does not have a wide enough duty cycle range to function well enough. Using a direct voltage divider design with the digipot barely worked, but was also too expensive, used too many components and was dependent on a specific voltage level that would have to be adjusted on a per-project basis.
+
+The [attiny402-i2c-pwm-generator](/attiny-402-i2c-pwm-generator) project is a far superior approach using a very small microcontroller to achieve a clean, adjustable PWM signal. See this project for how the component was designed and how it is connected to the AP5726.
+
+Later LCD related projects will combine this project and the pwm generator functional blocks in a similar way.
 
 ## References/Further Reading
 
