@@ -116,7 +116,7 @@ Some important points:
 
 #### Single LED
 
-![Single LED Arduino UPDI test set up](/images/attiny-402-i2c-pwm-generator/test-setup-single-led.jpg?raw=true)
+![Single LED Arduino UPDI test set up](/images/attiny-402-i2c-pwm-generator/test-setup-single-led.jpg?raw=true)  
 *Image of Arduino Uno being used as a UPDI programmer for the ATTiny402 (SMT soldered to a [breakout board from Adafruit](https://www.adafruit.com/product/1212))*
 
 We are using an ATTiny402 on a breadboard, similar to the set up described in the previous section hooked up to a single discrete LED and I2C signals going to the corresponding pins of a Raspberry Pi CM3 on a development board, which is acting as the I2C host. The I2C pins are physical pin 3 for SDA and physical pin 5 for SCL.
@@ -192,7 +192,7 @@ This sketch is basically copied verbatim from the PWM example in the megaTinyCor
 
 The rest of the document talks about how to program the TCA0 timer and its different execution modes. The PWM code uses the TCA0 timer on the microcontroller to give an extremely accurate, 16 bit resolution PWM signal. You do not need to generate the signal manually, simply configure the TCA0 register. This also handles value changing as well, by flopping the previous value until the cycle finishes and then changing when a new period starts, for greater accuracy.
 
-![PWM signal generation using microcontrollers](/images/attiny-402-i2c-pwm-generator/timer-pwm-generation.jpeg?raw=true)
+![PWM signal generation using microcontrollers](/images/attiny-402-i2c-pwm-generator/timer-pwm-generation.jpeg?raw=true)  
 *How microcontrollers generate PWM signals with perfect timing and full duty cycle range.*
 
 Another interesting page to read is [PWM and Timer usage](https://github.com/SpenceKonde/megaTinyCore/blob/master/megaavr/extras/PWMandTimers.md) for more general PWM related information.
