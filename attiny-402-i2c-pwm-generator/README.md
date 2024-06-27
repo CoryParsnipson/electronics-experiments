@@ -241,9 +241,23 @@ Once the `serial_write_pointer` is set, we read out **one** byte at the specifie
 
 #### I2C PWM Generator (attiny402-i2c-pwm-generator)
 
-Include usage documentation, register configuration, and interesting facts about the implementation (periodic EEPROM writeback, register file config, local variable update, etc)
+This sketch is based off the i2c register file example, but includes changes for generating a PWM signal using TCA0, and writes the values of these registers back to the EEPROM periodically. On power up, it will also restore the values of the I2C registers from EEPROM.
 
-TBD
+There are 5 registers, with an elaborate control register:
+
+1. `REG_ADDR_CTRL` 0x00
+1. `REG_ADDR_PWM_FREQ_LOW` 0x01
+1. `REG_ADDR_PWM_FREQ_HIGH` 0x02
+1. `REG_ADDR_PWM_DUTY_LOW` 0x03
+1. `REG_ADDR_PWM_DUTY_HIGH` 0x04
+
+The frequency and duty cycles are both stored as 16 bit values, requiring you to do 2 I2C writes each to update them.
+
+There is a "writeback timer" that will write the I2C registers back to EEPROM every 10 seconds of inactivity, or every minute regardless of activity.
+
+The 16 bit frequency storage has custom encoding scheme to give you a range from 0 to 16Mhz, with the most resolution at 0 to 16384 Hz, where it matters most. You can find the description of how it works in the [comments](https://github.com/CoryParsnipson/electronics-experiments/blob/main/attiny-402-i2c-pwm-generator/firmware/attiny402-i2c-pwm-generator/attiny402-i2c-pwm-generator.ino#L300-L303).
+
+For the control register, the top most 6 bits are currently unused. The LSB is used to [set the duty cycle resolution (8 or 16 bits)](https://github.com/CoryParsnipson/electronics-experiments/blob/main/attiny-402-i2c-pwm-generator/firmware/attiny402-i2c-pwm-generator/attiny402-i2c-pwm-generator.ino#L53), and bit[1] is used for ["invert mode"](https://github.com/CoryParsnipson/electronics-experiments/blob/main/attiny-402-i2c-pwm-generator/firmware/attiny402-i2c-pwm-generator/attiny402-i2c-pwm-generator.ino#L62), which will make 0 duty cycle full brightness and 100 duty cycle off.
 
 ## References/Further Reading
 
