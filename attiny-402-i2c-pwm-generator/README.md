@@ -121,6 +121,8 @@ Some important points:
 
 We are using an ATTiny402 on a breadboard, similar to the set up described in the previous section hooked up to a single discrete LED and I2C signals going to the corresponding pins of a Raspberry Pi CM3 on a development board, which is acting as the I2C host. The I2C pins are physical pin 3 for SDA and physical pin 5 for SCL.
 
+> NOTE: don't forget to add 4.7 kOhm pull up resistors on the SDA and SCL wires. Use the 5V Arduino signal, same as the VCC input. These pull of resistors are mandated by the I2C spec and you will risk undefined behavior if they are not included.
+
 A development computer (a Windows 10 laptop) is used to VNC into the Raspberry Pi and sent/receive I2C commands to the ATTiny via the bundled Raspberry Pi Linux utilities, `i2c-set` and `i2c-get`.
 
 Lastly, a [CP2102 USB TTL module](https://www.aliexpress.com/w/wholesale-cp2102-usb-to-ttl-converter.html) was used to allow for serial debug through the UART interface. 
@@ -160,6 +162,8 @@ There are several sketches written to test various features of the microcontroll
 
 The final PWM generator firmware is called `attiny402-i2c-pwm-generator`. This one is the "final product" you should flash to the ATTiny if you want the described behavior in the introduction. The rest of the sketches are intermediate tests or copied from tutorials/documentation as incremental attempts to construct the final product.
 
+It is recommended to try `attiny202-updi-led-blink` first, to check if the UPDI and LED wiring is correct. This program simply blinks the LED at 1 Hz.
+
 ```
 firmware
 ├───attiny202-eeprom-dump
@@ -184,27 +188,58 @@ This is a quick and simple test program to see if the serial UART debug messages
 
 #### PWM generation on ATTiny (attiny202-tca0-pwm-test)
 
-The PWM code uses the TCA0 timer on the microcontroller to give an extremely accurate, 16 bit resolution PWM signal. You do not need to generate the signal manually, simply configure the TCA0 register. This also handles value changing as well, by flopping the previous value until the cycle finishes and then changing when a new period starts, for greater accuracy.
+This sketch is basically copied verbatim from the PWM example in the megaTinyCore documentation on [TakingOverTCA0](https://github.com/SpenceKonde/megaTinyCore/blob/master/megaavr/extras/TakingOverTCA0.md#example-2-variable-frequency-and-duty-cycle-pwm).
 
-TBD
+The rest of the document talks about how to program the TCA0 timer and its different execution modes. The PWM code uses the TCA0 timer on the microcontroller to give an extremely accurate, 16 bit resolution PWM signal. You do not need to generate the signal manually, simply configure the TCA0 register. This also handles value changing as well, by flopping the previous value until the cycle finishes and then changing when a new period starts, for greater accuracy.
+
+![PWM signal generation using microcontrollers](/images/attiny-402-i2c-pwm-generator/timer-pwm-generation.jpeg?raw=true)
+*How microcontrollers generate PWM signals with perfect timing and full duty cycle range.*
+
+Another interesting page to read is [PWM and Timer usage](https://github.com/SpenceKonde/megaTinyCore/blob/master/megaavr/extras/PWMandTimers.md) for more general PWM related information.
+
+A less interesting page to read is the [Microchip TCA0 User Manual](https://ww1.microchip.com/downloads/en/Appnotes/TB3217-Getting-Started-with-TCA-DS90003217.pdf) for ATTiny. This reference doc will fill in some obscure blanks not covered by the megaTinyCore documentation, if you need it for some reason.
+
+There were a couple slight modifications from the example in this sketch. The first is that the `setDutyCycle()` function is called from `setFrequency()` for the users convenience, because once the duty cycle is changed, the frequency will be in an invalid state.
+
+The second is that the TCA0 mode is set to dual slope, overflow on bottom instead of single slope like in the example. This means, when the PWM counter reaches the max value (0xFFFF), it will start counting down instead of wrapping around immediately back to 0x0000. This halves the maximum achievable frequency of the PWM signal, but increases precision. Since we only need to generate a 2kHz signal, this was an acceptable trade-off.
+
+The prescaler calculation in the `setFrequency()` function has been slightly renamed to try and make the algorithm a little more clear. [This article](https://www.linkedin.com/pulse/stm32-pwm-using-timers-timesaving-formula-gurajapu-raja-sumant/) has a slightly better but still mostly inscrutable explanation of how it works.
 
 #### EEPROM (attiny402-eeprom-test)
 
-The EEPROM is really simple. From the programmer's perspective, it looks like a 128 entry array of bytes.
+The EEPROM library is extremely simple, appearing to the programmer as a 128-entry array of bytes you can read and write to. The values in this array are non-volatile, meaning they are preserved across power cycles, so you can store information long term in here.
 
-TBD
+There are other EEPROM related test programs that might come in handy for debugging:
+
+* `attiny202-eeprom-dump` - This prints the values of all EEPROM cells once on power up
+* `attiny202-eeprom-erase` - This "erases" all EEPROM cells. This is equivalent to writing 0xFF to all of them. This is useful for resetting the EEPROM to a known state.
+* `attiny202-eeprom-test-pattern` - Writes a predictable pattern to all cells (their index). Useful for debugging other programs which may read/write to cells, so you can use this program to make it easier to figure out which cells are being read.
 
 #### I2C Reading and Writing and Register Modeling (attiny402-i2c-reg)
 
-This is taken almost wholesale from the megatinycore documentation about how to write a register file I2C device. This is pretty much exactly what we want for the firmware, so the final product starts here and makes a bunch of modifications.
+The [introductory page in the megaTinyCore documentation about I2C](https://github.com/SpenceKonde/megaTinyCore/tree/master/megaavr/libraries/Wire) is pretty illuminating.
 
-Describe read process.
+> NOTE: here is it called "Wire", as in "Two Wire Interface (TWI)" instead of I2C because I2C is a trademarked term. So that's good to know for later.
 
-Describe write process.
+This sketch is taken basically verbatim from the example [here](https://github.com/SpenceKonde/megaTinyCore/blob/master/megaavr/libraries/Wire/examples/register_model/register_model.ino).
 
-TBD
+In this sketch, the I2C register file is only 2 registers large. We store these as a volatile global variable called `device_registers`.
 
-### I2C PWM Firwmare Documentation
+The TWI library requires you to initialize it with `Wire.begin` and supplying an I2C device address. You must supply two callbacks, `onReceive` and `onRequest`, which are called when an I2C write is received and when an I2C read is received, respectively.
+
+##### I2C Write Flow
+
+The write flow is simpler. When a write is received, we get one paramter, `num_bytes`. The first byte is the I2C register address to write. This updates a global `serial_write_pointer` that will be auto incremented (and wrap around back to zero) on every subsequent byte in this write request. The remaining bytes are considered data, written into the auto incremented write pointer address.
+
+The write doesn't necessarily have to behave like this, but it is quite common and expected, so it's better not to break convention.
+
+##### I2C Read Flow
+
+The read flow is more weird. Before every read, a zero byte write is issued. This means the I2C Write Flow is executed before every read. This is to update the write pointer to the read address. The read command re-uses the `serial_write_pointer`. No data is modified, because this write always has length one (zero data bytes).
+
+Once the `serial_write_pointer` is set, we read out **one** byte at the specified device register address and send it back to the I2C host using the `Wire.write()` command. We do implement the ability to write multiple bytes unlike the write command. (You are free to modify it to do so.)
+
+#### I2C PWM Generator (attiny402-i2c-pwm-generator)
 
 Include usage documentation, register configuration, and interesting facts about the implementation (periodic EEPROM writeback, register file config, local variable update, etc)
 
@@ -218,3 +253,8 @@ TBD
 * [MicroUPDI - Pro-Micro Based UPDI Programmer](https://www.electronics-lab.com/microupdi-pro-micro-based-updi-programmer/)
 * [jtag2updi](https://github.com/ElTangas/jtag2updi)
 * [megaTinyCore Installation Instructions](https://github.com/SpenceKonde/megaTinyCore/blob/master/Installation.md#boards-manager-installation-now-strongly-recommended-unless-helping-with-core-development)
+* [megaTinyCore: TakingOverTCA0](https://github.com/SpenceKonde/megaTinyCore/blob/master/megaavr/extras/TakingOverTCA0.md#example-2-variable-frequency-and-duty-cycle-pwm).
+* [megaTinyCore: PWM and Timer usage](https://github.com/SpenceKonde/megaTinyCore/blob/master/megaavr/extras/PWMandTimers.md) 
+* [Microchip TCA0 User Manual](https://ww1.microchip.com/downloads/en/Appnotes/TB3217-Getting-Started-with-TCA-DS90003217.pdf) 
+* [stm32: PWM using Timers - The timesaving formula](https://www.linkedin.com/pulse/stm32-pwm-using-timers-timesaving-formula-gurajapu-raja-sumant/) 
+* [megaTinyCore: Wire (TWI/I2C)](https://github.com/SpenceKonde/megaTinyCore/tree/master/megaavr/libraries/Wire) 
