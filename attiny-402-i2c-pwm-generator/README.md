@@ -4,17 +4,30 @@ This is a project to use the new ATTiny series microcontroller to make an I2C co
 
 The PWM generator will be a sub-component needed for another project, the [ap5726-lcd-backlight-driver](/ap5726-lcd-backlight-driver), that can take a PWM signal <= 2 kHz to dim the backlight output.
 
-The requirements of this project are:
+## Versioning
 
-* Duty cycle must be able to be varied between exactly 0% (completely off) to 100% (full brightness) via I2C
-* Frequency should be slightly less than 2 kHz, but ideally larger than 1000 Hz to reduce signal noise
+Current Arduino IDE Version: 1.8.13
+
+This is not the latest version as of the time of this writing, but according to Spence Konde, the maintainer of the megatinycore library, this is the best version to use for stability and compatibility reasons.
+
+## Description
+
+![ATTiny 402 I2C PWM Generator](/images/attiny-402-i2c-pwm-generator/test-blink.jpg?raw=true)
+
+Unlike Arduino, which is extremely user-friendly, the ATTiny microcontrollers require a bit of setup to use. However, they are inexpensive, need very few additional components, and have a small physical footprint, making them excellent choices for certain applications--such as this one, which needs to be glued to the back of an LCD screen inside an enclosure with very limited space.
+
+The requirements of this project:
+
+* Variable duty cycle between exactly 0% (completely off) to 100% (full brightness)
+* Frequency should be slightly less than 2 kHz
+* Write duty cycle via I2C
 * The duty cycle should be written to non-volatile memory so it can be restored on power-cycle
 * The PWM signal should start automatically, with no outside input on power up (we want the LCD screen to turn on during power-up and not have to worry about programming the LCD backlight on start up)
 
 As of the time of this writing, I was able to implement a firmware that could give the above capabilities and more:
 
 * Able to communicate to and from the device using I2C. The I2C device address is programmable.
-* Duty cycle and frequency are both able to be programmed via I2C.
+* Duty cycle and frequency are programmable via I2C.
 * Duty cycle has full range of 0 to 100, since it uses the microcontroller timer
 * Duty cycle and frequency are written to EEPROM and automatically restored on power up
 * There is an additional configuration register that allows you to configure other variables.
@@ -24,18 +37,6 @@ As of the time of this writing, I was able to implement a firmware that could gi
 * EEPROM is written in intervals to avoid wearing out the EEPROM prematurely
 
 For some context, prior to this project, considerable research was done into trying to find a dedicated part that will generate a somewhat configurable PWM signal. Many dedicated ICs you can buy are domain specific, with the most common being for power supply switching or modulating colors in RGB LEDs. In the former application, those parts were expensive and overkill and for the latter application, all parts were constrained to low frequencies (<=152 Hz) and could not be configured to remember the duty cycle and automatically restore it after power cycling.
-
-## Arduino IDE Version
-
-Current version: 1.8.13
-
-This is not the latest version as of the time of this writing, but according to Spence Konde, the maintaining of the megatinycore library, this is the best version to use for stability and compatibility reasons.
-
-## Description
-
-![ATTiny 402 I2C PWM Generator](/images/attiny-402-i2c-pwm-generator/test-blink.jpg?raw=true)
-
-Unlike Arduino, which is extremely user-friendly, the ATTiny microcontrollers require a bit of setup to use. However, they are inexpensive, need very few additional components, and have a small physical footprint, making them excellent choices for certain applications--such as this one, which needs to be glued to the back of an LCD screen inside an enclosure with very limited space.
 
 ### ATTiny Family Overview
 
@@ -89,26 +90,69 @@ Since we are using the ATTIny402, the UPDI pin is 6, as we can see from this pin
 
 ![ATTiny x02 pinout](/images/attiny-402-i2c-pwm-generator/attiny-x02-pinout.jpg?raw=true)
 
-Very good and concise instructions can be found on the internet and I found this 8 minute youtube video by bitluni quite helpful, if more direction is needed:
+This 8 minute youtube video by bitluni is quite helpful, if more direction is needed:
 
 [![How to Program ATTiny using Arduino and UPDI Tutorial](https://img.youtube.com/vi/AL9vK_xMt4E/0.jpg)](https://www.youtube.com/watch?v=AL9vK_xMt4E)
 
 #### Using the megatinycore Arduino Library for ATTiny Development
 
-The last part of the puzzle is to set up the megatinycore library for ATTiny development. This is a collection of C libraries that really help with microcontroller abstractions of the ATTiny 0-series.
+The last part of the puzzle is to set up the megatinycore library for ATTiny development. This is a collection of C libraries that really help with microcontroller abstractions for the ATTiny 0-series.
 
-TBD
+1. Install Arduino IDE, preferably version 1.8.13.
+1. Follow the [instructions here](https://github.com/SpenceKonde/megaTinyCore/blob/master/Installation.md#boards-manager-installation-now-strongly-recommended-unless-helping-with-core-development) to install the megaTinyCore board libraries.
 
-### Dev Setup
+Once that is installed, go to `Tools` and make sure all the settings look like below:
 
-We are using an ATTiny402 on a breadboard, similar to the set up described in the previous section. The output of the ATTiny's PWM signal is a single discrete LED for initial testing, and then to the EN pin of an AP5726 LCD backlight that is hooked up to 2 parallel rows of 6 LEDs each (to simulate a 5\" LCD screen backlight). This way, we can observe the PWM signal output affecting an analogue of our desired application.
+![megaTinyCore board settings](/images/attiny-402-i2c-pwm-generator/megatinycore-board-settings.png?raw=true)
 
-![Single LED Arduino UPDI test set up](/images/attiny-402-i2c-pwm-generator/test-blink.jpg?raw=true)
+Some important points:
+
+* `millis()/micros() Timer` set to TCB0 - we are using TCA0 for PWM generation
+* Startup time can be anything, not just 8ms in the picture
+* `printf()` - set this to minimal *if it is used in the program*, else set to default or it will use more flash
+* `Programmer` - set this to `jtag2updi`
+
+### Hardware Setup
+
+#### Single LED
+
+![Single LED Arduino UPDI test set up](/images/attiny-402-i2c-pwm-generator/test-setup-single-led.jpg?raw=true)
 *Image of Arduino Uno being used as a UPDI programmer for the ATTiny402 (SMT soldered to a [breakout board from Adafruit](https://www.adafruit.com/product/1212))*
 
-Additionally, the I2C signals of the ATTiny are hooked up to a Raspberry Pi CM3, which is itself on a development motherboard. The Raspberry Pi acts as an I2C host, and we can communicate with the ATTiny through the bundled `i2c-get` and `i2c-set` linux utilities. It would also work to use a "normal" Windows development computer as an I2C host, but the Raspberry Pi is easier to interface with and secondly the final product will be to include it as an RPi peripheral.
+We are using an ATTiny402 on a breadboard, similar to the set up described in the previous section hooked up to a single discrete LED and I2C signals going to the corresponding pins of a Raspberry Pi CM3 on a development board, which is acting as the I2C host. The I2C pins are physical pin 3 for SDA and physical pin 5 for SCL.
 
-TBD
+A development computer (a Windows 10 laptop) is used to VNC into the Raspberry Pi and sent/receive I2C commands to the ATTiny via the bundled Raspberry Pi Linux utilities, `i2c-set` and `i2c-get`.
+
+Lastly, a [CP2102 USB TTL module](https://www.aliexpress.com/w/wholesale-cp2102-usb-to-ttl-converter.html) was used to allow for serial debug through the UART interface. 
+
+![CP2102 USB TTL module for Serial Debug](/images/attiny-402-i2c-pwm-generator/cp2102-module.webp?raw=true)
+
+Since, we are already using the Arduino IDE for programming the Arduino Uno, we need to install puTTy and set the COM port appropriately (need to look at control panel) and use the baud rate of 115200, matching that of the firmware sketches in this repo, to view serial debug messages.
+
+##### Pin Assignments
+
+From the ATTiny:
+
+![ATTiny x02 pinout](/images/attiny-402-i2c-pwm-generator/attiny-x02-pinout.jpg?raw=true)
+
+* pin 1 -> 5V from the Arduino
+* pin 2 -> to the **RX** pin of the CP2102
+* pin 3 -> to the **TX** pin of the CP2102
+* pin 4 -> to the SDA pin of the Raspberry Pi
+* pin 5 -> to the SCL pin fo the Raspberry Pi
+* pin 6 -> to pin D6 of the Arduino via 4.7 kOhm resistor as part of UPDI setup
+* pin 7 -> to the positive lead of the LED, via 1k ohm resistor (the other lead to ground)
+* pin 8 -> to GND from the Arduino
+
+#### AP5726 with LED Strips
+
+![Full setup with AP5726 and LED Strips](/images/attiny-402-i2c-pwm-generator/test-setup-ap5726.jpg?raw=true)
+
+This setup is identical in pin assignments to the single LED setup, except for pin 7, which now goes directly into the EN pin of the AP5726. See [that project](/ap5726-lcd-backlight-driver) for more information.
+
+The I2C signals going to the Raspberry Pi are highlighted with light green arrows. (Ignore the extra circuit elements on the upper breadboard, they are unrelated to this project).
+
+IMPORTANT: you now also need to add a large (1 MOhm) pull down resistor to ground on pin 7. This is because on power-up, before the PWM output starts, this pin is floating and that will cause the EN input of the AP5726 to assume a random value otherwise. (This is not pictured in the image above.)
 
 ### Firmware
 
@@ -177,3 +221,4 @@ TBD
 * [Programming the new ATtiny from Arduion using UPDI \[Beginner Tutorial\]](https://www.youtube.com/watch?v=AL9vK_xMt4E)
 * [MicroUPDI - Pro-Micro Based UPDI Programmer](https://www.electronics-lab.com/microupdi-pro-micro-based-updi-programmer/)
 * [jtag2updi](https://github.com/ElTangas/jtag2updi)
+* [megaTinyCore Installation Instructions](https://github.com/SpenceKonde/megaTinyCore/blob/master/Installation.md#boards-manager-installation-now-strongly-recommended-unless-helping-with-core-development)
