@@ -152,7 +152,7 @@ This setup is identical in pin assignments to the single LED setup, except for p
 
 The I2C signals going to the Raspberry Pi are highlighted with light green arrows. (Ignore the extra circuit elements on the upper breadboard, they are unrelated to this project).
 
-IMPORTANT: you now also need to add a large (1 MOhm) pull down resistor to ground on pin 7. This is because on power-up, before the PWM output starts, this pin is floating and that will cause the EN input of the AP5726 to assume a random value otherwise. (This is not pictured in the image above.)
+> IMPORTANT: you now also need to add a large (1 MOhm) pull down resistor to ground on pin 7. This is because on power-up, before the PWM output starts, this pin is floating and that will cause the EN input of the AP5726 to assume a random value otherwise. (This is not pictured in the image above.)
 
 ### Firmware
 
