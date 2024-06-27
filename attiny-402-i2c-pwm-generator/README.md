@@ -16,7 +16,7 @@ This is not the latest version as of the time of this writing, but according to 
 
 Unlike Arduino, which is extremely user-friendly, the ATTiny microcontrollers require a bit of setup to use. However, they are inexpensive, need very few additional components, and have a small physical footprint, making them excellent choices for certain applications--such as this one, which needs to be glued to the back of an LCD screen inside an enclosure with very limited space.
 
-The requirements of this project:
+### Requirements of This Project
 
 * Variable duty cycle between exactly 0% (completely off) to 100% (full brightness)
 * Frequency should be slightly less than 2 kHz
@@ -24,7 +24,7 @@ The requirements of this project:
 * The duty cycle should be written to non-volatile memory so it can be restored on power-cycle
 * The PWM signal should start automatically, with no outside input on power up (we want the LCD screen to turn on during power-up and not have to worry about programming the LCD backlight on start up)
 
-As of the time of this writing, I was able to implement a firmware that could give the above capabilities and more:
+### Current Capabilities
 
 * Able to communicate to and from the device using I2C. The I2C device address is programmable.
 * Duty cycle and frequency are programmable via I2C.
