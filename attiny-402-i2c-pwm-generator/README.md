@@ -156,12 +156,15 @@ The I2C signals going to the Raspberry Pi are highlighted with light green arrow
 
 ### Firmware
 
-There are several firmware written to test various features of the microcontrollers in different stages of development. They can be found in the `firmware` folder.
+There are several sketches written to test various features of the microcontrollers in different stages of development. They can be found in the `firmware` folder.
 
-Arduino sketches that start with `attiny202` are meant to be run on the ATTiny202, though they can also fit on the ATTiny402 if you change the microcontroller to the right value. Sketches that start with `attiny402` are meant to run on the ATTiny402, though some sketches that aren't memory intensive could run on the ATTiny202.
+The final PWM generator firmware is called `attiny402-i2c-pwm-generator`. This one is the "final product" you should flash to the ATTiny if you want the described behavior in the introduction. The rest of the sketches are intermediate tests or copied from tutorials/documentation as incremental attempts to construct the final product.
 
 ```
 firmware
+├───attiny202-eeprom-dump
+├───attiny202-eeprom-erase
+├───attiny202-eeprom-test-pattern
 ├───attiny202-serial-test
 ├───attiny202-tca0-pwm-test
 ├───attiny202-updi-led-blink
@@ -169,22 +172,15 @@ firmware
 ├───attiny402-i2c-pwm-generator
 └───attiny402-i2c-reg
 ```
+Arduino sketches that start with `attiny202` are meant to be run on the ATTiny202, though they can also fit on the ATTiny402 if you change the microcontroller to the right value. Sketches that start with `attiny402` are meant to run on the ATTiny402, though some sketches that aren't memory intensive may fit on the ATTiny202.
 
-The final PWM generator firmware is called `attiny402-i2c-pwm-generator`. The rest of the sketches are intermediate tests or copied from tutorials/documentation as incremental attempts to construct the final product.
-
-#### megatinycore Settings
-
-Go over programmer settings
-
-TBD
+Don't forget to check the `Board` and `Chip` values under the Arduino IDE `Tools` menu when you switch sketches.
 
 #### UART Debug Messages  (attiny202-serial-test)
 
-Arduino and Attiny don't have a debugger you can step through (or at least, not to my knowledge), so debug log messages were invaluable. Unfortunately, this requires a printf library and that takes up a lot of space.
+This is a quick and simple test program to see if the serial UART debug messages are working. It prints "Serial init done." to the console. Flash this to the ATTiny, and make sure the CP2102 is hooked up and the puTTy session is running on the correct COM port and baud rate, and you should see that message.
 
-Even on the 402, you will only be able to enable one or two log messages at a time, so debug wisely...
-
-TBD
+> NOTE: If you look at this program it will take up around 2KB of flash memory, which is a lot of space for 20 lines of code. This is due to the printf library inclusion (triggered by the `Serial.println` statement), which is very large. This will become a problem for larger sketches, like `attiny402-i2c-pwm-generator`,
 
 #### PWM generation on ATTiny (attiny202-tca0-pwm-test)
 
