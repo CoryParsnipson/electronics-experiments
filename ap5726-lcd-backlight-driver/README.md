@@ -26,7 +26,7 @@ It is important to find a dc-converter or regulated power supply that is specifi
 
 The schematic of this breakout board is fairly minimal and based on [page 12 of the AP5726 datasheet](https://www.diodes.com/assets/Datasheets/AP5726.pdf).
 
-My schematic has the addition of a solder jumper on the LED\_A pin and a test pad on the FB pin. This is because the intention is to dim the lights using the ENABLE pin, but in case I wanted to use a filtered pwm signal, I would be able to splice a voltage and resistor with the solder jumper.
+My schematic has the addition of a solder jumper on the LED\_K pin and a test pad on the FB pin. This is because the intention is to dim the lights using the ENABLE pin, but in case I wanted to use a filtered pwm signal, I would be able to splice a voltage and resistor with the solder jumper.
 
 For more information about this, see the "LED Dimming" section below.
 
@@ -96,11 +96,13 @@ Schottky diodes were recommended for their low forward voltage drop and fast rev
 
 The output current of the AP5726 is configurable by setting the value of Rset, on the FB pin. There is a chart showing how to calculate this value on page 9 of the [AP5726 datasheet](https://www.diodes.com/assets/Datasheets/AP5726.pdf). For us, we want 7.5 Ohms for 40 mA output. The datasheet also recommends 1% precision resistors.
 
-A [1% 7.87 Ohm 0805 SMD resistor](https://www.digikey.com/en/products/detail/vishay-dale/CRCW08057R87FKEA/1961753) was chosen for this. This is an E96 series resistor and the closest single component you can find to 7.5 Ohms. Remember, getting slightly above the 7.5 value will translate to slightly less current (and slightly less maximum brightness). It is preferred to err on this side, rather than having slightly too much current.
+A [1% 7.87 Ohm 0805 SMD resistor](https://www.digikey.com/en/products/detail/vishay-dale/CRCW08057R87FKEA/1961753) was chosen for this. Remember, getting slightly above the 7.5 value will translate to slightly less current (and slightly less maximum brightness). It is preferred to err on this side, rather than having slightly too much current.
+
+> NOTE: At the time of initial prototyping, a 7.87 Ohm resistor was probably the closest E96 series resistor to 7.5 Ohms that was available. A quick look on Digi-Key, for instance, shows that 7.5 Ohm resistors with 1% tolerance and exactly the same form factor and dimensions are abundantly available. 
 
 ### PCB layout
 
-There are some EMI and high frequency considerations for this particular design. The [LT1932 datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/1932f.pdf) has some really good tips on page 9. The LT1932 is a very similar chip to the AP5726.https://www.analog.com/media/en/technical-documentation/data-sheets/1932f.pdf
+There are some EMI and high frequency considerations for this particular design. The [LT1932 datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/1932f.pdf) has some really good tips on page 9. The LT1932 is a very similar chip to the AP5726.
 
 ![LT1932 PCB layout tips](/images/ap5726-lcd-backlight-driver/lt1932-layout-tips.png?raw=true)
 
