@@ -129,7 +129,9 @@ Lastly, a [CP2102 USB TTL module](https://www.aliexpress.com/w/wholesale-cp2102-
 
 ![CP2102 USB TTL module for Serial Debug](/images/attiny-402-i2c-pwm-generator/cp2102-module.webp?raw=true)
 
-Since, we are already using the Arduino IDE for programming the Arduino Uno, we need to install puTTy and set the COM port appropriately (need to look at control panel) and use the baud rate of 115200, matching that of the firmware sketches in this repo, to view serial debug messages.
+Since, we are already using the Arduino IDE for programming the Arduino Uno, we need to install puTTy and set the COM port appropriately\* and use the baud rate of 115200, matching that of the firmware sketches in this repo, to view serial debug messages.
+
+> NOTE: to figure out which COM port to use on Windows, go to the Device Manager from the Control Panel and view the list of attached COM ports. The one that appears when the UART is plugged in is the number to use.
 
 ##### Pin Assignments
 
@@ -154,7 +156,7 @@ This setup is identical in pin assignments to the single LED setup, except for p
 
 The I2C signals going to the Raspberry Pi are highlighted with light green arrows. (Ignore the extra circuit elements on the upper breadboard, they are unrelated to this project).
 
-> IMPORTANT: you now also need to add a large (1 MOhm) pull down resistor to ground on pin 7. This is because on power-up, before the PWM output starts, this pin is floating and that will cause the EN input of the AP5726 to assume a random value otherwise. (This is not pictured in the image above.)
+> IMPORTANT: you now also need to add a large (1 MOhm) pull down resistor to ground on pin 7. This is because on power-up, before the PWM output starts, this pin is floating and that will cause the EN input of the AP5726 to assume a random value otherwise. This is not pictured in the image above.
 
 ### Firmware
 
@@ -176,7 +178,7 @@ firmware
 ├───attiny402-i2c-pwm-generator
 └───attiny402-i2c-reg
 ```
-Arduino sketches that start with `attiny202` are meant to be run on the ATTiny202, though they can also fit on the ATTiny402 if you change the microcontroller to the right value. Sketches that start with `attiny402` are meant to run on the ATTiny402, though some sketches that aren't memory intensive may fit on the ATTiny202.
+Arduino sketches that start with `attiny202` are meant to be run on the ATTiny202, though they can also fit on the ATTiny402 if you change the microcontroller to the right `Chip` value in the Tools menu of the Arduino IDE. Sketches that start with `attiny402` are meant to run on the ATTiny402, though some sketches that aren't memory intensive may fit on the ATTiny202.
 
 Don't forget to check the `Board` and `Chip` values under the Arduino IDE `Tools` menu when you switch sketches.
 
