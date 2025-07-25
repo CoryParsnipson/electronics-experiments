@@ -993,7 +993,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "project:mipi-breakout-header-conn"
+		(symbol "project:mipi_breakout_header_conn"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1040,7 +1040,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "mipi-breakout-header-conn_0_1"
+			(symbol "mipi_breakout_header_conn_0_1"
 				(rectangle
 					(start -8.89 27.94)
 					(end 8.89 -25.4)
@@ -1053,7 +1053,7 @@
 					)
 				)
 			)
-			(symbol "mipi-breakout-header-conn_1_1"
+			(symbol "mipi_breakout_header_conn_1_1"
 				(pin output line
 					(at -11.43 25.4 0)
 					(length 2.54)
@@ -3629,130 +3629,6 @@
 		)
 	)
 	(symbol
-		(lib_id "project:mipi-breakout-header-conn")
-		(at 237.49 110.49 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "2b178064-ad14-493a-9b9e-ad8d01dc904e")
-		(property "Reference" "X1"
-			(at 250.19 109.2199 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "~"
-			(at 250.19 111.7599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 237.49 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 237.49 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 237.49 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b5827017-e613-4d01-aa01-01df8a3f136c")
-		)
-		(pin "19"
-			(uuid "2f21922d-df5b-4739-a03b-c0f66cd362c2")
-		)
-		(pin "17"
-			(uuid "10aecaae-dfa8-479e-991b-108d205e7c68")
-		)
-		(pin "16"
-			(uuid "0175e550-b0d2-42a5-ab75-3197f11ed6fb")
-		)
-		(pin "20"
-			(uuid "9d8b055e-636d-46d1-9b4b-b96d1f6f5c1c")
-		)
-		(pin "18"
-			(uuid "622d9850-aee6-4f37-960e-471750f9fce8")
-		)
-		(pin "12"
-			(uuid "c09ec930-48d1-453a-a9ad-1c66c34ca9eb")
-		)
-		(pin "11"
-			(uuid "80093d1b-60a5-4f6b-aef2-5b568d873618")
-		)
-		(pin "15"
-			(uuid "db7885ba-9422-4f03-8427-22f31a97bc06")
-		)
-		(pin "14"
-			(uuid "361db3e3-dac5-423f-b9d5-e4fe5adbe762")
-		)
-		(pin "13"
-			(uuid "d3f2c258-ed41-440f-a222-b19b264d6e52")
-		)
-		(pin "10"
-			(uuid "701bde9f-5a9b-414c-8d36-92843cc5a794")
-		)
-		(pin "9"
-			(uuid "bf26ea26-bb80-4621-a8c0-2463adb8aa36")
-		)
-		(pin "8"
-			(uuid "35b39e7e-8d63-4bc8-bf3e-594df85db867")
-		)
-		(pin "7"
-			(uuid "03d1c849-71bc-4ff0-8432-f77f044b0314")
-		)
-		(pin "2"
-			(uuid "4b91a34c-d652-4a43-9656-0fb85e0e4d20")
-		)
-		(pin "3"
-			(uuid "5a232b99-6afd-4c7c-83b9-07c34d4ce8df")
-		)
-		(pin "6"
-			(uuid "ffebdcea-81e6-4098-b9e4-e681d70fadc8")
-		)
-		(pin "5"
-			(uuid "45ea95f4-e312-4e33-97e9-b8b47c2597ff")
-		)
-		(pin "4"
-			(uuid "39b427c6-be33-489a-aedb-34fb5f76522b")
-		)
-		(instances
-			(project ""
-				(path "/f2077993-b821-4408-bc59-2d0bd14a1026"
-					(reference "X1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 191.77 130.81 0)
 		(unit 1)
@@ -4078,6 +3954,130 @@
 			(project ""
 				(path "/f2077993-b821-4408-bc59-2d0bd14a1026"
 					(reference "#FLG01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "project:mipi_breakout_header_conn")
+		(at 237.49 110.49 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "715aa867-3e84-441e-a72e-04d3aa4ae8ef")
+		(property "Reference" "X1"
+			(at 247.65 107.9499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "~"
+			(at 247.65 110.4899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 237.49 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 237.49 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 237.49 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "8"
+			(uuid "ba176605-a23f-46b2-a97d-1f540470f6eb")
+		)
+		(pin "5"
+			(uuid "53827c8f-4273-471c-a4a8-a1a0658cf4c1")
+		)
+		(pin "3"
+			(uuid "feed355f-b295-4e4e-a94f-fe2ec03e218b")
+		)
+		(pin "9"
+			(uuid "f9324ad6-5720-4b93-a0b8-d47fe1b2b292")
+		)
+		(pin "6"
+			(uuid "55ba7f89-7578-47a3-90ce-98ddcde01005")
+		)
+		(pin "11"
+			(uuid "3446508f-47fe-4fcc-b773-df3677f61939")
+		)
+		(pin "10"
+			(uuid "09a36d92-5dbe-4ebf-aede-abff457ccb04")
+		)
+		(pin "7"
+			(uuid "ac243057-282d-442e-bcf4-3a80055c3b8c")
+		)
+		(pin "4"
+			(uuid "1cd187d0-74e5-4b8d-84e3-da812ba76e0e")
+		)
+		(pin "2"
+			(uuid "8b317baf-3106-4717-89df-b4db4e83f939")
+		)
+		(pin "1"
+			(uuid "dd405e98-7e3d-45e6-a6a8-fd6c08ad5258")
+		)
+		(pin "19"
+			(uuid "9c7b24a5-f2c9-4757-907a-14d762d677bc")
+		)
+		(pin "16"
+			(uuid "7d12b2d5-21da-4b77-a7ed-f61b612521ac")
+		)
+		(pin "20"
+			(uuid "13a38803-a09c-4b7f-bb02-9aaeb60298d7")
+		)
+		(pin "17"
+			(uuid "aa462dfc-1e02-40dc-9bc8-53f0c1246701")
+		)
+		(pin "15"
+			(uuid "0f2a16cf-11c5-469e-90f1-3d7c25b746b5")
+		)
+		(pin "14"
+			(uuid "6210d086-9f0f-469b-95da-db3d0d87df4b")
+		)
+		(pin "13"
+			(uuid "c764f673-2e7c-4ca9-8c1d-ccf801736b9b")
+		)
+		(pin "12"
+			(uuid "85c43cc4-52de-4a8b-9726-914cc3aa2836")
+		)
+		(pin "18"
+			(uuid "85c5ba35-fe74-4ec4-89d0-92e9147dc191")
+		)
+		(instances
+			(project ""
+				(path "/f2077993-b821-4408-bc59-2d0bd14a1026"
+					(reference "X1")
 					(unit 1)
 				)
 			)
