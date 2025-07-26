@@ -2253,7 +2253,7 @@
 	)
 	(wire
 		(pts
-			(xy 154.94 71.12) (xy 154.94 77.47)
+			(xy 154.94 71.12) (xy 154.94 88.9)
 		)
 		(stroke
 			(width 0)
@@ -2410,16 +2410,6 @@
 			(type default)
 		)
 		(uuid "5a5c9afd-fb78-4bb9-b466-5332e6718183")
-	)
-	(wire
-		(pts
-			(xy 154.94 85.09) (xy 154.94 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5b97ddd3-60bc-4dab-9bab-2a9c65ca83e0")
 	)
 	(wire
 		(pts
@@ -4569,76 +4559,6 @@
 			(project ""
 				(path "/f2077993-b821-4408-bc59-2d0bd14a1026"
 					(reference "J2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 154.94 81.28 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "9911e818-af77-423f-be1a-be0352b86512")
-		(property "Reference" "R2"
-			(at 157.48 80.0099 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "4.7k"
-			(at 157.48 82.5499 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 153.162 81.28 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 154.94 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 154.94 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b755d04f-197b-4898-a6d5-82f59d3412aa")
-		)
-		(pin "2"
-			(uuid "0c90afb6-0ab5-449b-a80a-2cdeb312839c")
-		)
-		(instances
-			(project ""
-				(path "/f2077993-b821-4408-bc59-2d0bd14a1026"
-					(reference "R2")
 					(unit 1)
 				)
 			)
