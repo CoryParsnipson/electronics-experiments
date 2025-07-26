@@ -2,12 +2,12 @@
 	(version 20241209)
 	(generator "kicad_symbol_editor")
 	(generator_version "9.0")
-	(symbol "backlight_driver"
+	(symbol "ap5726"
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(property "Reference" "BD"
-			(at 3.556 -5.842 0)
+		(property "Reference" "U"
+			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -49,10 +49,10 @@
 				(hide yes)
 			)
 		)
-		(symbol "backlight_driver_0_1"
+		(symbol "ap5726_0_1"
 			(rectangle
-				(start -6.35 7.62)
-				(end 6.35 -7.62)
+				(start -1.27 -1.27)
+				(end 11.43 -13.97)
 				(stroke
 					(width 0)
 					(type default)
@@ -62,11 +62,11 @@
 				)
 			)
 		)
-		(symbol "backlight_driver_1_1"
-			(pin power_in line
-				(at -8.89 6.35 0)
+		(symbol "ap5726_1_1"
+			(pin input line
+				(at -3.81 -3.81 0)
 				(length 2.54)
-				(name "VCC"
+				(name "SW"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -82,7 +82,7 @@
 				)
 			)
 			(pin power_in line
-				(at -8.89 3.81 0)
+				(at -3.81 -7.62 0)
 				(length 2.54)
 				(name "GND"
 					(effects
@@ -100,9 +100,9 @@
 				)
 			)
 			(pin input line
-				(at -8.89 0 0)
+				(at -3.81 -11.43 0)
 				(length 2.54)
-				(name "Enable"
+				(name "FB"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -117,17 +117,17 @@
 					)
 				)
 			)
-			(pin output line
-				(at -8.89 -3.81 0)
+			(pin power_in line
+				(at 13.97 -3.81 180)
 				(length 2.54)
-				(name "LED_A"
+				(name "Vin"
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
 					)
 				)
-				(number "4"
+				(number "6"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -135,10 +135,10 @@
 					)
 				)
 			)
-			(pin output line
-				(at -8.89 -6.35 0)
+			(pin input line
+				(at 13.97 -7.62 180)
 				(length 2.54)
-				(name "LED_K"
+				(name "OVP"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -146,6 +146,24 @@
 					)
 				)
 				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 13.97 -11.43 180)
+				(length 2.54)
+				(name "EN"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
 					(effects
 						(font
 							(size 1.27 1.27)
