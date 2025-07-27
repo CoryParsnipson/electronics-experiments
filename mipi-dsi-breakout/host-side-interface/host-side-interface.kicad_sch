@@ -1731,7 +1731,7 @@
 				)
 			)
 			(symbol "mipi_breakout_header_conn_1_1"
-				(pin output line
+				(pin bidirectional line
 					(at -11.43 25.4 0)
 					(length 2.54)
 					(name "DSI_3_P"
@@ -1749,7 +1749,7 @@
 						)
 					)
 				)
-				(pin output line
+				(pin bidirectional line
 					(at -11.43 22.86 0)
 					(length 2.54)
 					(name "DSI_3_N"
@@ -1767,7 +1767,7 @@
 						)
 					)
 				)
-				(pin output line
+				(pin bidirectional line
 					(at -11.43 20.32 0)
 					(length 2.54)
 					(name "DSI_2_P"
@@ -1785,7 +1785,7 @@
 						)
 					)
 				)
-				(pin output line
+				(pin bidirectional line
 					(at -11.43 17.78 0)
 					(length 2.54)
 					(name "DSI_2_N"
@@ -1803,7 +1803,7 @@
 						)
 					)
 				)
-				(pin output line
+				(pin bidirectional line
 					(at -11.43 15.24 0)
 					(length 2.54)
 					(name "DSI_CLK_P"
@@ -1821,7 +1821,7 @@
 						)
 					)
 				)
-				(pin output line
+				(pin bidirectional line
 					(at -11.43 12.7 0)
 					(length 2.54)
 					(name "DSI_CLK_N"
@@ -1839,7 +1839,7 @@
 						)
 					)
 				)
-				(pin output line
+				(pin bidirectional line
 					(at -11.43 10.16 0)
 					(length 2.54)
 					(name "DSI_1_P"
@@ -1857,7 +1857,7 @@
 						)
 					)
 				)
-				(pin output line
+				(pin bidirectional line
 					(at -11.43 7.62 0)
 					(length 2.54)
 					(name "DSI_1_N"
@@ -1875,7 +1875,7 @@
 						)
 					)
 				)
-				(pin output line
+				(pin bidirectional line
 					(at -11.43 5.08 0)
 					(length 2.54)
 					(name "DSI_0_P"
@@ -1893,7 +1893,7 @@
 						)
 					)
 				)
-				(pin output line
+				(pin bidirectional line
 					(at -11.43 2.54 0)
 					(length 2.54)
 					(name "DSI_0_N"
@@ -1911,7 +1911,7 @@
 						)
 					)
 				)
-				(pin input line
+				(pin bidirectional line
 					(at -11.43 0 0)
 					(length 2.54)
 					(name "LED_K"
@@ -1929,7 +1929,7 @@
 						)
 					)
 				)
-				(pin input line
+				(pin bidirectional line
 					(at -11.43 -2.54 0)
 					(length 2.54)
 					(name "LED_A"
@@ -1965,7 +1965,7 @@
 						)
 					)
 				)
-				(pin input line
+				(pin bidirectional line
 					(at -11.43 -7.62 0)
 					(length 2.54)
 					(name "SCL"
@@ -1983,7 +1983,7 @@
 						)
 					)
 				)
-				(pin output line
+				(pin bidirectional line
 					(at -11.43 -10.16 0)
 					(length 2.54)
 					(name "TE_O"
@@ -2001,7 +2001,7 @@
 						)
 					)
 				)
-				(pin output line
+				(pin bidirectional line
 					(at -11.43 -12.7 0)
 					(length 2.54)
 					(name "INTERRUPT"
@@ -2019,7 +2019,7 @@
 						)
 					)
 				)
-				(pin input line
+				(pin bidirectional line
 					(at -11.43 -15.24 0)
 					(length 2.54)
 					(name "RESET_N"
