@@ -6349,7 +6349,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:sus-grounding-pad"
 			(at 193.04 144.78 0)
 			(effects
 				(font
@@ -6614,7 +6614,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:TE_2328702_8pos-0.5mm-zif"
 			(at 113.03 63.5 0)
 			(effects
 				(font
@@ -6702,7 +6702,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:TE_1-2328702-0_10pos-0.5mm-zif"
 			(at 113.03 106.68 0)
 			(effects
 				(font
@@ -6987,7 +6987,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:Cvilux_CF4230FH0R0-05-NH_30pos-0.5mm-zif"
 			(at 168.91 86.36 0)
 			(effects
 				(font
@@ -7195,7 +7195,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:Cvilux_CF5825DH0RA-NH_25pos-0.3mm-zif"
 			(at 80.01 86.36 0)
 			(effects
 				(font
@@ -7328,7 +7328,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x20_P2.54mm_Horizontal"
 			(at 146.05 157.48 0)
 			(effects
 				(font
@@ -7451,7 +7451,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:Cvilux_CF4240FH0R0-05-NH_40pos-0.5mm-zif"
 			(at 219.71 80.01 0)
 			(effects
 				(font
@@ -7864,7 +7864,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:Cvilux_CF4220FH0R0-05-NH_20pos-0.5mm-zif"
 			(at 83.82 158.75 0)
 			(effects
 				(font

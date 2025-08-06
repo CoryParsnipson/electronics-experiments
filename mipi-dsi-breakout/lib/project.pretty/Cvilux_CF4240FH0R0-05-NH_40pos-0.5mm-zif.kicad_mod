@@ -481,4 +481,15 @@
 		(uuid "2900744e-ba0e-41a7-8a1f-1133f6c0a41d")
 	)
 	(embedded_fonts no)
+	(model "C:/Users/Cory/Documents/pcb/electronics-experiments/mipi-dsi-breakout/lib/step-models/Cvilux-CF4240FH0R0-05-NH-40pos-0.5mm-zif.step"
+		(offset
+			(xyz 0.1 -3 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -0 -0)
+		)
+	)
 )

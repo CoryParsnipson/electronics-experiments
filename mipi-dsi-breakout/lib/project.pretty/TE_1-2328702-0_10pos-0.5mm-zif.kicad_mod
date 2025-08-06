@@ -337,4 +337,15 @@
 		(uuid "5af17b36-3fb7-498f-8386-58229b3b826b")
 	)
 	(embedded_fonts no)
+	(model "C:/Users/Cory/Documents/pcb/electronics-experiments/mipi-dsi-breakout/lib/step-models/TE-1-2328702-0-10pos-0.5mm-zif.step"
+		(offset
+			(xyz -2.25 -3 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -0 -0)
+		)
+	)
 )
