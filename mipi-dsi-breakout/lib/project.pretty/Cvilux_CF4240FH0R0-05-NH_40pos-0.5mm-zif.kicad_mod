@@ -5,7 +5,7 @@
 	(layer "F.Cu")
 	(tags "CF4240FH0R0-05-NH ")
 	(property "Reference" "REF**"
-		(at 9.8 -1.7 0)
+		(at 9.65 4.3 0)
 		(unlocked yes)
 		(layer "F.SilkS")
 		(uuid "c82808c9-8a2e-41b5-850f-bfab5394e07c")
@@ -206,8 +206,8 @@
 		(uuid "01bdf81a-300b-4170-9573-14a6265d16ee")
 	)
 	(fp_circle
-		(center 0 -1.4478)
-		(end 0.381 -1.4478)
+		(center -2.264199 0)
+		(end -1.883199 0)
 		(stroke
 			(width 0.508)
 			(type solid)
@@ -217,7 +217,7 @@
 		(uuid "b3696075-fe63-4c62-88a8-4c3ba95471bc")
 	)
 	(fp_text user "${REFERENCE}"
-		(at 17.65 -1.6 0)
+		(at 1.35 4.35 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(uuid "648bb728-1c78-4e88-856f-cee019827557")
@@ -227,6 +227,18 @@
 				(thickness 0.15)
 			)
 		)
+	)
+	(pad "" smd rect
+		(at -1 2.500122)
+		(size 0.4572 0.8636)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "045c9672-e18a-44c4-a4d1-bbdbd385777a")
+	)
+	(pad "" smd rect
+		(at 20.500002 2.500122)
+		(size 0.4572 0.8636)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "2900744e-ba0e-41a7-8a1f-1133f6c0a41d")
 	)
 	(pad "1" smd rect
 		(at 0 0)
@@ -467,18 +479,6 @@
 		(size 0.3048 0.8636)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "2afae207-8dca-4529-86a3-dbf314d6b0fd")
-	)
-	(pad "41" smd rect
-		(at -1 2.500122)
-		(size 0.4572 0.8636)
-		(layers "F.Cu" "F.Mask" "F.Paste")
-		(uuid "045c9672-e18a-44c4-a4d1-bbdbd385777a")
-	)
-	(pad "42" smd rect
-		(at 20.500002 2.500122)
-		(size 0.4572 0.8636)
-		(layers "F.Cu" "F.Mask" "F.Paste")
-		(uuid "2900744e-ba0e-41a7-8a1f-1133f6c0a41d")
 	)
 	(embedded_fonts no)
 	(model "C:/Users/Cory/Documents/pcb/electronics-experiments/mipi-dsi-breakout/lib/step-models/Cvilux-CF4240FH0R0-05-NH-40pos-0.5mm-zif.step"
