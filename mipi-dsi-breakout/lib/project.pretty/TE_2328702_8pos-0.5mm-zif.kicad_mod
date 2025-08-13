@@ -325,7 +325,7 @@
 	(embedded_fonts no)
 	(model "C:/Users/Cory/Documents/pcb/electronics-experiments/mipi-dsi-breakout/lib/step-models/TE-2328702-8pos-0.5mm-zif.step"
 		(offset
-			(xyz 0 -2 0)
+			(xyz 0 -1.9 0.5)
 		)
 		(scale
 			(xyz 1 1 1)
