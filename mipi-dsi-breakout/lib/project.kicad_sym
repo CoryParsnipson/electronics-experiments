@@ -2153,8 +2153,8 @@
 		)
 		(symbol "rpi_dsi_connector_0_1"
 			(rectangle
-				(start -27.94 6.35)
-				(end 27.94 -6.35)
+				(start -29.21 6.35)
+				(end 29.21 -6.35)
 				(stroke
 					(width 0)
 					(type default)
@@ -2166,7 +2166,7 @@
 		)
 		(symbol "rpi_dsi_connector_1_1"
 			(pin power_in line
-				(at -25.4 8.89 270)
+				(at -26.67 8.89 270)
 				(length 2.54)
 				(name "GND"
 					(effects
@@ -2184,7 +2184,7 @@
 				)
 			)
 			(pin input line
-				(at -20.32 8.89 270)
+				(at -24.13 8.89 270)
 				(length 2.54)
 				(name "D0_N"
 					(effects
@@ -2202,7 +2202,7 @@
 				)
 			)
 			(pin input line
-				(at -17.78 8.89 270)
+				(at -21.59 8.89 270)
 				(length 2.54)
 				(name "D0_P"
 					(effects
@@ -2219,8 +2219,26 @@
 					)
 				)
 			)
+			(pin power_in line
+				(at -19.05 8.89 270)
+				(length 2.54)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
 			(pin input line
-				(at -12.7 8.89 270)
+				(at -16.51 8.89 270)
 				(length 2.54)
 				(name "D1_N"
 					(effects
@@ -2238,7 +2256,7 @@
 				)
 			)
 			(pin input line
-				(at -10.16 8.89 270)
+				(at -13.97 8.89 270)
 				(length 2.54)
 				(name "D1_P"
 					(effects
@@ -2255,8 +2273,26 @@
 					)
 				)
 			)
+			(pin power_in line
+				(at -11.43 8.89 270)
+				(length 2.54)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
 			(pin input line
-				(at -5.08 8.89 270)
+				(at -8.89 8.89 270)
 				(length 2.54)
 				(name "CLK_N"
 					(effects
@@ -2274,7 +2310,7 @@
 				)
 			)
 			(pin input line
-				(at -2.54 8.89 270)
+				(at -6.35 8.89 270)
 				(length 2.54)
 				(name "CLK_P"
 					(effects
@@ -2291,8 +2327,26 @@
 					)
 				)
 			)
+			(pin power_in line
+				(at -3.81 8.89 270)
+				(length 2.54)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
 			(pin input line
-				(at 2.54 8.89 270)
+				(at -1.27 8.89 270)
 				(length 2.54)
 				(name "D2_N"
 					(effects
@@ -2310,7 +2364,7 @@
 				)
 			)
 			(pin input line
-				(at 5.08 8.89 270)
+				(at 1.27 8.89 270)
 				(length 2.54)
 				(name "D2_P"
 					(effects
@@ -2327,8 +2381,26 @@
 					)
 				)
 			)
+			(pin power_in line
+				(at 3.81 8.89 270)
+				(length 2.54)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
 			(pin input line
-				(at 10.16 8.89 270)
+				(at 6.35 8.89 270)
 				(length 2.54)
 				(name "D3_N"
 					(effects
@@ -2346,7 +2418,7 @@
 				)
 			)
 			(pin input line
-				(at 12.7 8.89 270)
+				(at 8.89 8.89 270)
 				(length 2.54)
 				(name "D3_P"
 					(effects
@@ -2363,8 +2435,80 @@
 					)
 				)
 			)
+			(pin power_in line
+				(at 11.43 8.89 270)
+				(length 2.54)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 13.97 8.89 270)
+				(length 2.54)
+				(name "NC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "17"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 16.51 8.89 270)
+				(length 2.54)
+				(name "NC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "18"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 19.05 8.89 270)
+				(length 2.54)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "19"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
 			(pin input line
-				(at 17.78 8.89 270)
+				(at 21.59 8.89 270)
 				(length 2.54)
 				(name "SCL"
 					(effects
@@ -2382,7 +2526,7 @@
 				)
 			)
 			(pin bidirectional line
-				(at 20.32 8.89 270)
+				(at 24.13 8.89 270)
 				(length 2.54)
 				(name "SDA"
 					(effects
@@ -2400,7 +2544,7 @@
 				)
 			)
 			(pin power_in line
-				(at 25.4 8.89 270)
+				(at 26.67 8.89 270)
 				(length 2.54)
 				(name "VCC"
 					(effects
