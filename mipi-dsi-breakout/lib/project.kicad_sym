@@ -2507,7 +2507,7 @@
 					)
 				)
 			)
-			(pin input line
+			(pin bidirectional line
 				(at 21.59 8.89 270)
 				(length 2.54)
 				(name "SCL"
@@ -2888,7 +2888,7 @@
 					)
 				)
 			)
-			(pin input line
+			(pin output line
 				(at -21.59 10.16 270)
 				(length 2.54)
 				(name "MIPI_CLK_N"
@@ -2906,7 +2906,7 @@
 					)
 				)
 			)
-			(pin input line
+			(pin output line
 				(at -19.05 10.16 270)
 				(length 2.54)
 				(name "MIPI_CLK_P"
@@ -2942,7 +2942,7 @@
 					)
 				)
 			)
-			(pin input line
+			(pin output line
 				(at -13.97 10.16 270)
 				(length 2.54)
 				(name "MIPI_D0_P"
@@ -2960,7 +2960,7 @@
 					)
 				)
 			)
-			(pin input line
+			(pin output line
 				(at -11.43 10.16 270)
 				(length 2.54)
 				(name "MIPI_D0_N"
@@ -2996,7 +2996,7 @@
 					)
 				)
 			)
-			(pin input line
+			(pin output line
 				(at -6.35 10.16 270)
 				(length 2.54)
 				(name "MIPI_D1_N"
@@ -3014,7 +3014,7 @@
 					)
 				)
 			)
-			(pin input line
+			(pin output line
 				(at -3.81 10.16 270)
 				(length 2.54)
 				(name "MIPI_D1_P"

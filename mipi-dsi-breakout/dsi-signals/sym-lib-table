@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "project")(type "KiCad")(uri "C:/Users/Cory/Documents/pcb/electronics-experiments/mipi-dsi-breakout/lib/project.kicad_sym")(options "")(descr ""))
+)
