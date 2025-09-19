@@ -9362,7 +9362,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:Cvilux_CF4222FH0R0-05-NH_22pos-0.5mm-zif"
 			(at 53.34 181.61 0)
 			(effects
 				(font
@@ -9557,7 +9557,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:Cvilux_CF4230FH0R0-05-NH_30pos-0.5mm-zif"
 			(at 210.82 85.09 0)
 			(effects
 				(font
@@ -9842,7 +9842,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 71.882 151.13 90)
 			(effects
 				(font
@@ -9978,7 +9978,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 76.962 151.13 90)
 			(effects
 				(font
@@ -10179,7 +10179,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm"
 			(at 156.21 157.48 0)
 			(effects
 				(font
@@ -10247,7 +10247,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical"
 			(at 163.83 48.26 0)
 			(effects
 				(font
@@ -10395,7 +10395,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:sus-grounding-pad"
 			(at 163.83 91.44 0)
 			(effects
 				(font
@@ -10592,7 +10592,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:sus-grounding-pad"
 			(at 156.21 91.44 0)
 			(effects
 				(font
@@ -10657,7 +10657,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:Cvilux_CF4222FH0R0-05-NH_22pos-0.5mm-zif"
 			(at 109.22 27.94 0)
 			(effects
 				(font
@@ -10785,7 +10785,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:Cvilux_CF4220FH0R0-05-NH_20pos-0.5mm-zif"
 			(at 53.34 124.46 0)
 			(effects
 				(font
@@ -10907,7 +10907,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:Cvilux_CF4222FH0R0-05-NH_22pos-0.5mm-zif"
 			(at 254 26.67 0)
 			(effects
 				(font
@@ -11036,7 +11036,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:Cvilux_CF4240FH0R0-05-NH_40pos-0.5mm-zif"
 			(at 120.65 105.41 0)
 			(effects
 				(font
@@ -11218,7 +11218,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm"
 			(at 35.56 26.67 0)
 			(effects
 				(font
@@ -11353,7 +11353,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 225.552 123.19 90)
 			(effects
 				(font
@@ -11489,7 +11489,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:TE_1-2328702-0_10pos-0.5mm-zif"
 			(at 55.88 73.66 0)
 			(effects
 				(font
@@ -11581,7 +11581,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
 			(at 158.75 177.8 0)
 			(effects
 				(font
@@ -11652,7 +11652,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:Cvilux_CF4222FH0R0-05-NH_22pos-0.5mm-zif"
 			(at 207.01 153.67 0)
 			(effects
 				(font
@@ -11781,7 +11781,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:TE_2328702_8pos-0.5mm-zif"
 			(at 210.82 25.4 0)
 			(effects
 				(font
@@ -11867,7 +11867,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
 			(at 57.15 26.67 0)
 			(effects
 				(font
@@ -12198,7 +12198,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 230.632 123.19 90)
 			(effects
 				(font
@@ -12333,7 +12333,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project:Cvilux_CF5825DH0RA-NH_25pos-0.3mm-zif"
 			(at 273.05 97.79 0)
 			(effects
 				(font
