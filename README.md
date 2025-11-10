@@ -34,6 +34,12 @@ This is a project to use the new ATTiny series microcontroller to make an I2C co
 
 This is a design for a Class D speaker amplifier based on a [product by Adafruit](https://learn.adafruit.com/adafruit-max98357-i2s-class-d-mono-amp).
 
+### [mipi-dsi-breakout](./mipi-dsi-breakout)
+
+![MIPI DSI breakout board](/images/banner/mipi-dsi-breakout.jpeg?raw=true)
+
+This is a pcb design that acts as an adapter board to hook up DSI signals coming from a LCD module with MIPI DSI interface to the raspberry pi.
+
 ### [retrocution-usb-hub](./retrocution-usb-hub)
 
 ![Retrocution USB Hub](/images/banner/retrocution-usb-hub.jpg?raw=true)
