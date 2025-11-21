@@ -71,7 +71,7 @@ This might be the most popular screen interface. With an HDMI controller, the sc
 
 #### MIPI DSI
 
-For this project specifically, we have chosen to look for DSI screens exclusively because the DSI interface is convenient for Raspberry Pi microcontrollers. Having a DSI screen uses less power, supports higher resolutions and refresh rates, low physical profile, and does not take up GPIO or other ports that could be used for other things. The DSI protocol is also meant for internal connectors for mobile and low power and physical small devices.
+MIPI DSI stands for *Mobile Industry Processor Interface Display Serial Interface*. For this project specifically, we have chosen to look for DSI screens exclusively because the DSI interface is convenient for Raspberry Pi microcontrollers. Having a DSI screen uses less power, supports higher resolutions and refresh rates, low physical profile, and does not take up GPIO or other ports that could be used for other things. The DSI protocol is also meant for internal connectors for mobile and low power and physical small devices.
 
 #### LVDS
 
@@ -89,7 +89,29 @@ Display Parallel Interface (DPI) is similar to SPI but is faster so supports hig
 
 ### Differential High Speed Signal Background
 
-TBD
+MIPI DSI protocol relies on high speed differential pair signals. High speed, meaning signals that switch with frequency higher than 50 MHz. For the DSI protocol, it can reach speeds up to 480 MHz, for higher resolutions and refresh speeds. In this project, we are targeting screens around 5 inches in size and slightly lower than HD resolution (480x800 or 1280x1024), so speeds will not be as high, but around the 50 - 100 MHz range.
+
+The term differential pair refers to the fact that each signal is split into two complementary signals that are transmitted together. In other words, when one signal is high, the other signal is low. The destination device will receive both signals and take the difference between their values to recover the original signals.
+
+![Illustration of Differential pair signals](/images/mipi-dsi-breakout/differential-pair-signals.png?raw=true)
+
+Doing things this way allows one to transmit at lower voltages since the amplitude of each individual signal can be half the maximum value required, and also allows for higher data rates, and protection against electromagnetic interference (EMI).
+
+The tradeoff is that it requires more board space for extra traces, specific geometric and PCB design constraints to accomodate the differential pair layout, and protocol overhead to recover the original signal.
+
+What is of particular interest for this project are all the ways including differential pairs change the PCB layout constraints compared to "ordinary" non-high speed and non-differential signals. A design that is meant to include differential pairs must be done at the very start, because it involves all aspects of the board and layout.
+
+#### How to Route Differential Signals in KiCAD
+
+TBD (link to youtube video tutorial about differential pair signal routing)
+
+#### Differential Pair Signals Background
+
+TBD (link video about differential pair ground plane coupling and stuff)
+
+#### PCB Considerations when using Differential Pair Signals
+
+TBD (link to Sierra Circuits impedance calculator and PCBway 4 layer stackup)
 
 ## Part Selection
 
