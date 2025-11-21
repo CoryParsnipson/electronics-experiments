@@ -57,7 +57,35 @@ There are also Organic LED (OLED) screens now, which are a different technology 
 
 ### MIPI DSI Interface
 
-TBD
+If that wasn't complicated enough, one must also have to worry about the interface of the LCD screen, and there are many different interface protocols. Some of the more common ones:
+
+* HDMI
+* MIPI DSI
+* LVDS
+* SPI
+* RGB/MCU/Parallel/DPI
+
+#### HDMI
+
+This might be the most popular screen interface. With an HDMI controller, the screen hooks up to a host using an HDMI cable. This makes it compatible with anything that supports the HDMI protocol, and not just a specific device. It also supports audio and input signals as well. HDMI circuitry is relatively complicated, however, so it was not considered for this project.
+
+#### MIPI DSI
+
+For this project specifically, we have chosen to look for DSI screens exclusively because the DSI interface is convenient for Raspberry Pi microcontrollers. Having a DSI screen uses less power, supports higher resolutions and refresh rates, low physical profile, and does not take up GPIO or other ports that could be used for other things. The DSI protocol is also meant for internal connectors for mobile and low power and physical small devices.
+
+#### LVDS
+
+"Low Voltage Differential Signaling" actually refers to the transmission method and not an entire protocol, so it is not quite equivelant to other things on this list. In fact, MIPI DSI is a protocol that sits on top of LVDS. However, you may see this and "Enhanced LVDS" (eLVDS) when searching for screens and this just means that it uses LVDS and then a proprietary protocol on top to transmit data. This is common for larger screens such as for laptops and tablets, and only found buried in commercially manufactured devices. It is generally not recommended to use a screen that claims to use LVDS because it is hard to reverse engineer or find documentation on proprietary protocols, especially since they would be completely different across screens.
+
+#### SPI
+
+Serial Peripheral Interface (SPI) is a protocol used for many devices, not just screens. This is common for graphical LCD screens 3-4 inches and smaller, since the maximum data rate for SPI is not very fast. Even then, you may observe that the framerate is not very high due to the transfer rate limitations. Furthermore, an SPI screen will probably require more CPU overhead and power because the protocol is not designed specifically to transmit video. One good thing is that the interface and protocol is very simple, so it is very easy to integrate into a device as long as the screen is small and the framerate and resolution is not too large.
+
+SPI devices usually hook in through GPIO pins.
+
+#### RGB/MCU/Parallel/DPI
+
+Display Parallel Interface (DPI) is similar to SPI but is faster so supports higher resolutions. It still suffers from similar power and CPU overhead limitations. It also uses GPIO pins, but a very large amount. For example, in a Raspberry Pi, hooking up a DPI screen may use almost all of the 40 available GPIO pins. This is not convenient if one wants to integrate multiple peripherals to the same microcontroller.
 
 ### Differential High Speed Signal Background
 
