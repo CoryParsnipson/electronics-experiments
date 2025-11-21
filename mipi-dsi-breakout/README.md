@@ -44,13 +44,8 @@ The objective of this project is to prototype something that could potentially r
 
 The LCD screens this project is concerned with are mostly *Thin Film Transistor* (TFT) screens. See [this page](https://www.topwaydisplay.com/en/blog/how-tft-lcd-works-explained) to learn more about how TFT screens work. Essentially, TFT LCDs are a VLSI design that prints individual transistors on a transparent substrate that act as individual pixels. So the takeaway here is that it is not very simple or inexpensive to produce these, and that there are very expensive foundries needed to manufacturer these like one would need to make CPUs and other integrated circuits.
 
-<figure>
-    <img src="/images/mipi-dsi-breakout/lcd-screen-types.jpg?raw=true" alt="LCD screen types">
-    <figcaption>Left: segmented (monochrome, big segments) Middle: dot matrix (monochrome, medium resolution) Right: TFT (graphical, transistors, RGB color)</figcaption>
-</figure>
-
 ![LCD screen types](/images/mipi-dsi-breakout/lcd-screen-types.jpg?raw=true)
-
+*Left: segmented (monochrome, big segments) Middle: dot matrix (monochrome, medium resolution) Right: TFT (graphical, transistors, RGB color)*
 
 Within these LCD displays are Twisted Neumatic (TN) and In-Plane Switching (IPS) type displays with the difference being that IPS displays are more vibrant, brighter, and have a better viewing angle range than TN displays, which are older and cheaper than IPS displays.
 
