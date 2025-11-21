@@ -55,7 +55,7 @@ There are also Organic LED (OLED) screens now, which are a different technology 
 
 > NOTE: as of the time of this writing, if you try to buy an OLED screen from an electronics supplier, you may find very (physically) small, extremely low resolution, monochrome screens that have more in common with segmented displays or something you'd see in an old calculator. If you want a *graphical* OLED screen, you would need to specifically search for it, or try to get an AMOLED screen instead. Still, these are not as common as IPS displays.
 
-### MIPI DSI Interface
+### Overview of LCD Interfaces
 
 If that wasn't complicated enough, one must also have to worry about the interface of the LCD screen, and there are many different interface protocols. Some of the more common ones:
 
