@@ -40,6 +40,20 @@ It falls short due to:
 
 The objective of this project is to prototype something that could potentially replace this product while allowing one to swap the screen out and adjust the PCB design.
 
+### Design Overview
+
+For context into how this fits into a larger project, refer to the following block diagram:
+
+![System block diagram](/images/mipi-dsi-breakout/system-block-diagram.png?raw=true)
+
+Here we can see a motherboard for a Raspberry Pi Compute Module. This is a microcontroller board that you can use just like a regular computer once you hook up a keyboard, mouse, monitor, and power cord into it.
+
+On the right, you can see an illustration for an LCD screen (imaging the OSOYOO 5 inch DSI screen).
+
+Described in 4 numbered functional blocks are the peripheral circuitry required to connect the LCD screen to the microcontroller.
+
+Assuming that everything is built and working, we should be able to see the operating system graphical output on the LCD screen as if we were using it as a computer monitor. Getting this working is the goal of this project.
+
 ### LCD Screens Overview
 
 The LCD screens this project is concerned with are mostly *Thin Film Transistor* (TFT) screens. See [this page](https://www.topwaydisplay.com/en/blog/how-tft-lcd-works-explained) to learn more about how TFT screens work. Essentially, TFT LCDs are a VLSI design that prints individual transistors on a transparent substrate that act as individual pixels. So the takeaway here is that it is not very simple or inexpensive to produce these, and that there are very expensive foundries needed to manufacturer these like one would need to make CPUs and other integrated circuits, though a TFT screen does not require as small transistors nor is the design as complex as a CPU.
