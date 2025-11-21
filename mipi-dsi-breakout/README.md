@@ -103,7 +103,7 @@ Display Parallel Interface (DPI) is similar to SPI but is faster so supports hig
 
 ### Differential High Speed Signal Background
 
-MIPI DSI protocol relies on high speed differential pair signals. High speed, meaning signals that switch with frequency higher than 50 MHz. For the DSI protocol, it can reach speeds up to 480 MHz, for higher resolutions and refresh speeds. In this project, we are targeting screens around 5 inches in size and slightly lower than HD resolution (480x800 or 1280x1024), so speeds will not be as high, but around the 50 - 100 MHz range.
+The MIPI DSI protocol relies on high speed differential pair signals. To create a MIPI DSI LCD interface board, we will need to know how to route these signals. High speed, meaning signals that switch with frequency higher than 50 MHz. For the DSI protocol, it can reach speeds up to 480 MHz, for higher resolutions and refresh speeds. In this project, we are targeting screens around 5 inches in size and slightly lower than HD resolution (480x800 or 1280x1024), so speeds will not be as high, but around the 50 - 100 MHz range.
 
 The term differential pair refers to the fact that each signal is split into two complementary signals that are transmitted together. In other words, when one signal is high, the other signal is low. The destination device will receive both signals and take the difference between their values to recover the original signals.
 
