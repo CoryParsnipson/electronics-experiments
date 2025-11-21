@@ -14,6 +14,12 @@ The PCB fabrication for this project is sponsored by [PCBWay](https://www.pcbway
 
 ## Description
 
+![Assembled MIPI DSI breakout PCBs](/images/mipi-dsi-breakout/assembled-breakout.jpg?raw=true)
+
+When working with microcontrollers, you can buy "all-inclusive" LCD screen kits from electronics hobby stores that are basically plug and play. With this, the user experience is quite nice, needing only to plug in a video cable going from the LCD screen circuitry directly to the microcontroller. However, these kits leave little flexibilty in the physical form factor, size and type of LCD screen, and price.
+
+This project is an attempt to go beyond the beginner LCD peripherals offered by microcontroller hobby stores and interface directly with an LCD screen using custom peripheral circuitry.
+
 ### Background and Context
 
 TBD
