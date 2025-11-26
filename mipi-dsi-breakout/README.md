@@ -251,11 +251,11 @@ To be coupled means that when one item changes in voltage, the other will be inf
 
 This video is particularly informative on the theoretical side. In particular, these two slides were pretty illuminating:
 
-![Twisted Pair Coupling](twisted-pair-coupling.jpg?raw=true)
+![Twisted Pair Coupling](/images/mipi-dsi-breakout/twisted-pair-coupling.jpg?raw=true)
 
 A true coupling comes about when electrical signals are in proximity with each other and their electromagnetic fields influence each other.
 
-![PCB Differential Pair](pcb-differential-pair.jpg?raw=true)
+![PCB Differential Pair](/images/mipi-dsi-breakout/pcb-differential-pair.jpg?raw=true)
 
 On a PCB, the coupled pair is actually an abstraction. Here the differential pair signals aren't coupled with each other, but are both coupled to ground, and then routed next to each other to symbolize the intention that they are coupled. And the source of these digital signals makes sure to set their values to be complementary at all times.
 
