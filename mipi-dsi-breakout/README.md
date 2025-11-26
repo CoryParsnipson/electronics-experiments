@@ -107,10 +107,6 @@ Display Parallel Interface (DPI) is similar to SPI but is faster so supports hig
 
 ## Part Selection
 
-![System block diagram](/images/mipi-dsi-breakout/system-block-diagram.png?raw=true)
-
-This section covers parts from the entire system diagram above, though the salient parts are probably the LCD screens and zif connectors.
-
 ### LCD Screen Parts
 
 Finding LCD screen modules that are not part of a kit directly from manufacturers is tough. Lots of the supply is only available from China.
@@ -145,7 +141,7 @@ This was purchased from Dongguan Team off Aliexpress. The part number is `TST043
 
 #### 5 Inch 720x1280 MIPI DSI Display with CTP
 
-![5 Inch DSI Display with Capacitive Touch Screen](/images/mipi-dsi-breakout/5-inch-dsi-display.jpg?raw=true)
+![5 Inch DSI Display with Capacitive Touch Screen](/images/mipi-dsi-breakout/5-inch-dsi-display-with-ctp.jpg?raw=true)
 
 The TST050HDBS-80C was also purchased from Dongguan Team off Aliexpress.
 
@@ -192,8 +188,6 @@ TBD (describe Attiny PWM microcontroller and ap5762 backlight controller). These
 ## PCB Layout
 
 ### Differential High Speed Signal Background
-
-![System block diagram](/images/mipi-dsi-breakout/system-block-diagram.png?raw=true)
 
 The MIPI DSI protocol relies on high speed differential pair signals. To create a MIPI DSI LCD interface board, we will need to know how to route these signals. High speed, meaning signals that switch with frequency higher than 50 MHz. For the DSI protocol, it can reach speeds up to 480 MHz, for higher resolutions and refresh speeds. In this project, we are targeting screens around 5 inches in size and slightly lower than HD resolution (480x800 or 1280x1024), so speeds will not be as high, but around the 50 - 100 MHz range.
 
