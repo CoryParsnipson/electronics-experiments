@@ -136,7 +136,7 @@ This was purchased from Dongguan Team off Aliexpress. The part number is `TST043
 
 > NOTE: none of these screens are available anymore, but the suppliers probably have very similar products available for purchase. Suppliers are selling surplus screens from bigger customer orders, so inventory goes quickly and then parts change very often.
 
-[Datasheet (without CTP)](/mipi-dsi-breakout/docs/TST043WVBI-130.pdf?raw=true)
+[Datasheet (without CTP)](/mipi-dsi-breakout/docs/TST043WVBI-130.pdf?raw=true)<br />
 [Datasheet (just schematic with CTP)](/mipi-dsi-breakout/docs/TST043WVBI-130C.pdf?raw=true)
 
 #### 5 Inch 720x1280 MIPI DSI Display with CTP
