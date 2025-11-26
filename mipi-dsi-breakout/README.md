@@ -245,7 +245,7 @@ What is of particular interest for this project are all the ways including diffe
 
 #### Coupling
 
-To be coupled means that when one item changes in voltage, the other will be influenced to some degree to change in the same manner. Both signals in a differential pair are meant to be coupled to each other. Unfortunately, because we need to rely on this coupling, differential pair signals are susceptible to EMI, which usually means unintentional coupling to outside signals.
+To be coupled means that when one item changes in a property (like voltage or current), the other will be influenced to some degree to change in the same manner. Both signals in a differential pair are meant to be coupled to each other. Unfortunately, because we need to rely on this coupling, differential pair signals are susceptible to EMI, which usually means unintentional coupling to outside signals.
 
 [![Differential Pairs PCB Design Basics](/images/mipi-dsi-breakout/diff-pairs-pcb-design-basics.jpg?raw=true)](https://www.youtube.com/watch?v=xwrdvhm4vgw)
 
@@ -279,9 +279,41 @@ I found this video to be very helpful overview of what to do. The rough steps ar
 
 > NOTE: I've reversed the first two steps compared to the video because I think it makes more sense this way.
 
-#### How to Target the stackup for a Specific PCB Manufacturer
+#### How to Target the Stackup for a Specific PCB Manufacturer
+
+The very presence of high speed differential pair signals influences the board even before anything is created. The thickness and spacing of the signal wires is influenced by the geometry of the PCB, and so one must target a specific PCB company from the beginning. To switch manufacturers means make small modifications to match the new manufacturer's fabrication process.
+
+[PCBWay has a helpful page](https://www.pcbway.com/multi-layer-laminated-structure.html) that shows their fabrication specifications.
+
+![PCBWay 4 layer stackup](/images/mipi-dsi-breakout/pcbway-4-layer-stackup.png?raw=true)
+
+Here is a stack up for a 4 layer board that is 1.6mm thick (standard) with 1oz outer and inner copper. PCBWay specifically gives you values for different residual copper. 100% means completely covered in copper and 0% means completely devoid of copper. The actual value varies per design since it is determined by all the gaps and fill of copper in the layout. Using 50% might be a good rule of thumb, but 70% is shown here because this design has large ground fills on all layers.
+
+Most large fabs should have similar information on their websites or through customer service.
 
 #### Using Impedance Calculator to figure out differential pair signal spacing and thickness
+
+Once a manufacturer and stackup are selected, we can use the Sierra Circuits impedance calculator to find the trace width and spacing.
+
+[Sierra Circuits Impedance Calculator](https://impedance.app.protoexpress.com)
+
+1. Choose "Uncoated Microstrip" and "Differential Pair (Non coplanar)". The reference plane will not be on the same layer as the differential signals, so it is considered non coplanar.
+
+1. Switch units from mils to mm.
+
+1. Fill in "Dielectric Height and Dielectric Constant" from the stackup page. These values will probably be taken from the "Prepreg 1" layer, since it is the dielectric layer between the copper layer and the reference plane.
+
+1. Set an arbitrary but sensible starting value for "Trace Separation". In the video he used 0.2mm.
+
+1. Set the target differential impedance, which is 90 Ohms here. The [MIPI DSI PCB Layout Notes](https://pcbartists.com/design/pcb-design/mipi-dsi-pcb-layout-notes/) mentions that the spec calls for 90 Ohms but also has a margin of error of 15%.
+
+1. Click "Calculate W" and see what value appears for "Trace Width". We want this value to be entered into the trace width for our netclass in KiCAD.
+
+#### Making a NetClass in KiCAD
+
+This can be done in board properties the same was it is done in the video. Use the default value for everything except for the values you selected for Trace Separation and Trace Width. They go in the entries for "DP Gap" and "DP Width", respectively.
+
+Lastly, in the same netclass window, make sure that the right signals are associated with the proper netclass by adding entries and mapping the signal names to it. (You can use wildcards to make this easier.)
 
 ## PCB assembly
 
