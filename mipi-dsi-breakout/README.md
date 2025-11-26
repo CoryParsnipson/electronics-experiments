@@ -105,37 +105,77 @@ SPI devices usually hook in through GPIO pins.
 
 Display Parallel Interface (DPI) is similar to SPI but is faster so supports higher resolutions. It still suffers from similar power and CPU overhead limitations. It also uses GPIO pins, but a very large amount. For example, in a Raspberry Pi, hooking up a DPI screen may use almost all of the 40 available GPIO pins. This is not convenient if one wants to integrate multiple peripherals to the same microcontroller.
 
-### Differential High Speed Signal Background
-
-The MIPI DSI protocol relies on high speed differential pair signals. To create a MIPI DSI LCD interface board, we will need to know how to route these signals. High speed, meaning signals that switch with frequency higher than 50 MHz. For the DSI protocol, it can reach speeds up to 480 MHz, for higher resolutions and refresh speeds. In this project, we are targeting screens around 5 inches in size and slightly lower than HD resolution (480x800 or 1280x1024), so speeds will not be as high, but around the 50 - 100 MHz range.
-
-The term differential pair refers to the fact that each signal is split into two complementary signals that are transmitted together. In other words, when one signal is high, the other signal is low. The destination device will receive both signals and take the difference between their values to recover the original signals.
-
-![Illustration of Differential pair signals](/images/mipi-dsi-breakout/differential-pair-signals.png?raw=true)
-
-Doing things this way allows one to transmit at lower voltages since the amplitude of each individual signal can be half the maximum value required, and also allows for higher data rates, and protection against electromagnetic interference (EMI).
-
-The tradeoff is that it requires more board space for extra traces, specific geometric and PCB design constraints to accomodate the differential pair layout, and protocol overhead to recover the original signal.
-
-What is of particular interest for this project are all the ways including differential pairs change the PCB layout constraints compared to "ordinary" non-high speed and non-differential signals. A design that is meant to include differential pairs must be done at the very start, because it involves all aspects of the board and layout.
-
-#### How to Route Differential Signals in KiCAD
-
-TBD (link to youtube video tutorial about differential pair signal routing)
-
-#### Differential Pair Signals Background
-
-TBD (link video about differential pair ground plane coupling and stuff)
-
-#### PCB Considerations when using Differential Pair Signals
-
-TBD (link to Sierra Circuits impedance calculator and PCBway 4 layer stackup)
-
 ## Part Selection
+
+![System block diagram](/images/mipi-dsi-breakout/system-block-diagram.png?raw=true)
+
+This section covers parts from the entire system diagram above, though the salient parts are probably the LCD screens and zif connectors.
 
 ### LCD Screen Parts
 
-TBD
+Finding LCD screen modules that are not part of a kit directly from manufacturers is tough. Lots of the supply is only available from China.
+
+There were three main websites explored in my search for screens:
+
+1. [Aliexpress](https://www.aliexpress.us)
+   While not the most user friendly place, it contained the largest and relevant selection. I ended up buying all screens I wanted to try out from here. The "negotiation" process of talking to different salespeople to get a list of parts with the required specs was long and tedious. The pricing shown is not always accurate, but you can haggle with them. The price is dependent on the quantity you buy, which is usually a minimum of 500 or 1000 pieces, but you can order a few samples for a higher price for development (which is what I did).
+
+1. [Waveshare](https://www.waveshare.com)
+   This is more of a general electronics shop like Adafruit or SparkFun. For places like these, screen selection is very small, but the quality of parts is much better. The price is retail price, so not really ideal, but would still work for prototyping and development.
+
+1. [BuyDisplay](https://www.buydisplay.com)
+   This is another website that specializes in displays. The selection is large (but not as large as Aliexpress), and contains lots of unique parts.
+
+#### Search Criteria
+
+I was looking for a graphical, full color LCD screen that was around 5 inches across. Resolution around 480x800 or slightly higher is fine. The difficult part was finding parts with a MIPI DSI interface, which aren't very common especially on smaller screens. Looking at nits (>= 200) is a nice to have, to get an idea of whether or not the screen would be visible outdoors. A capactive touch screen was also a nice to have. If the screen comes with a touch panel, you can also ask them to customize the shape of the front lens/sticker if you order in bulk. This could be useful when putting together a complete product.
+
+#### 4.3 Inch 480x800 MIPI DSI Display with CTP
+
+The New Nintendo 3DS (non XL) top screen is about 4 inches across, and I think that is a nice size, so 4.3 inches wasn't out of the question. I bought one display I found at this size just to see if it would feel too small or not.
+
+![4.3 Inch DSI Display with Capacitive Touch Screen](/images/mipi-dsi-breakout/4.3-inch-dsi-display.jpg?raw=true)
+
+This was purchased from Dongguan Team off Aliexpress. The part number is `TST043WVBI-130` (or `TST043WVBI-130C` for the touch screen variant).
+
+> NOTE: none of these screens are available anymore, but the suppliers probably have very similar products available for purchase. Suppliers are selling surplus screens from bigger customer orders, so inventory goes quickly and then parts change very often.
+
+[Datasheet (without CTP)](/mipi-dsi-breakout/docs/TST043WVBI-130.pdf?raw=true)
+[Datasheet (just schematic with CTP)](/mipi-dsi-breakout/docs/TST043WVBI-130C.pdf?raw=true)
+
+#### 5 Inch 720x1280 MIPI DSI Display with CTP
+
+![5 Inch DSI Display with Capacitive Touch Screen](/images/mipi-dsi-breakout/5-inch-dsi-display.jpg?raw=true)
+
+The TST050HDBS-80C was also purchased from Dongguan Team off Aliexpress.
+
+An interesting thing about this is how large and lopsided the bezels on the touch panel are. It looks like this came from a small, budget tablet device.
+
+Another aspect of this part is that it is a 4 lane MIPI DSI device. The Raspberry Pi I am using has one DSI port with 2 lanes and another with 4 lanes. Supposedly, if you hook up a 4 lane device to a 2 lane host port, it should still work, but the bandwidth/framerate will be lower. I bought 2 different 5 inch screens with differing resolutions to see if you could notice the difference.
+
+[Datasheet](/mipi-dsi-breakout/docs/TST050HDBS-80C.pdf?raw=true)
+
+#### 5 Inch 480x854 MIPI DSI Display
+
+TODO: need a picture for this screen
+
+The ET050FW04-T was purchased from Shenzhen Eurotech Technology Co. Ltd. off Aliexpress.
+
+The odd screen resolution comes from old cellphones, I think, which have a particularly elongated aspect ratio. This is the 2 lane MIPI DSI counterpart to the other DSI screen, and it doesn't come with a capacitive touch panel.
+
+[Datasheet](/mipi-dsi-breakout/docs/ET050FW04-T.pdf?raw=true)
+
+#### 6 Inch 720x1280 MIPI DSI Display
+
+![6 Inch DSI Display with Capacitive Touch Screen](/images/mipi-dsi-breakout/6-inch-dsi-display.jpg?raw=true)
+
+The ET060HD02-T was purchased from Shenzhen Eurotech Technology Co. Ltd. off Aliexpress.
+
+The salesperson told me that they had a lot of 6 inch screens (an unusual size) that were from a 3d printer. Judging from the size and resolution, I'd say it was for a resin printer.
+
+After playing on the Nintendo Switch for a while, I got the idea that maybe a larger screen would be nice too. The size of this screen is probably around the same as the Nintendo Switch Lite (though not nearly as nice) or slightly smaller than the original Nintendo Switch screen.
+
+[Datasheet](/mipi-dsi-breakout/docs/ET060HD02-T.pdf?raw=true)
 
 ### Raspberry Pi Host Motherboard
 
@@ -151,7 +191,47 @@ TBD (describe Attiny PWM microcontroller and ap5762 backlight controller). These
 
 ## PCB Layout
 
-TBD
+### Differential High Speed Signal Background
+
+![System block diagram](/images/mipi-dsi-breakout/system-block-diagram.png?raw=true)
+
+The MIPI DSI protocol relies on high speed differential pair signals. To create a MIPI DSI LCD interface board, we will need to know how to route these signals. High speed, meaning signals that switch with frequency higher than 50 MHz. For the DSI protocol, it can reach speeds up to 480 MHz, for higher resolutions and refresh speeds. In this project, we are targeting screens around 5 inches in size and slightly lower than HD resolution (480x800 or 1280x1024), so speeds will not be as high, but around the 50 - 100 MHz range.
+
+The term differential pair refers to the fact that each signal is split into two complementary signals that are transmitted together. In other words, when one signal is high, the other signal is low. The destination device will receive both signals and take the difference between their values to recover the original signals.
+
+![Illustration of Differential pair signals](/images/mipi-dsi-breakout/differential-pair-signals.png?raw=true)
+
+Doing things this way allows one to transmit at lower voltages since the amplitude of each individual signal can be half the maximum value required, and also allows for higher data rates, and protection against electromagnetic interference (EMI).
+
+The tradeoff is that it requires more board space for extra traces, specific geometric and PCB design constraints to accomodate the differential pair layout, and protocol overhead to recover the original signal.
+
+What is of particular interest for this project are all the ways including differential pairs change the PCB layout constraints compared to "ordinary" non-high speed and non-differential signals. A design that is meant to include differential pairs must be done at the very start, because it involves all aspects of the board and layout.
+
+#### How to Route Differential Signals in KiCAD
+
+[![KiCAD Differential Pairs from Basics to Memory](/images/routing-differential-signals-in-kicad-thumbnail.jpg?raw=true)](https://www.youtube.com/watch?v=M13QxtPVrXY)
+
+I found this video to be very helpful overview of what to do, though I don't think it is a very good video.
+
+The rough steps are as follows:
+
+1. Set the PCB stackup and manufacturer
+1. Create and assign a netclass for differential pair wires (they need a specific thickness and spacing).
+1. Use calculator to find the diff pair parameters
+1. Edit the netclass for differential pair signals
+1. Route
+1. Tune length
+1. Tune skew
+
+> NOTE: I've reversed the first two steps compared to the video because I think it makes more sense this way.
+
+#### How to Target the stackup for a Specific PCB Manufacturer
+
+#### Using Impedance Calculator to figure out differential pair signal spacing and thickness
+
+#### Some Theory
+
+TBD (link video about differential pair ground plane coupling and stuff)
 
 ## PCB assembly
 
