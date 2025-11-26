@@ -223,9 +223,15 @@ These two circuits can be placed on a breadboard and hooked up to this PCB via j
 
 ## PCB Layout
 
+The main novelty of this project was learning to route high speed differential signals and complicated surface mount components.
+
+This part in paricular was a very useful reference for MIPI DSI signal routing:
+
+[PCB Artists - MIPI DSI PCB Layout Notes](https://pcbartists.com/design/pcb-design/mipi-dsi-pcb-layout-notes/)
+
 ### Differential High Speed Signal Background
 
-The MIPI DSI protocol relies on high speed differential pair signals. To create a MIPI DSI LCD interface board, we will need to know how to route these signals. High speed, meaning signals that switch with frequency higher than 50 MHz. For the DSI protocol, it can reach speeds up to 480 MHz, for higher resolutions and refresh speeds. In this project, we are targeting screens around 5 inches in size and slightly lower than HD resolution (480x800 or 1280x1024), so speeds will not be as high, but around the 50 - 100 MHz range.
+The MIPI DSI protocol relies on high speed differential pair signals. To create a MIPI DSI LCD interface board, we will need to know how to route these signals. High speed, meaning signals that switch with frequency higher than 50 MHz. For the DSI protocol, it can reach speeds up to 480 MHz, for higher resolutions and refresh speeds. In this project, we are targeting screens around 5 inches in size and slightly lower than HD resolution (480x800 or 1280x1024), so speeds will not be as high, but probably around the 50 - 100 MHz range.
 
 The term differential pair refers to the fact that each signal is split into two complementary signals that are transmitted together. In other words, when one signal is high, the other signal is low. The destination device will receive both signals and take the difference between their values to recover the original signals.
 
@@ -237,13 +243,31 @@ The tradeoff is that it requires more board space for extra traces, specific geo
 
 What is of particular interest for this project are all the ways including differential pairs change the PCB layout constraints compared to "ordinary" non-high speed and non-differential signals. A design that is meant to include differential pairs must be done at the very start, because it involves all aspects of the board and layout.
 
+#### Coupling
+
+To be coupled means that when one item changes in voltage, the other will be influenced to some degree to change in the same manner. Both signals in a differential pair are meant to be coupled to each other. Unfortunately, because we need to rely on this coupling, differential pair signals are susceptible to EMI, which usually means unintentional coupling to outside signals.
+
+[![Differential Pairs PCB Design Basics](/images/mipi-dsi-breakout/diff-pairs-pcb-design-basics.jpg?raw=true)](https://www.youtube.com/watch?v=xwrdvhm4vgw)
+
+This video is particularly informative on the theoretical side. In particular, these two slides were pretty illuminating:
+
+![Twisted Pair Coupling](twisted-pair-coupling.jpg?raw=true)
+
+A true coupling comes about when electrical signals are in proximity with each other and their electromagnetic fields influence each other.
+
+![PCB Differential Pair](pcb-differential-pair.jpg?raw=true)
+
+On a PCB, the coupled pair is actually an abstraction. Here the differential pair signals aren't coupled with each other, but are both coupled to ground, and then routed next to each other to symbolize the intention that they are coupled. And the source of these digital signals makes sure to set their values to be complementary at all times.
+
+The main takeaway here is how important the ground/reference plane is to differential pairs routed on a PCB. The reference plane must be aligned with the signals at all points, or else you will end up with a large cross sectinoal area susceptible to EMI. Thus it is important not to route signals where the ground plane cannot follow.
+
+I found some of the principles described in this video were also helpful to reason about how certain kinds of layout features could affect the signal. The two main considerations for signal integrity are reducing EMI (by reducing opportunities for outside signals to couple with the diff pair) and to reduce skew--both intrapair and inter-channel skew--meaning that all diff pair wires should be around the same exact length so the signal arrives at the destination at the same time.
+
 #### How to Route Differential Signals in KiCAD
 
-[![KiCAD Differential Pairs from Basics to Memory](/images/routing-differential-signals-in-kicad-thumbnail.jpg?raw=true)](https://www.youtube.com/watch?v=M13QxtPVrXY)
+[![KiCAD Differential Pairs from Basics to Memory](/images/mipi-dsi-breakout/routing-differential-signals-in-kicad-thumbnail.jpg?raw=true)](https://www.youtube.com/watch?v=M13QxtPVrXY)
 
-I found this video to be very helpful overview of what to do, though I don't think it is a very good video.
-
-The rough steps are as follows:
+I found this video to be very helpful overview of what to do. The rough steps are as follows:
 
 1. Set the PCB stackup and manufacturer
 1. Create and assign a netclass for differential pair wires (they need a specific thickness and spacing).
@@ -258,10 +282,6 @@ The rough steps are as follows:
 #### How to Target the stackup for a Specific PCB Manufacturer
 
 #### Using Impedance Calculator to figure out differential pair signal spacing and thickness
-
-#### Some Theory
-
-TBD (link video about differential pair ground plane coupling and stuff)
 
 ## PCB assembly
 
