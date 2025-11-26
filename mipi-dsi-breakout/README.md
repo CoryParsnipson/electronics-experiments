@@ -81,7 +81,11 @@ If that wasn't complicated enough, one must also have to worry about the interfa
 
 #### HDMI
 
-This might be the most popular screen interface. With an HDMI controller, the screen hooks up to a host using an HDMI cable. This makes it compatible with anything that supports the HDMI protocol, and not just a specific device. It also supports audio and input signals as well. HDMI circuitry is relatively complicated, however, so it was not considered for this project.
+This might be the most popular screen interface. With an HDMI controller, the screen hooks up to a host using an HDMI cable. This makes it compatible with anything that supports the HDMI protocol, and not just a specific device. It also supports audio and input signals as well. This seems to be the most popular interface type for LCD screens around 5 inches in size, so it would give us the best options for screens.
+
+Some of the disadvantages are the relatively complicated (and physically large) circuitry required, and the extra power consumption from converting from whatever format the LCD screen is in natively to HDMI. For these reasons, the search for screens for this project was limited to MIPI DSI.
+
+> NOTE: in a "real" product development environment, what probably happens is that the designer will look for screens with the required attributes, and then integrate whatever interface the desired product was using afterwards. Going forward, this is probably a much better attitude than choosing the interface first.
 
 #### MIPI DSI
 
