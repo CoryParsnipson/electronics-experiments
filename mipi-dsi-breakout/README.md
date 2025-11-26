@@ -167,6 +167,8 @@ The odd screen resolution comes from old cellphones, I think, which have a parti
 
 The ET060HD02-T was purchased from Shenzhen Eurotech Technology Co. Ltd. off Aliexpress.
 
+> NOTE: while all the other screens on this list have a 0.5mm pitch FPC data cable, this screen has a 0.3mm pitch data cable!
+
 The salesperson told me that they had a lot of 6 inch screens (an unusual size) that were from a 3d printer. Judging from the size and resolution, I'd say it was for a resin printer.
 
 After playing on the Nintendo Switch for a while, I got the idea that maybe a larger screen would be nice too. The size of this screen is probably around the same as the Nintendo Switch Lite (though not nearly as nice) or slightly smaller than the original Nintendo Switch screen.
@@ -175,15 +177,48 @@ After playing on the Nintendo Switch for a while, I got the idea that maybe a la
 
 ### Raspberry Pi Host Motherboard
 
-TBD
+The host for this project is a [Raspberry Pi CM3+ with 32 GB](https://www.raspberrypi.com/products/compute-module-3-plus/) of on board eMMC memory. This is the version of the Raspberry Pi intended for industrial applications and so cannot be used by itself.
+
+![Waveshare Compute Module IO Board Plus](/images/mipi-dsi-breakout/compute-module-io-board-plus-5.jpg?raw=true)
+
+The Raspberry Pi is paired with the [Compute Module IO Board Plus by Waveshare](https://www.waveshare.com/compute-module-io-board-plus.htm).
+
+This project can be replicated with a different microcontroller or PC, as long as the device supports DSI display ports. The compute module io board plus has a 22 pin DSI port with a specific pinout, so using a different microcontroller would most likely require modifying the designs in this repository to match.
+
+[Here is a schematic](https://files.waveshare.com/upload/7/75/CM3-board.pdf) of the compute module IO board plus with the DSI port pinout.
 
 ### Zif Connector Selection
 
-TBD
+On the custom PCB, zif (Zero-Insertion Force) connectors comprise the majority of components. Aside from pin header, the only other components are 4.7 kOhm resistors for the I2C lines.
+
+* [8pos 0.5mm connector (for 5 inch CTP cable)](https://www.digikey.com/en/products/detail/te-connectivity-amp-connectors/2328702-8/9565576)
+* [10pos 0.5mm connector (for 4.3 inch CTP cable)](https://www.digikey.com/en/products/detail/te-connectivity-amp-connectors/1-2328702-0/9565577)
+* [20pos 0.5mm connector (for 4.3 inch DSI cable)](https://www.digikey.com/en/products/detail/cvilux-usa/CF4220FH0R0-05-NH/15793107)
+* [22pos 0.5mm connector (for RPI DSI port connector)](https://www.digikey.com/en/products/detail/cvilux-usa/CF4222FH0R0-05-NH/15793179)
+* [25pos 0.3mm connector (for 6 inch DSI cable)](https://www.digikey.com/en/products/detail/cvilux-usa/CF5825DH0RA-NH/15793009)
+* [30pos 0.5mm connector (for 5 inch DSI cable)](https://www.digikey.com/en/products/detail/amphenol-cs-fci/F3311A7H121030E200/15287516)
+* [40pos 0.5mm connector (for 5 inch DSI cable)](https://www.digikey.com/en/products/detail/cvilux-usa/CF4240FH0R0-05-NH/15793119)
+
+Exact parts are not necessary, many of the parts with the same specs have similar physical dimensions.
+
+> WARNING: Careful about the 25pos connector, which is the only one that is 0.3mm pitch and its very different from the others.
+
+### Other PCB components
+
+You will also need a [22-pin 0.5mm FPC flx cable](https://www.digikey.com/en/products/detail/adafruit-industries-llc/6036/25589362), preferably at least 4.
+
+Male pin header 2.54mm pitch. (At least 4 of 1x6, and optionally, 4 of 1x3 for the output signals).
+
+And [4.7 kOhm surface mount resistors, 0805 (2012 Metric)](https://www.digikey.com/en/products/detail/te-connectivity-passive-product/CRGCQ0805F4K7/8576359), tolerance not important.
 
 ### Peripheral Electronics
 
-TBD (describe Attiny PWM microcontroller and ap5762 backlight controller). These circuits hook into this board using 6 wide pin header.
+To hook up all the input signals on this PCB via pin header, you will need:
+
+* [ap5726-lcd-backlight-driver](/ap5726-lcd-backlight-driver)
+* [attiny-402-i2c-pwm-generator](/attiny-402-i2c-pwm-generator)
+
+These two circuits can be placed on a breadboard and hooked up to this PCB via jumper cables and pin header.
 
 ## PCB Layout
 
