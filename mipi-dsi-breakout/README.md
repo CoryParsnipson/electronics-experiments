@@ -65,6 +65,7 @@ When searching for LCD screens one must be careful to specify which kind, betwee
 
 Within the graphical LCD displays are Twisted Neumatic (TN) and In-Plane Switching (IPS) type displays with the difference being that IPS displays are more vibrant, brighter, and have a better viewing angle range than TN displays, which are older and cheaper than IPS displays.
 
+TBD
 There are also Organic LED (OLED) screens now, which are a different technology where VLSI LEDs are printed directly onto a substrate instead of whatever circuitry and electrodes TFT screens use. OLED screens are even more vibrant, have true black color, and supposedly use less energy because each pixel that is turned off does not consume power. These screens are better in every way, but are still relatively new and thus more expensive and less available. Now you have AMOLED screens which are minor improvements upon an OLED screen but mostly the same thing.
 
 > NOTE: as of the time of this writing, if you try to buy an OLED screen from an electronics supplier, you may find very (physically) small, extremely low resolution, monochrome screens that have more in common with segmented displays or something you'd see in an old calculator. If you want a *graphical* OLED screen, you would need to specifically search for it, or try to get an AMOLED screen instead. Still, these are not as common as IPS displays.
@@ -266,7 +267,9 @@ TBD (link video about differential pair ground plane coupling and stuff)
 
 It is highly recommended to use a hot plate or reflow oven for ease of use. A hot air rework station may work as well, but will be more difficult especially for soldering the wider, higher-pin connectors.
 
-TBD
+I also used a regulated soldering iron with a 0.3mm conical smd tip to do some touch ups and to tin the solder pads without a stencil. (Obviously, a stencil would be easier, if available.)
+
+> WARNING: this design has very large ground pours on all 4 layers of the PCB. This is something to take into consideration when trying to assemble the board.
 
 ## Software Setup
 
@@ -278,6 +281,6 @@ This was developed on a Raspbian OS (Debian 11/Bullseye) running on a Raspberry 
 
 TBD
 
-### Usage?
+### Usage
 
 TBD
