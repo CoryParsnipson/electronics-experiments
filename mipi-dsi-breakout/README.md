@@ -48,11 +48,11 @@ For context into how this fits into a larger project, refer to the following blo
 
 Here we can see a motherboard for a Raspberry Pi Compute Module. This is a microcontroller board that you can use just like a regular computer once you hook up a keyboard, mouse, monitor, and power cord into it.
 
-On the right, you can see an illustration for an LCD screen (imaging the OSOYOO 5 inch DSI screen).
+On the right, there is a section labeled "LCD Screen" (imagine that it is the OSOYOO screen). Described in 4 numbered functional blocks surrounding the screen component is the peripheral circuitry required to connect the LCD screen to the microcontroller.
 
-Described in 4 numbered functional blocks are the peripheral circuitry required to connect the LCD screen to the microcontroller.
+Assuming that everything is built and working, we should be able to see the operating system graphical output on the LCD screen as if we were using it as a computer monitor. This project is a PCB implementation of the functional blocks labelled (1) and (4).
 
-Assuming that everything is built and working, we should be able to see the operating system graphical output on the LCD screen as if we were using it as a computer monitor. Getting this working is the goal of this project.
+For information about implemting blocks (2) and (3), see the other projects in this repository, [ap5726-lcd-backlight-driver](/ap5726-lcd-backlight-driver) and [attiny-402-i2c-pwm-generator](/attiny-402-i2c-pwm-generator) respectively.
 
 ### LCD Screens Overview
 
