@@ -154,7 +154,7 @@ Another aspect of this part is that it is a 4 lane MIPI DSI device. The Raspberr
 
 #### 5 Inch 480x854 MIPI DSI Display
 
-TODO: need a picture for this screen
+![5 Inch DSI Display](/images/mipi-dsi-breakout/5-inch-dsi-display.jpg?raw=true)
 
 The ET050FW04-T was purchased from Shenzhen Eurotech Technology Co. Ltd. off Aliexpress.
 
