@@ -393,6 +393,10 @@ Assembly Instructions:
 
 1. Use the M2.5 screws to mount the PCB to the back of the mounting bracket.
 
+1. Carefully insert all the zif cables of the DSI screen into the corresponding zif connectors on the PCB. This may be easier with the appropriate plyers or tweezers.
+
+1. Insert one end of the 22 pin 20cm DSI cable into the bottom zif connector of the PCB. The other end goes to the Raspberry Pi breakout board, but do not connect this end yet.
+
 1. Use the wood screws to mount the base brackets to a permanent surface.
 
    ![Example of mounted brackets](/images/mipi-dsi-breakout/test-setup-1.jpg?raw=true)
@@ -409,7 +413,7 @@ On top of the angled brackets is a breadboard for external peripheral circuitry.
 
 1. The 20cm long DSI cable is attached to the bottom zif connector of the PCB and the other end is slotted into the DISP0 or DISP1 port of the Raspberry Pi breakout board.
 
-1. The ap5726-lcd-backlight-driver and attiny-402-i2c-pwm-generator designs are reproduced on the breadboard and wired up to the VCC, GND, SDA, SCL, LEDA, and LEDK pins on the PCB. Do not forget the 1 million ohm pull down resistor on the enable pin of the backlight.
+1. The [ap5726-lcd-backlight-driver](/ap5726-lcd-backlight-driver) and [attiny-402-i2c-pwm-generator](attiny-402-i2c-pwm-generator) designs are reproduced on the breadboard and wired up to the VCC, GND, SDA, SCL, LEDA, and LEDK pins on the PCB. Do not forget the 1 million ohm pull down resistor on the enable pin of the backlight.
 
    ![Fully connected peripheral circuitry](/images/mipi-dsi-breakout/test-setup-3.jpg?raw=true)
 
