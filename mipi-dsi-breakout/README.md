@@ -417,6 +417,14 @@ On top of the angled brackets is a breadboard for external peripheral circuitry.
 
    ![Fully connected peripheral circuitry](/images/mipi-dsi-breakout/test-setup-3.jpg?raw=true)
 
+1. Connect the I2C signals of the DISP0 or DISP1 port to the main I2C bus. The waveshare compute module io plus board is not designed such that these signals are already connected.
+
+   > INFO: The [schematic of this board](https://files.waveshare.com/upload/7/75/CM3-board.pdf) seems to imply this. For DISP0, look for CD0\_SDA and CD0\_SCL (or CD1\_SDA and CD1\_SCL for DISP1) in GPIO bank 1 section, and hook them up to your preferred I2C GPIO interface. In my case, I was using the GPIO0 and GPIO1 pins off of the original 40 pin RPi connector.
+
+   ![Picture illustrating the I2C bus hookups for DISP0](/images/mipi-dsi-breakout/test-setup-4.jpg?raw=true)
+
+   The picture above shows the aforementioned signals for DISP0 being hooked up using a breadboard underneath the main board.
+
 Now that everything is connected, all that is left is to set up the software and turn on the board!
 
 ## Software Setup
