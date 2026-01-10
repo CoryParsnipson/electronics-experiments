@@ -315,13 +315,105 @@ This can be done in board properties the same was it is done in the video. Use t
 
 Lastly, in the same netclass window, make sure that the right signals are associated with the proper netclass by adding entries and mapping the signal names to it. (You can use wildcards to make this easier.)
 
-## PCB assembly
+## Physical assembly and Test Setup
+
+### PCB assembly
 
 It is highly recommended to use a hot plate or reflow oven for ease of use. A hot air rework station may work as well, but will be more difficult especially for soldering the wider, higher-pin connectors.
 
 I also used a regulated soldering iron with a 0.3mm conical smd tip to do some touch ups and to tin the solder pads without a stencil. (Obviously, a stencil would be easier, if available.)
 
 > WARNING: this design has very large ground pours on all 4 layers of the PCB. This is something to take into consideration when trying to assemble the board.
+
+Here is a picture of one of the circuits with the zif connectors soldered on:
+
+![Assembled 4.3 inch screen board](/images/mipi-dsi-breakout/tst043-assembled.jpg?raw=true)
+
+This picture shows 4 copies of the boards with all circuits populated with all components. Note that only the six middle signals are mandatory, with the 4 other signals, INT, RESET, TEO, and 1.8FS left unconnected. Though they can certainly be wired up later if debugging makes it necessary.
+
+![Assembled MIPI DSI breakout PCBs](/images/mipi-dsi-breakout/assembled-breakout.jpg?raw=true)
+
+### 3D Printed Parts and Mounting Brackets
+
+There are optional (but highly recommended) 3d printable mounting brackets for whatever your testing needs require. They consist of 6 parts (4 parts, one for each screen and 2 types of mounting bases).
+
+You can find the files in [/mipi-dsi-breakout/mounting-brackets]:
+
+* dsi-base-angled (a 60 degree angled holder to mount a screen to a surface via wood screws)
+
+  ![The angled DSI base mounting bracket design](/images/mipi-dsi-breakout/dsi-base-angled.png?raw=true)
+
+* dsi-base-upright (same as above but 90 degrees perpendicular to surface)
+
+  ![The upright DSI base mounting bracket design](/images/mipi-dsi-breakout/dsi-base-upright.png?raw=true)
+
+* dsi-holder-4.3inch (for the TST043WVBI-130, 4.3 inch screen)
+* dsi-holder-5inch (for the ET050FW04-T, 5 inch screen without capacitive touch screen)
+* dsi-holder-5inch-ctp (for the TST050HDBS-80C, 5 inch screen with capacitive touch screen)
+* dsi-holder-6inch (for the ET060HD02-T, 6 inch screen)
+
+For each of these points, there is an stl file (ready to be sliced and printed), and a f3d/f3z file that shoudl be able to be opened in Autodesk Fusion360.
+
+Here are pictures of the 4.3 inch screen holder (all the other ones are minimal variations on the same idea).
+
+![4.3 inch DSI holder front](/images/mipi-dsi-breakout/4.3-inch-bracket-front.png?raw=true)
+![4.3 inch DSI holder back](/images/mipi-dsi-breakout/4.3-inch-bracket-back.png?raw=true)
+
+### Complete Component Assembly
+
+There are several manual steps and necessary "ingredients" to fully replicate this design.
+
+Additional parts required (beyond the 3d printed mounting bracket, assembled PCB, and screen):
+
+1. Conductive tape (I used copper tape from Amazon, but you can use Z tape or 3M conductive double sided tape, or even aluminum foil and glue combined with kaptop or electrical tape for insultion).
+
+1. M2.5 machine screws. Two each per screen. Specifically, [MPFX02505-100M1 from McMaster-Carr](https://www.mcmaster.com/92010A014/). These screws are 5mm in total length with M2.5 size threads (metric). The head juts out at 45 degrees from the shaft and is approximately 1.5mm tall.
+
+1. Scotch tape for holding the screen to the mounting bracket. Can use some other light adhesive, or something more permanent if desired. In a real product, it is common to use some sort of low melting point glue or 3M double sided adhesive tape.
+
+1. #6 x 1/2 inch flat head philips wood screws for mounting. I bought a 100 pk from Home Depot.
+
+   ![100pk of #6 1/2 inch Wood Screws from Home Depot](/images/mipi-dsi-breakout/wood-screws.jpg?raw=true)
+
+1. [20 cm long 22pin FPC cable (from Adafruit)](https://www.adafruit.com/product/6036)
+
+Assembly Instructions:
+
+1. Complete the PCB assembly for one screen design (see the above PCB Assembly section for more information).
+1. Print out the appropriate dsi base and dsi holder.
+1. Apply the scotch tape to the back of the screen.
+
+   ![Assemble process](/images/mipi-dsi-breakout/bracket-assembly-1.jpg?raw=true)
+
+1. Place the screen into the dsi holder, making sure to thread the FPC cable through the hole on the left and gently but firmly press the screen into place so the tape will stick.
+
+1. Attach the copper tape to the SUS cable stiffener (as specified by the datasheet) and the appropriate ground pad on the PCB. Some of the datasheets do not specify any specific grounding, but I attached tape to those parts anyway out of caution. Basically, wherever there is a stainless steel or conductive cable stiffener, I connected it to ground.
+
+   ![Assemble process](/images/mipi-dsi-breakout/bracket-assembly-2.jpg?raw=true)
+
+1. Use the M2.5 screws to mount the PCB to the back of the mounting bracket.
+
+1. Use the wood screws to mount the base brackets to a permanent surface.
+
+   ![Example of mounted brackets](/images/mipi-dsi-breakout/test-setup-1.jpg?raw=true)
+
+### Physical Test Bench Description
+
+The final testbench consists of a 3/4 inch thick piece of plywood with the waveshare compute module io board plus (mentioned earlier) mounted to it. There are additional peripherals mounted and connected to the Raspberry Pi.
+
+![Test setup overview](/images/mipi-dsi-breakout/test-setup-2.jpg?raw=true)
+
+Two angled bases were mounted to the board, in addition to three upright base brackets to store screens that aren't being used. The brackets are mounted close to the DSI ports on the RPi breakout board.
+
+On top of the angled brackets is a breadboard for external peripheral circuitry.
+
+1. The 20cm long DSI cable is attached to the bottom zif connector of the PCB and the other end is slotted into the DISP0 or DISP1 port of the Raspberry Pi breakout board.
+
+1. The ap5726-lcd-backlight-driver and attiny-402-i2c-pwm-generator designs are reproduced on the breadboard and wired up to the VCC, GND, SDA, SCL, LEDA, and LEDK pins on the PCB. Do not forget the 1 million ohm pull down resistor on the enable pin of the backlight.
+
+   ![Fully connected peripheral circuitry](/images/mipi-dsi-breakout/test-setup-3.jpg?raw=true)
+
+Now that everything is connected, all that is left is to set up the software and turn on the board!
 
 ## Software Setup
 
