@@ -352,7 +352,7 @@ You can find the files in [/mipi-dsi-breakout/mounting-brackets]:
 * dsi-holder-5inch-ctp (for the TST050HDBS-80C, 5 inch screen with capacitive touch screen)
 * dsi-holder-6inch (for the ET060HD02-T, 6 inch screen)
 
-For each of these points, there is an stl file (ready to be sliced and printed), and a f3d/f3z file that shoudl be able to be opened in Autodesk Fusion360.
+For each of these points, there is an stl file (ready to be sliced and printed), and a f3d/f3z file that should be able to be opened in Autodesk Fusion360.
 
 Here are pictures of the 4.3 inch screen holder (all the other ones are minimal variations on the same idea).
 
