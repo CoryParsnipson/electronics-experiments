@@ -277,11 +277,17 @@ void readEEPROM(uint8_t* registers, uint8_t num_regs) {
 }
 
 void writeEEPROM(uint8_t* registers, uint8_t num_regs) {
-  // FIXME: should we disable interrupts in this function?
   for (uint8_t addr = 0; addr < num_regs; ++addr) {
+    noInterrupts();
     EEPROM.update(addr, registers[addr]);
+    interrupts();
+  }
+
+#if SERIAL_ENABLED
+  for (uint8_t addr = 0; addr < num_regs; ++addr) {
     SERIAL_MSG("[EEPROM] write reg[%d] = 0x%02X", addr, registers[addr]);
   }
+#endif
 }
 
 uint16_t getDutyCycle(uint8_t* registers, bool use_8_bits) {
