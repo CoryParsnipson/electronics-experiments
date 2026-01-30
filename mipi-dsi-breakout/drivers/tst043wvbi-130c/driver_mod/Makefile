@@ -17,3 +17,4 @@ modules_install:
 	@echo depmod: "$(DEPMOD)"
 
 	$(MAKE) -C /lib/modules/$(shell uname -r)/build M=$(SRC) modules_install
+	$(DEPMOD)
