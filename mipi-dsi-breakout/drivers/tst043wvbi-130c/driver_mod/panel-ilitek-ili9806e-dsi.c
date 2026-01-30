@@ -8,7 +8,7 @@
 // this file. The functionality should be 95% the same, but not quite how the new kernel behaves.
 //
 // It is strongly recommended to just upgrade the system to be 6.21+, but for testing and development
-// purposes, one can compile this driver and load it into an older kernel.W
+// purposes, one can compile this driver and load it into an older kernel.
 
 #include <linux/delay.h>
 #include <linux/device.h>
