@@ -12,6 +12,27 @@
 	compatible = "brcm,bcm2837";
 
 	fragment@0 {
+		target-path = "/";
+		__overlay__ {
+			reg_vdd_panel: tst043wvbi-regulator-vdd {
+				compatible = "regulator-fixed";
+				regulator-name = "tst043wvbi-vdd";
+				regulator-min-microvolt = <3300000>;
+				regulator-max-microvolt = <3300000>;
+				regulator-always-on;
+			};
+
+			reg_vccio_panel: tst043wvbi-regulator-vccio {
+				compatible = "regulator-fixed";
+				regulator-name = "tst043wvbi-vccio";
+				regulator-min-microvolt = <3300000>;
+				regulator-max-microvolt = <3300000>;
+				regulator-always-on;
+			};
+		};
+	};
+
+	fragment@1 {
 		target = <&dsi0>;
 		__overlay__ {
 			status = "okay";
@@ -26,12 +47,17 @@
 			// ili9806e driver has two compatiblity strings:
 			// 1. densitron,dmt028vghmcmi-1d
 			// 2. ortustech,com35h3p70ulc
-			dsi_screen:dmt028vghmcmi_1d@0 {
-				compatible = "densitron,dmt028vghmcmi-1d";
+			dsi_screen:tst043wvbi@0 {
+				compatible = "dongguan,tst043wvbi";
 				status = "okay";
 				reg = <0>;
+
 				// RESET gpio, use 1 to set active low
 				reset-gpios = <&gpio 17 1>;
+
+				vdd-supply = <&reg_vdd_panel>;
+				vccio-supply = <&reg_vccio_panel>;
+
 				port {
 					panel_dsi_port:endpoint {
 						remote-endpoint = <&dsi_out_port>;
@@ -41,10 +67,10 @@
 		};
 	};
 
-	fragment@1 {
+	fragment@2 {
 		target = <&gpio>;
 		__overlay__ {
-			dsi_screen_pins:dmt028vghmcmi_1d_pins {
+			dsi_screen_pins:tst043wvbi_pins {
 				brcm,pins = <17>;
 				brcm,function = <1>; // set gpio pin to output (1)
 				brcm,pull = <0>; // unset pulldown of gpio pin (no pulldown or pullup)

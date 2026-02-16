@@ -1,8 +1,9 @@
-obj-m += panel-ilitek-ili9806e-dsi.o
+obj-m += panel-tst043wvbi.o
 
 DEPMOD=$(shell which depmod)
 SRC=$(shell pwd)
 
+.PHONY: clean
 
 all:
 	@echo make: "$(MAKE)"
@@ -18,3 +19,6 @@ modules_install:
 
 	$(MAKE) -C /lib/modules/$(shell uname -r)/build M=$(SRC) modules_install
 	$(DEPMOD)
+
+clean:
+	rm -f $(wildcard *.mod) $(wildcard *.o) modules.order Module.symvers $(wildcard *.ko)
