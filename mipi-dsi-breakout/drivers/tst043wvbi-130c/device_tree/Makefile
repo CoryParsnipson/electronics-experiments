@@ -1,3 +1,3 @@
 all:
-	dtc -I dts -O dtb ilitek-ili9806e-overlay.dts -o ilitek-ili9806e-overlay.dtbo
-	mv ilitek-ili9806e-overlay.dtbo /boot/overlays/
+	dtc -I dts -O dtb tst043wvbi-overlay.dts -o tst043wvbi-overlay.dtbo
+	mv tst043wvbi-overlay.dtbo /boot/overlays/
