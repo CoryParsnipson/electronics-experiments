@@ -1,0 +1,11 @@
+# ignore all driver compilation artifacts
+
+modules.order
+Module.symvers
+
+*.mod.*
+*.mod
+*.ko
+*.o
+.*.o
+.*.cmd

@@ -709,6 +709,7 @@ static const struct panel_desc tst043wvbi_desc = {
 	.mode_flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_BURST |
 		      MIPI_DSI_MODE_LPM | MIPI_DSI_CLOCK_NON_CONTINUOUS,
 	.format = MIPI_DSI_FMT_RGB888,
+	.lanes = 2,
 };
 
 static const struct of_device_id ili9806e_of_match[] = {
