@@ -678,29 +678,26 @@ static void tst043wvbi_init(struct mipi_dsi_multi_context *ctx) {
 
 	// Page 0 Commands
 	mipi_dsi_dcs_write_seq_multi(ctx, 0xff, 0xff, 0x98, 0x06, 0x04, 0x00);
-
-	mipi_dsi_dcs_write_seq_multi(ctx, 0x21);
-	mipi_dsi_dcs_write_seq_multi(ctx, 0x36, 0x08);
 };
 
 static const struct drm_display_mode tst043wvbi_default_mode = {
-	.clock		= 22000,
+	.clock       = 22000,
 
-	.hdisplay	= 480,
-	.hsync_start	= 480 + 20,
-	.hsync_end	= 480 + 20 + 4,
-	.htotal		= 480 + 20 + 4 + 10,
+	.hdisplay    = 480,
+	.hsync_start = 480 + 20,
+	.hsync_end   = 480 + 20 + 4,
+	.htotal      = 480 + 20 + 4 + 10,
 
-	.vdisplay	= 800,
-	.vsync_start	= 800 + 40,
-	.vsync_end	= 800 + 40 + 4,
-	.vtotal		= 800 + 40 + 4 + 20,
+	.vdisplay    = 800,
+	.vsync_start = 800 + 40,
+	.vsync_end   = 800 + 40 + 4,
+	.vtotal      = 800 + 40 + 4 + 20,
 
-	.width_mm	= 56,
-	.height_mm	= 94,
+	.width_mm    = 56,
+	.height_mm   = 94,
 
-	.flags		= DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
-	.type		= DRM_MODE_TYPE_DRIVER | DRM_MODE_TYPE_PREFERRED,
+	.flags       = DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
+	.type        = DRM_MODE_TYPE_DRIVER | DRM_MODE_TYPE_PREFERRED,
 };
 
 static const struct panel_desc tst043wvbi_desc = {
