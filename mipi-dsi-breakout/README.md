@@ -337,7 +337,7 @@ This picture shows 4 copies of the boards with all circuits populated with all c
 
 There are optional (but highly recommended) 3d printable mounting brackets for whatever your testing needs require. They consist of 6 parts (4 parts, one for each screen and 2 types of mounting bases).
 
-You can find the files in [/mipi-dsi-breakout/mounting-brackets]:
+You can find the files in [/mipi-dsi-breakout/mounting-brackets](/mipi-dsi-breakout/mounting-brackets):
 
 * dsi-base-angled (a 60 degree angled holder to mount a screen to a surface via wood screws)
 
