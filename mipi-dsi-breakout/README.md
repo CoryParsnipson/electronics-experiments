@@ -94,7 +94,7 @@ MIPI DSI stands for *Mobile Industry Processor Interface Display Serial Interfac
 
 #### LVDS
 
-"Low Voltage Differential Signaling" actually refers to the transmission method and not an entire protocol, so it is not quite equivelant to other things on this list. In fact, MIPI DSI is a protocol that sits on top of LVDS. However, you may see this and "Enhanced LVDS" (eLVDS) when searching for screens and this just means that it uses LVDS and then a proprietary protocol on top to transmit data. This is common for larger screens such as for laptops and tablets, and only found buried in commercially manufactured devices. It is generally not recommended to use a screen that claims to use LVDS because it is hard to reverse engineer or find documentation on proprietary protocols, especially since they would be completely different across screens.
+"Low Voltage Differential Signaling" actually refers to the transmission method and not an entire protocol, so it is not quite equivelant to other things on this list. This term is usually kind of an umbrella term to refer to commercial or closed-source devices which have their own prioprietary protocol running on top of the LVDS transmission layer. This is common for larger screens such as for laptops and tablets. It is generally not recommended to use a screen that claims to use LVDS because it is hard to reverse engineer or find documentation on proprietary protocols, especially since they would be completely different across screens.
 
 #### SPI
 
@@ -104,7 +104,7 @@ SPI devices usually hook in through GPIO pins.
 
 #### RGB/MCU/Parallel/DPI
 
-Display Parallel Interface (DPI) is similar to SPI but is faster so supports higher resolutions. It still suffers from similar power and CPU overhead limitations. It also uses GPIO pins, but a very large amount. For example, in a Raspberry Pi, hooking up a DPI screen may use almost all of the 40 available GPIO pins. This is not convenient if one wants to integrate multiple peripherals to the same Raspberry Pi or other GPIO limited device.
+Display Parallel Interface (DPI) uses many more GPIO pins and as such the parallel configuration allows for much higher resolution or faster framerate than SPI devices do. It still suffers from similar power and CPU overhead limitations, but on the Raspberry Pi, there is a dedicated hardware block for driving DPI so aside from the GPIO usage, there is no overhead. For example, in a Raspberry Pi, hooking up a DPI screen may use almost all of the 40 available GPIO pins. This is not convenient if one wants to integrate multiple peripherals to the same Raspberry Pi or other GPIO limited device.
 
 ## Part Selection
 
@@ -148,7 +148,7 @@ The TST050HDBS-80C was also purchased from Dongguan Team off Aliexpress.
 
 An interesting thing about this is how large and lopsided the bezels on the touch panel are. It looks like this came from a small, budget tablet device.
 
-Another aspect of this part is that it is a 4 lane MIPI DSI device. The Raspberry Pi I am using has one DSI port with 2 lanes and another with 4 lanes. Supposedly, if you hook up a 4 lane device to a 2 lane host port, it should still work, but the bandwidth/framerate will be lower. I bought 2 different 5 inch screens with differing resolutions to see if you could notice the difference.
+Another aspect of this part is that it is a 4 lane MIPI DSI device. The Raspberry Pi I am using has one DSI port with 2 lanes and another with 4 lanes. There are displays out there that can be configured to support different numbers of lanes, so for those devices it may be possible to operate at either 2 or 4 lanes, as long as the proper configuration is in place. The number of lanes influences the amount of data or framerate that a screen can support. I bought 2 different 5 inch screens with differing resolutions to see if you could notice the difference.
 
 [Datasheet](/mipi-dsi-breakout/docs/TST050HDBS-80C.pdf?raw=true)
 
@@ -188,9 +188,9 @@ This project can be replicated with a different microcontroller, SBC, or PC, as 
 
 [Here is a schematic](https://files.waveshare.com/upload/7/75/CM3-board.pdf) of the compute module IO board plus with the DSI port pinout.
 
-### Zif Connector Selection
+### FFC Connector Selection
 
-On the custom PCB, zif (Zero-Insertion Force) connectors comprise the majority of components. Aside from pin header, the only other components are 4.7 kOhm resistors for the I2C lines.
+On the custom PCB, flat flexible cables (FFC)--also sometimes called zif (Zero-Insertion Force) connectors--comprise the majority of components. Aside from pin header, the only other components are 4.7 kOhm resistors for the I2C lines.
 
 * [8pos 0.5mm connector (for 5 inch CTP cable)](https://www.digikey.com/en/products/detail/te-connectivity-amp-connectors/2328702-8/9565576)
 * [10pos 0.5mm connector (for 4.3 inch CTP cable)](https://www.digikey.com/en/products/detail/te-connectivity-amp-connectors/1-2328702-0/9565577)
@@ -231,7 +231,7 @@ This part in paricular was a very useful reference for MIPI DSI signal routing:
 
 ### Differential High Speed Signal Background
 
-The MIPI DSI protocol relies on high speed differential pair signals. To create a MIPI DSI LCD interface board, we will need to know how to route these signals. High speed, meaning signals that switch with frequency higher than 50 MHz. For the DSI protocol, it can reach speeds up to 480 MHz, for higher resolutions and refresh speeds. In this project, we are targeting screens around 5 inches in size and slightly lower than HD resolution (480x800 or 1280x1024), so speeds will not be as high, but probably around the 50 - 100 MHz range.
+The MIPI DSI protocol relies on high speed differential pair signals. To create a MIPI DSI LCD interface board, we will need to know how to route these signals. High speed, meaning signals that switch with frequency higher than 50 MHz. DSI transmission can reach speeds of up to 1Gbit/s per lane for devices using the 1.0 D-PHY, meaning up to 500 MHz clock, since it uses double data rate transfer. Devices using newer versions of the D-PHY may even run up to 2.5GHz. The clock speed is commonly proportional to the resolution and refresh speed of a particular display. In this project, we are targeting screens around 5 inches in size and slightly lower than HD resolution (480x800 or 1280x1024), so speeds will not be as high, but probably around the 50 - 100 MHz range.
 
 The term differential pair refers to the fact that each signal is split into two complementary signals that are transmitted together. In other words, when one signal is high, the other signal is low. The destination device will receive both signals and take the difference between their values to recover the original signals.
 
@@ -325,7 +325,7 @@ I also used a regulated soldering iron with a 0.3mm conical smd tip to do some t
 
 > WARNING: this design has very large ground pours on all 4 layers of the PCB. This is something to take into consideration when trying to assemble the board.
 
-Here is a picture of one of the circuits with the zif connectors soldered on:
+Here is a picture of one of the circuits with the FFC connectors soldered on:
 
 ![Assembled 4.3 inch screen board](/images/mipi-dsi-breakout/tst043-assembled.jpg?raw=true)
 
@@ -393,9 +393,9 @@ Assembly Instructions:
 
 1. Use the M2.5 screws to mount the PCB to the back of the mounting bracket.
 
-1. Carefully insert all the zif cables of the DSI screen into the corresponding zif connectors on the PCB. This may be easier with the appropriate plyers or tweezers.
+1. Carefully insert all the cables of the DSI screen into the corresponding FFC connectors on the PCB. This may be easier with the appropriate plyers or tweezers.
 
-1. Insert one end of the 22 pin 20cm DSI cable into the bottom zif connector of the PCB. The other end goes to the Raspberry Pi breakout board, but do not connect this end yet.
+1. Insert one end of the 22 pin 20cm DSI cable into the bottom FFC connector of the PCB. The other end goes to the Raspberry Pi breakout board, but do not connect this end yet.
 
 1. Use the wood screws to mount the base brackets to a permanent surface.
 
@@ -411,7 +411,7 @@ Two angled bases were mounted to the board, in addition to three upright base br
 
 On top of the angled brackets is a breadboard for external peripheral circuitry.
 
-1. The 20cm long DSI cable is attached to the bottom zif connector of the PCB and the other end is slotted into the DISP0 or DISP1 port of the Raspberry Pi breakout board.
+1. The 20cm long DSI cable is attached to the bottom FFC connector of the PCB and the other end is slotted into the DISP0 or DISP1 port of the Raspberry Pi breakout board.
 
 1. The [ap5726-lcd-backlight-driver](/ap5726-lcd-backlight-driver) and [attiny-402-i2c-pwm-generator](attiny-402-i2c-pwm-generator) designs are reproduced on the breadboard and wired up to the VCC, GND, SDA, SCL, LEDA, and LEDK pins on the PCB. Do not forget the 1 million ohm pull down resistor on the enable pin of the backlight.
 
