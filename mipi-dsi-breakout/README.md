@@ -16,15 +16,15 @@ The PCB fabrication for this project is sponsored by [PCBWay](https://www.pcbway
 
 ![Assembled MIPI DSI breakout PCBs](/images/mipi-dsi-breakout/assembled-breakout.jpg?raw=true)
 
-When working with microcontrollers, you can buy "all-inclusive" LCD screen kits from electronics hobby stores that are basically plug and play. With this, the user experience is quite nice, needing only to plug in a video cable going from the LCD screen circuitry directly to the microcontroller. However, these kits leave little flexibilty terms of physical form factor, size and type of LCD screen, and price.
+When working with microcontrollers or single board computers (SBC), you can buy "all-inclusive" LCD screen kits from electronics hobby stores that are basically plug and play. With this, the user experience is quite nice, needing only to plug in a video cable going from the LCD screen circuitry directly to the microcontroller or SBC. However, these kits leave little flexibilty terms of physical form factor, size and type of LCD screen, and price.
 
-This project is an attempt to go beyond the beginner LCD peripherals offered by microcontroller hobby stores and interface directly with an LCD screen using custom peripheral circuitry. The hope is to increase the available LCD screens one can use beyond the small selection specifically available for a particular family of microcontroller products.
+This project is an attempt to go beyond the beginner LCD peripherals offered by electronics hobby stores and interface directly with an LCD screen using custom peripheral circuitry. The hope is to increase the available LCD screens one can use beyond the small selection specifically available for a particular ecosystem of microcontroller or SBC products.
 
 ### Background and Context
 
 ![OSOYOO 5 inch DSI LCD Screen for Raspberry Pi](/images/mipi-dsi-breakout/osoyoo-5in-dsi-screen-1.jpg?raw=true)
 
-An existing product like the [OSOYOO 5 inch DSI LCD Screen for Raspberry Pi](https://www.amazon.com/OSOYOO-Touchscreen-Monitor-Raspberry-800%C3%97480/dp/B0CWL7R8T4) was used as a reference base. This is a 5 inch screen that is designed to work out of the box with the Raspberry Pi family of microcontrollers.
+An existing product like the [OSOYOO 5 inch DSI LCD Screen for Raspberry Pi](https://www.amazon.com/OSOYOO-Touchscreen-Monitor-Raspberry-800%C3%97480/dp/B0CWL7R8T4) was used as a reference base. This is a 5 inch screen that is designed to work out of the box with the Raspberry Pi family of products.
 
 It is desirable for the following feaures:
 
@@ -46,7 +46,7 @@ For context into how this fits into a larger project, refer to the following blo
 
 ![System block diagram](/images/mipi-dsi-breakout/system-block-diagram.png?raw=true)
 
-Here we can see a motherboard for a Raspberry Pi Compute Module. This is a microcontroller board that you can use just like a regular computer once you hook up a keyboard, mouse, monitor, and power cord into it.
+Here we can see a motherboard for a Raspberry Pi Compute Module. This is a development board that you can use just like a regular computer once you hook up a keyboard, mouse, monitor, and power cord into it.
 
 On the right, there is a section labeled "LCD Screen" (imagine that it is the OSOYOO screen). Described in 4 numbered functional blocks surrounding the screen component is the peripheral circuitry required to connect the LCD screen to the microcontroller.
 
@@ -90,7 +90,7 @@ Some of the disadvantages are the relatively complicated (and physically large) 
 
 #### MIPI DSI
 
-MIPI DSI stands for *Mobile Industry Processor Interface Display Serial Interface*. For this project specifically, we have chosen to look for DSI screens exclusively because the DSI interface is convenient for Raspberry Pi microcontrollers. Having a DSI screen uses less power, supports higher resolutions and refresh rates, low physical profile, and does not take up GPIO or other ports that could be used for other things. The DSI protocol is also meant for internal connectors for mobile and low power and physical small devices.
+MIPI DSI stands for *Mobile Industry Processor Interface Display Serial Interface*. For this project specifically, we have chosen to look for DSI screens exclusively because the DSI interface is convenient for Raspberry Pi products. Having a DSI screen uses less power, supports higher resolutions and refresh rates, low physical profile, and does not take up GPIO or other ports that could be used for other things. The DSI protocol is also meant for internal connectors for mobile and low power and physical small devices.
 
 #### LVDS
 
@@ -104,7 +104,7 @@ SPI devices usually hook in through GPIO pins.
 
 #### RGB/MCU/Parallel/DPI
 
-Display Parallel Interface (DPI) is similar to SPI but is faster so supports higher resolutions. It still suffers from similar power and CPU overhead limitations. It also uses GPIO pins, but a very large amount. For example, in a Raspberry Pi, hooking up a DPI screen may use almost all of the 40 available GPIO pins. This is not convenient if one wants to integrate multiple peripherals to the same microcontroller.
+Display Parallel Interface (DPI) is similar to SPI but is faster so supports higher resolutions. It still suffers from similar power and CPU overhead limitations. It also uses GPIO pins, but a very large amount. For example, in a Raspberry Pi, hooking up a DPI screen may use almost all of the 40 available GPIO pins. This is not convenient if one wants to integrate multiple peripherals to the same Raspberry Pi or other GPIO limited device.
 
 ## Part Selection
 
@@ -184,7 +184,7 @@ The host for this project is a [Raspberry Pi CM3+ with 32 GB](https://www.raspbe
 
 The Raspberry Pi is paired with the [Compute Module IO Board Plus by Waveshare](https://www.waveshare.com/compute-module-io-board-plus.htm).
 
-This project can be replicated with a different microcontroller or PC, as long as the device supports DSI display ports. The compute module io board plus has a 22 pin DSI port with a specific pinout, so using a different microcontroller would most likely require modifying the designs in this repository to match.
+This project can be replicated with a different microcontroller, SBC, or PC, as long as the device supports DSI display ports. The compute module io board plus has a 22 pin DSI port with a specific pinout, so using a different product would most likely require modifying the designs in this repository to match.
 
 [Here is a schematic](https://files.waveshare.com/upload/7/75/CM3-board.pdf) of the compute module IO board plus with the DSI port pinout.
 
