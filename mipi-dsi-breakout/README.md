@@ -12,7 +12,7 @@ This was originally made with KiCAD 9.0.3.
 
 Massive thanks to aBUGSworstnightmare and 6by9 of the Raspberry Pi Forums for help debugging and many factual and editorial corrections to this README. The debugging and driver/software stage of this project would not be possible without their help.
 
-I am also thankful for the help and support from members of the SomthingAwful forums: babyeatingpsychopath, cakesmith handyman, Granite Octopus, Sgt Fox, ihafarm, HazCat, and many more.
+I am also thankful for the help and support from members of the SomthingAwful forums: babyeatingpsychopath, cakesmith handyman, Seat Safety Switch, Granite Octopus, Sgt Fox, ihafarm, HazCat, BlackTie, and many more.
 
 ## Sponsorship
 
