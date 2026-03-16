@@ -8,4 +8,5 @@ Module.symvers
 *.ko
 *.o
 .*.o
+.*.o.d
 .*.cmd

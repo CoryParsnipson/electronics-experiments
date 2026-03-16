@@ -81,5 +81,6 @@
 	__overrides__ {
 		reset = <&dsi_screen_pins>,"brcm,pins:8",
 			<&dsi_screen>,"reset-gpios:4";
+    rotation = <&dsi_screen>,"rotation:90";
 	};
 };

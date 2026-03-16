@@ -21,4 +21,4 @@ modules_install:
 	$(DEPMOD)
 
 clean:
-	rm -f $(wildcard *.mod) $(wildcard *.mod.*) $(wildcard *.o) modules.order Module.symvers $(wildcard *.ko) $(wildcard .*.o) $(wildcard .*.cmd)
+	rm -f $(wildcard *.mod) $(wildcard *.mod.*) $(wildcard *.o) modules.order Module.symvers $(wildcard *.ko) $(wildcard .*.o) $(wildcard .*.o.d) $(wildcard .*.cmd)
