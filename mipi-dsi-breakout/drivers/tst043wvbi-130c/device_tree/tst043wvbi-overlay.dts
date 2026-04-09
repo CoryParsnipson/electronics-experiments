@@ -55,6 +55,8 @@
 				// RESET gpio, use 1 to set active low
 				reset-gpios = <&gpio 17 1>;
 
+				rotation = <90>;
+
 				vdd-supply = <&reg_vdd_panel>;
 				vccio-supply = <&reg_vccio_panel>;
 
@@ -78,9 +80,40 @@
 		};
 	};
 
+	fragment@3 {
+		target = <&gpio>;
+		__overlay__ {
+			dsi_touchscreen_pins: goodix_pins {
+				brcm,pins = <27 22>;   // GPIO 27 (pin 13) and GPIO 22
+				brcm,function = <0 1>; // set interrupt pin as input and reset as output
+				brcm,pull = <0 2>;     // enable internal pull-up resistors
+			};
+		};
+	};
+
+	fragment@4 {
+		target = <&i2c1>; // i2c bank 1
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "okay";
+
+			dsi_touchscreen: gt911@5d {
+				compatible = "goodix,gt911";
+				reg = <0x5d>; // i2c address (needs to match above)
+				pinctrl-names = "default";
+				pinctrl-0 = <&dsi_touchscreen_pins>;
+				interrupt-parent = <&gpio>;
+				interrupts = <27 2>;
+				irq-gpios = <&gpio 27 0>; // set interrupt pin to gpio 27
+				reset-gpios = <&gpio 22 1>; // set reset pin to gpio 22
+			};
+		};
+	};
+
 	__overrides__ {
 		reset = <&dsi_screen_pins>,"brcm,pins:8",
 			<&dsi_screen>,"reset-gpios:4";
-    rotation = <&dsi_screen>,"rotation:90";
+		rotation = <&dsi_screen>, "rotation";
 	};
 };
