@@ -105,7 +105,7 @@ function set_brightness() {
 	device_name=$1
 	brightness=$2
 
-	echo $brightness | tee "/sys/class/backlight/$device_name/brightness"
+	echo $brightness > "/sys/class/backlight/$device_name/brightness"
 }
 
 function sigint_handler() {
@@ -136,4 +136,6 @@ while [ true ]; do
 
 	#set_brightness $DEVICE_NAME $curr_brightness # this is linear mapping
 	set_brightness $DEVICE_NAME ${exp_lut[$curr_brightness]}
+
+	sleep 0.005
 done
