@@ -60,6 +60,8 @@
 				vdd-supply = <&reg_vdd_panel>;
 				vccio-supply = <&reg_vccio_panel>;
 
+				backlight = <&attiny_backlight>;
+
 				port {
 					panel_dsi_port:endpoint {
 						remote-endpoint = <&dsi_out_port>;
@@ -107,6 +109,11 @@
 				interrupts = <27 2>;
 				irq-gpios = <&gpio 27 0>; // set interrupt pin to gpio 27
 				reset-gpios = <&gpio 22 1>; // set reset pin to gpio 22
+			};
+
+			attiny_backlight: backlight@3F {
+				compatible = "slackerparadise,attiny-i2c-pwm-bl";
+				reg = <0x3F>; /* i2c address (needs to match above) */
 			};
 		};
 	};
