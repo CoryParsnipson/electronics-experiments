@@ -1,0 +1,390 @@
+
+write_reg(0xFF);
+write_dat(0XFF);
+write_dat(0X98);
+write_dat(0X06);
+write_dat(0X04);
+write_dat(0X01);     // Change to Page 1
+
+write_reg(0x08);
+write_dat(0x10);   // output SDA
+
+write_reg(0x21);
+write_dat(0x01);   // DE = 1 Active
+
+write_reg(0x30);
+write_dat(0x02);   // 480 X 800
+
+write_reg(0x31);
+write_dat(0x00);   // 2dot Inversion
+
+write_reg(0x60);
+write_dat(0x07);   // SDTI
+
+write_reg(0x61);
+write_dat(0x06);   // CRTI
+
+write_reg(0x62);
+write_dat(0x06);   // EQTI
+
+write_reg(0x63);
+write_dat(0x04);   // PCTI
+
+write_reg(0x40);
+write_dat(0x14);   // BT  +2.5/-2.5 pump for DDVDH-L
+
+write_reg(0x41);
+write_dat(0x33);   // DVDDH DVDDL clamp  
+ 
+write_reg(0x42);
+write_dat(0x01);   // VGH/VGL 31.37ma 32.7ma  0.03
+
+write_reg(0x43);
+write_dat(0x09);   // VGH/VGL 13 -9  5 -3.8 1.6 -1.5 -2.75
+
+write_reg(0x44);
+write_dat(0x0A);   // VGH/VGL 
+
+write_reg(0x45);
+write_dat(0x0A);   // VGL_REG  -10V 
+
+write_reg(0x50);
+write_dat(0x78);   // VGMP
+
+write_reg(0x51);
+write_dat(0x78);   // VGMN
+
+write_reg(0x52);
+write_dat(0x00);   //Flicker
+
+write_reg(0x53);
+write_dat(0x3B);   //Flicker4F
+
+write_reg(0x57);
+write_dat(0x50);   //
+///==============Positive Gamma==============///
+write_reg(0xA0);
+write_dat(0x00);  // Gamma 0 /255
+
+write_reg(0xA1);
+write_dat(0x13);  // Gamma 4 /251
+
+write_reg(0xA2);
+write_dat(0x19);  // Gamma 8 /247
+
+write_reg(0xA3);
+write_dat(0x0C);  // Gamma 16	/239
+
+write_reg(0xA4);
+write_dat(0x06);  // Gamma 24 /231
+
+write_reg(0xA5);
+write_dat(0x0a);  // Gamma 52 / 203
+
+write_reg(0xA6);
+write_dat(0x06);  // Gamma 80 / 175
+
+write_reg(0xA7);
+write_dat(0x04);  // Gamma 108 /147
+
+write_reg(0xA8);
+write_dat(0x09);  // Gamma 147 /108
+
+write_reg(0xA9);
+write_dat(0x08);  // Gamma 175 / 80
+
+write_reg(0xAA);
+write_dat(0x12);  // Gamma 203 / 52
+
+write_reg(0xAB);
+write_dat(0x06);  // Gamma 231 / 24
+
+write_reg(0xAC);
+write_dat(0x0e);  // Gamma 239 / 16
+
+write_reg(0xAD);
+write_dat(0x0E);  // Gamma 247 / 8
+write_reg(0xAE);
+write_dat(0x09);  // Gamma 251 / 4
+
+write_reg(0xAF);
+write_dat(0x00);  // Gamma 255 / 0
+///==============Nagitive Gamma==============///
+write_reg(0xC0);
+write_dat(0x00);  // Gamma 0 
+
+write_reg(0xC1);
+write_dat(0x0D);  // Gamma 4
+
+write_reg(0xC2);
+write_dat(0x18);  // Gamma 8
+
+write_reg(0xC3);
+write_dat(0x0D);  // Gamma 16
+
+write_reg(0xC4);
+write_dat(0x06);  // Gamma 24
+
+write_reg(0xC5);
+write_dat(0x09);  // Gamma 52
+
+write_reg(0xC6);
+write_dat(0x07);  // Gamma 80
+
+write_reg(0xC7);
+write_dat(0x05);  // Gamma 108
+
+write_reg(0xC8);
+write_dat(0x08);  // Gamma 147
+
+write_reg(0xC9);
+write_dat(0x0E);  // Gamma 175
+
+write_reg(0xCA);
+write_dat(0x12);  // Gamma 203
+
+write_reg(0xCB);
+write_dat(0x09);  // Gamma 231
+
+write_reg(0xCC);
+write_dat(0x0e);  // Gamma 239
+
+write_reg(0xCD);
+write_dat(0x0E);  // Gamma 247
+
+write_reg(0xCE);
+write_dat(0x08);  // Gamma 251
+
+write_reg(0xCF);
+write_dat(0x00);  // Gamma 255
+//**************************************************************************//
+//****************************** Page 7 Command ****************************//
+//**************************************************************************//
+write_reg(0xFF);
+write_dat(0XFF);
+write_dat(0X98);
+write_dat(0X06);
+write_dat(0X04);
+write_dat(0X07);    // Change to Page 7
+
+write_reg(0x17);
+write_dat(0x32);
+
+write_reg(0x18);
+write_dat(0x1D);
+
+write_reg(0x26);
+write_dat(0xB2);
+
+write_reg(0x02);
+write_dat(0x77);
+
+write_reg(0xe1);
+write_dat(0x79);  // 
+
+write_reg(0xE1);
+write_dat(0x79);
+
+write_reg(0xB3);
+write_dat(0x10);
+//**************************************************************************//
+//****************************** Page 6 Command ****************************//
+//**************************************************************************//
+write_reg(0xFF);
+write_dat(0XFF);
+write_dat(0X98);
+write_dat(0X06);
+write_dat(0X04);
+write_dat(0X06);     // Change to Page 6
+
+write_reg(0x00);
+write_dat(0x20);
+
+write_reg(0x01);
+write_dat(0x04);
+
+write_reg(0x02);
+write_dat(0x00);    
+
+write_reg(0x03);
+write_dat(0x00);
+
+write_reg(0x04);
+write_dat(0x01);
+
+write_reg(0x05);
+write_dat(0x01);
+
+write_reg(0x06);
+write_dat(0x88);  
+
+write_reg(0x07);
+write_dat(0x04);
+
+write_reg(0x08);
+write_dat(0x01);
+
+write_reg(0x09);
+write_dat(0x90);  
+
+write_reg(0x0A);
+write_dat(0x03);  
+
+write_reg(0x0B);
+write_dat(0x01);  
+
+write_reg(0x0C);
+write_dat(0x01);
+
+write_reg(0x0D);
+write_dat(0x01);
+
+write_reg(0x0E);
+write_dat(0x00);
+
+write_reg(0x0F);
+write_dat(0x00);
+
+write_reg(0x10);
+write_dat(0x55);
+
+write_reg(0x11);
+write_dat(0x53);
+
+write_reg(0x12);
+write_dat(0x01);
+
+write_reg(0x13);
+write_dat(0x0D);
+
+write_reg(0x14);
+write_dat(0x0D);
+
+write_reg(0x15);
+write_dat(0x43);
+
+write_reg(0x16);
+write_dat(0x0B);
+
+write_reg(0x17);
+write_dat(0x00);
+
+write_reg(0x18);
+write_dat(0x00);
+
+write_reg(0x19);
+write_dat(0x00);
+
+write_reg(0x1A);
+write_dat(0x00);
+
+write_reg(0x1B);
+write_dat(0x00);
+
+write_reg(0x1C);
+write_dat(0x00);
+
+write_reg(0x1D);
+write_dat(0x00);
+
+write_reg(0x20);
+write_dat(0x01);
+
+write_reg(0x21);
+write_dat(0x23);
+
+write_reg(0x22);
+write_dat(0x45);
+
+write_reg(0x23);
+write_dat(0x67);
+
+write_reg(0x24);
+write_dat(0x01);
+
+write_reg(0x25);
+write_dat(0x23);
+
+write_reg(0x26);
+write_dat(0x45);
+
+write_reg(0x27);
+write_dat(0x67);
+
+write_reg(0x30);
+write_dat(0x02);
+
+write_reg(0x31);
+write_dat(0x22);
+
+write_reg(0x32);
+write_dat(0x11);
+
+write_reg(0x33);
+write_dat(0xAA);
+
+write_reg(0x34);
+write_dat(0xBB);
+
+write_reg(0x35);
+write_dat(0x66);
+
+write_reg(0x36);
+write_dat(0x00);
+
+write_reg(0x37);
+write_dat(0x22);
+
+write_reg(0x38);
+write_dat(0x22);
+
+write_reg(0x39);
+write_dat(0x22);
+
+write_reg(0x3A);
+write_dat(0x22);
+
+write_reg(0x3B);
+write_dat(0x22);
+
+write_reg(0x3C);
+write_dat(0x22);
+
+write_reg(0x3D);
+write_dat(0x22);
+
+write_reg(0x3E);
+write_dat(0x22);
+
+write_reg(0x3F);
+write_dat(0x22);
+
+write_reg(0x40);
+write_dat(0x22);
+
+write_reg(0x52);
+write_dat(0x10);
+
+write_reg(0x53);
+write_dat(0x12);  //VGLO refer VGL_REG
+
+write_reg(0x54);
+write_dat(0x13);
+//**************************************************************************//
+//****************************** Page 0 Command ****************************//
+//**************************************************************************//
+write_reg(0xFF);
+write_dat(0XFF);
+write_dat(0X98);
+write_dat(0X06);
+write_dat(0X04);
+write_dat(0X00);   // Change to Page 0
+
+//write_reg(0x21);
+
+//write_reg(0x36);
+//write_dat(0x08);
+
+write_reg(0x11);  // Sleep-Out
+Delayms(120);
+write_reg(0x29);  // Display On

@@ -1,0 +1,305 @@
+#define Width 720
+#define Height 1280
+
+#define VFP 16  
+#define VBP 14  
+#define VSA 4   
+
+#define HFP 40  
+#define HBP 40  
+#define HSA 20  
+ 
+==================================================
+
+DSI_CMD(0x04,0xB9); /// Set EXTC
+DSI_PA(0xF1);   //1
+DSI_PA(0x12);   //2
+DSI_PA(0x83);   //3
+
+DSI_CMD(0x1C,0xBA); /// Set DSI
+DSI_PA(0x33);   //1  // 0x33: 4 lane   0x32: 3 lane  0x31: 2 lane
+DSI_PA(0x81);   //2
+DSI_PA(0x05);   //3
+DSI_PA(0xF9);   //4
+DSI_PA(0x0E);   //5
+DSI_PA(0x0E);   //6
+DSI_PA(0x00);   //7
+DSI_PA(0x00);   //8
+DSI_PA(0x00);   //9
+DSI_PA(0x00);   //10
+DSI_PA(0x00);   //11
+DSI_PA(0x00);   //12
+DSI_PA(0x00);   //13
+DSI_PA(0x00);   //14
+DSI_PA(0x44);   //15
+DSI_PA(0x25);   //16
+DSI_PA(0x00);   //17
+DSI_PA(0x91);   //18
+DSI_PA(0x0A);   //19
+DSI_PA(0x00);   //20
+DSI_PA(0x00);   //21
+DSI_PA(0x02);   //22
+DSI_PA(0x4F);   //23
+DSI_PA(0xD1);   //24
+DSI_PA(0x00);   //25
+DSI_PA(0x00);   //26
+DSI_PA(0x37);   //27
+
+DSI_CMD(0x03,0xB8); ///Set ECP
+DSI_PA(0x23);    
+DSI_PA(0x22);
+
+
+DSI_CMD(0x04,0xBF); ///Set PCR
+DSI_PA(0x02);  //   
+DSI_PA(0x11);
+DSI_PA(0x00);
+
+
+DSI_CMD(0x0B,0xB3); /// SET RGB
+DSI_PA(0x0C);   //1 VBP_RGB_GEN 7
+DSI_PA(0x10);   //2 VFP_RGB_GEN 0B
+DSI_PA(0x0A);   //3 DE_BP_RGB_GEN 1E
+DSI_PA(0x50);   //4 DE_FP_RGB_GEN 1E
+DSI_PA(0x03);   //5
+DSI_PA(0xFF);   //6
+DSI_PA(0x00);   //7
+DSI_PA(0x00);   //8
+DSI_PA(0x00);   //9
+DSI_PA(0x00);   //10
+
+DSI_CMD(0x0A,0xC0); /// Set SCR
+DSI_PA(0x73);   //1  
+DSI_PA(0x73);   //2  
+DSI_PA(0x50);   //3
+DSI_PA(0x50);   //4
+DSI_PA(0x00);   //5
+DSI_PA(0x00);   //6
+DSI_PA(0x08);   //7
+DSI_PA(0x70);   //8  
+DSI_PA(0x00);   //9
+
+
+DSI_CMD(0x02,0xBC); /// Set VDC
+DSI_PA(0x46);   //1 defaut=46
+
+DSI_CMD(0x02,0xCC); /// Set Panel
+DSI_PA(0x0B);   //1 Forward:0x0B , Backward:0x07
+
+DSI_CMD(0x02,0xB4); /// Set Panel Inversion
+DSI_PA(0x80);   //1
+
+DSI_CMD(0x04,0xB2); /// Set RSO
+DSI_PA(0xC8);   //1
+DSI_PA(0x12);   //2
+DSI_PA(0x30);   //3
+
+DSI_CMD(0x0F,0xE3); /// Set EQ
+DSI_PA(0x07);   //1  PNOEQ                        
+DSI_PA(0x07);   //2  NNOEQ                        
+DSI_PA(0x0B);   //3  PEQGND                       
+DSI_PA(0x0B);   //4  NEQGND                       
+DSI_PA(0x03);   //5  PEQVCI                       
+DSI_PA(0x0B);   //6  NEQVCI                       
+DSI_PA(0x00);   //7  PEQVCI1                      
+DSI_PA(0x00);   //8  NEQVCI1                      
+DSI_PA(0x00);   //9  VCOM_PULLGND_OFF             
+DSI_PA(0x00);   //10 VCOM_PULLGND_OFF             
+DSI_PA(0xFF);   //11 VCOM_IDLE_ON                 
+DSI_PA(0x80);   //12                              
+DSI_PA(0xC0);   //13 defaut C0 ESD detect function
+DSI_PA(0x10);   //14 SLPOTP                      
+
+
+DSI_CMD(0x0D,0xC1); /// Set POWER	
+DSI_PA(0x25);   //1 VBTHS VBTLS 	
+DSI_PA(0x00);	//2 E3
+DSI_PA(0x1E);   //3 VSPR	
+DSI_PA(0x1E);   //4 VSNR	
+DSI_PA(0x77);   //5 VSP VSN	
+DSI_PA(0xF1);   //6 APS	
+DSI_PA(0xFF);   //7 VGH1 VGL1	
+DSI_PA(0xFF);   //8 VGH1 VGL1	
+DSI_PA(0xCC);   //9 VGH2 VGL2	
+DSI_PA(0xCC);   //10 VGH2 VGL2	
+DSI_PA(0x77);   //11 VGH3 VGL3	
+DSI_PA(0x77);   //12 VGH3 VGL3
+
+
+DSI_CMD(0x03,0xB5); /// Set BGP
+DSI_PA(0x0A);   //1 vref
+DSI_PA(0x0A);   //2 nvref
+
+DSI_CMD(0x03,0xB6); /// Set VCOM
+DSI_PA(0x50);   //1 F_VCOM
+DSI_PA(0x50);   //2 B_VCOM
+
+DSI_CMD(0x40,0xE9); /// Set GIP
+DSI_PA(0xC2);  //1  PANSEL      //04,C4
+DSI_PA(0x10);  //2  SHR_0[11:8] //00,10
+DSI_PA(0x0F);  //3  SHR_0[7:0]  //04,0F 
+DSI_PA(0x00);  //4  SHR_1[11:8]
+DSI_PA(0x00);  //5  SHR_1[7:0]  
+DSI_PA(0xB2);  //6  SPON[7:0]   B2
+DSI_PA(0xB8);  //7  SPOFF[7:0]  B8
+DSI_PA(0x12);  //8  SHR0_1[3:0], SHR0_2[3:0]
+DSI_PA(0x31);  //9  SHR0_3[3:0], SHR1_1[3:0]
+DSI_PA(0x23);  //10  SHR1_2[3:0], SHR1_3[3:0]
+DSI_PA(0x48);  //11  SHP[3:0], SCP[3:0]  48
+DSI_PA(0x8B);  //12  CHR[7:0]  //08,8B
+DSI_PA(0xB2);  //13  CON[7:0]  B2
+DSI_PA(0xB8);  //14  COFF[7:0] B8 
+DSI_PA(0x47);  //15  CHP[3:0], CCP[3:0]  47
+DSI_PA(0x20);  //16  USER_GIP_GATE[7:0]
+DSI_PA(0x00);  //17  CGTS_L[21:16]
+DSI_PA(0x00);  //18  CGTS_L[15:8]
+DSI_PA(0x30);  //19  CGTS_L[7:0]
+DSI_PA(0x00);  //20  CGTS_INV_L[21:16]
+DSI_PA(0x00);  //21  CGTS_INV_L[15:8]
+DSI_PA(0x00);  //22  CGTS_INV_L[7:0]
+DSI_PA(0x00);  //23  CGTS_R[21:16]
+DSI_PA(0x00);  //24  CGTS_R[15:8]
+DSI_PA(0x30);  //25  CGTS_R[7:0]
+DSI_PA(0x00);  //26  CGTS_INV_R[21:16]
+DSI_PA(0x00);  //27  CGTS_INV_R[15:8]
+DSI_PA(0x00);  //28  CGTS_INV_R[7:0]
+DSI_PA(0x02);  //29  COS1_L[3:0],  COS2_L[3:0] ,// CLK_L_1  CLK_L_2 
+DSI_PA(0x46);  //30  COS3_L[3:0],  COS4_L[3:0] ,// CLKB_L_1 CLKB_L_2  
+DSI_PA(0x02);  //31  COS5_L[3:0],  COS6_L[3:0] ,// STV_L_1  STV_L_2 
+DSI_PA(0x88);  //32  COS7_L[3:0],  COS8_L[3:0] ,//
+DSI_PA(0x88);  //33  COS9_L[3:0],  COS10_L[3:0],//
+DSI_PA(0x88);  //34  COS11_L[3:0], COS12_L[3:0],//
+DSI_PA(0x88);  //35  COS13_L[3:0], COS14_L[3:0],//
+DSI_PA(0x88);  //36  COS15_L[3:0], COS16_L[3:0],//
+DSI_PA(0x88);  //37  COS17_L[3:0], COS18_L[3:0],//      
+DSI_PA(0x88);  //38  COS19_L[3:0], COS20_L[3:0],// 
+DSI_PA(0xF8);  //39  COS21_L[3:0], COS22_L[3:0],// FW BW
+DSI_PA(0x13);  //40  COS1_R[3:0],  COS2_R[3:0] ,// CLK_R_1  CLK_R_2
+DSI_PA(0x57);  //41  COS3_R[3:0],  COS4_R[3:0] ,// CLKB_R_1 CLKB_R_2 
+DSI_PA(0x13);  //42  COS5_R[3:0],  COS6_R[3:0] ,// STV_R_1  STV_R_2 
+DSI_PA(0x88);  //43  COS7_R[3:0],  COS8_R[3:0] ,//
+DSI_PA(0x88);  //44  COS9_R[3:0],  COS10_R[3:0],//
+DSI_PA(0x88);  //45  COS11_R[3:0], COS12_R[3:0],//
+DSI_PA(0x88);  //46  COS13_R[3:0], COS14_R[3:0],//
+DSI_PA(0x88);  //47  COS15_R[3:0], COS16_R[3:0],//
+DSI_PA(0x88);  //48  COS17_R[3:0], COS18_R[3:0],// 
+DSI_PA(0x88);  //49  COS19_R[3:0], COS20_R[3:0],// 
+DSI_PA(0xF8);  //50  COS21_R[3:0], COS22_R[3:0],// FW BW
+DSI_PA(0x00);  //51  TCONOPTION
+DSI_PA(0x00);  //52  OPTION
+DSI_PA(0x00);  //53  OTPION
+DSI_PA(0x00);  //54  OPTION
+DSI_PA(0x00);  //55  CHR2
+DSI_PA(0x00);  //56  CON2
+DSI_PA(0x00);  //57  COFF2
+DSI_PA(0x00);  //58  CHP2,CCP2
+DSI_PA(0x00);  //59  CKS 21 20 19 18 17 16
+DSI_PA(0x00);  //60  CKS 15 14 13 12 11 10 9 8
+DSI_PA(0x00);  //61  CKS 7~0
+DSI_PA(0x00);  //62  COFF[7:6]   CON[5:4]    SPOFF[3:2]    SPON[1:0]
+DSI_PA(0x00);  //63  COFF2[7:6]    CON2[5:4]   - - - -
+
+DSI_CMD(0x3E,0xEA); /// Set GIP2
+DSI_PA(0x00);  //1  ys2_sel[1:0]
+DSI_PA(0x1A);  //2  user_gip_gate1[7:0]
+DSI_PA(0x00);  //3  ck_all_on_width1[5:0]
+DSI_PA(0x00);  //4  ck_all_on_width2[5:0]
+DSI_PA(0x00);  //5  ck_all_on_width3[5:0]
+DSI_PA(0x00);  //6  ys_flag_period[7:0]
+DSI_PA(0x02);  //7  ys_2
+DSI_PA(0x00);  //8  user_gip_gate1_2[7:0]
+DSI_PA(0x00);  //9  ck_all_on_width1_2[5:0]
+DSI_PA(0x00);  //10 ck_all_on_width2_2[5:0]
+DSI_PA(0x00);  //11 ck_all_on_width3_2[5:0]
+DSI_PA(0x00);  //12 ys_flag_period_2[7:0]
+DSI_PA(0x75);  //13 COS1_L[3:0], COS2_L[3:0]   // CLK_L_1 CLK_L_2 
+DSI_PA(0x31);  //14 COS3_L[3:0], COS4_L[3:0]   // CLKB_L_1 CLKB_L_2 
+DSI_PA(0x31);  //15 COS5_L[3:0], COS6_L[3:0]   // STV_L_1 STV_L_2 
+DSI_PA(0x88);  //16 COS7_L[3:0], COS8_L[3:0]
+DSI_PA(0x88);  //17 COS9_L[3:0], COS10_L[3:0]
+DSI_PA(0x88);  //18 COS11_L[3:0], COS12_L[3:0]
+DSI_PA(0x88);  //19 COS13_L[3:0], COS14_L[3:0]
+DSI_PA(0x88);  //20 COS15_L[3:0], COS16_L[3:0]
+DSI_PA(0x88);  //21 COS17_L[3:0], COS18_L[3:0]           
+DSI_PA(0x88);  //22 COS19_L[3:0], COS20_L[3:0]        
+DSI_PA(0x8F);  //23 COS21_L[3:0], COS22_L[3:0]		  FW   BW	
+DSI_PA(0x64);  //24 COS1_R[3:0], COS2_R[3:0]   // CLK_R_1  CLK_R_2
+DSI_PA(0x20);  //25 COS3_R[3:0], COS4_R[3:0]   // CLKB_R_1 CLKB_R_2
+DSI_PA(0x20);  //26 COS5_R[3:0], COS6_R[3:0]   // STV_R_1  STV_R_2
+DSI_PA(0x88);  //27 COS7_R[3:0], COS8_R[3:0]
+DSI_PA(0x88);  //28 COS9_R[3:0], COS10_R[3:0]
+DSI_PA(0x88);  //29 COS11_R[3:0], COS12_R[3:0]
+DSI_PA(0x88);  //30 COS12_R[3:0], COS14_R[3:0]
+DSI_PA(0x88);  //31 COS15_R[3:0], COS16_R[3:0]
+DSI_PA(0x88);  //32 COS17_R[3:0], COS18_R[3:0]       
+DSI_PA(0x88);  //33 COS19_R[3:0], COS20_R[3:0] 		      
+DSI_PA(0x8F);  //34 COS21_R[3:0], COS22_R[3:0] // FW BW
+DSI_PA(0x23);  //35 EQOPT , EQ_SEL
+DSI_PA(0x10);  //36 EQ_DELAY[7:0]
+DSI_PA(0x00);  //37 EQ_DELAY_HSYNC [3:0]
+DSI_PA(0x00);  //38 HSYNC_TO_CL1_CNT9[8]
+DSI_PA(0x02);  //39 HSYNC_TO_CL1_CNT9[7:0]
+DSI_PA(0x00);  //40 HIZ_L
+DSI_PA(0x00);  //41 HIZ_R
+DSI_PA(0x00);  //42 CKS_GS[21:16]
+DSI_PA(0x00);  //43 CKS_GS[15:8]
+DSI_PA(0x00);  //44 CKS_GS[7:0]
+DSI_PA(0x00);  //45 CK_MSB_EN[21:16]
+DSI_PA(0x00);  //46 CK_MSB_EN[15:8]
+DSI_PA(0x00);  //47 CK_MSB_EN[7:0]
+DSI_PA(0x00);  //48 CK_MSB_EN_GS[21:16]
+DSI_PA(0x00);  //49 CK_MSB_EN_GS[15:8]
+DSI_PA(0x00);  //50 CK_MSB_EN_GS[7:0]
+DSI_PA(0x00);  //51  SHR2[11:8]
+DSI_PA(0x00);  //52  SHR2[7:0]
+DSI_PA(0x00);  //53  SHR2_1[3:0] SHR2_2
+DSI_PA(0x00);  //54  SHR2_3[3:0]
+DSI_PA(0x00);  //55 SHP1[3:0]
+DSI_PA(0x00);  //56 SPON1[7:0]
+DSI_PA(0x00);  //57 SPOFF1[7:0]
+DSI_PA(0x00);  //58 SHP2[3:0]
+DSI_PA(0x00);  //59 SPON2[7:0]
+DSI_PA(0x00);  //60 SPOFF2[7:0]
+DSI_PA(0x00);  //61 SPOFF2[9:8]/SPON2[9:8]/SPOFF1[9:8]/SPON1[9:8]
+
+DSI_CMD(0x23,0xE0); /// Set Gamma
+DSI_PA(0x00);   //1
+DSI_PA(0x02);   //2
+DSI_PA(0x01);   //3
+DSI_PA(0x36);   //4
+DSI_PA(0x38);   //5
+DSI_PA(0x3F);   //6
+DSI_PA(0x2E);   //7
+DSI_PA(0x28);   //8
+DSI_PA(0x07);   //9
+DSI_PA(0x08);   //10
+DSI_PA(0x0D);   //11
+DSI_PA(0x10);   //12
+DSI_PA(0x14);   //13
+DSI_PA(0x10);   //14
+DSI_PA(0x16);   //15
+DSI_PA(0x0E);   //16
+DSI_PA(0x0E);   //17
+DSI_PA(0x00);   //18
+DSI_PA(0x02);   //19
+DSI_PA(0x01);   //20
+DSI_PA(0x36);   //21
+DSI_PA(0x38);   //22
+DSI_PA(0x3F);   //23
+DSI_PA(0x2E);   //24
+DSI_PA(0x28);   //25
+DSI_PA(0x07);   //26
+DSI_PA(0x08);   //27
+DSI_PA(0x0D);   //28
+DSI_PA(0x10);   //29
+DSI_PA(0x14);   //30
+DSI_PA(0x10);   //31
+DSI_PA(0x16);   //32
+DSI_PA(0x0E);   //33
+DSI_PA(0x0E);   //34
+  
+DSI_CMD(0x01,0x11); ////Sleep Out
+DelayX1ms(250);
+
+DSI_CMD(0x01,0x29); ///Display On
+DelayX1ms(50);
