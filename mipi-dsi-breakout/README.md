@@ -12,7 +12,7 @@ This was originally made with KiCAD 9.0.3.
 
 Massive thanks to aBUGSworstnightmare and 6by9 of the Raspberry Pi Forums for help debugging and many factual and editorial corrections to this README. The debugging and driver/software stage of this project would not be possible without their help.
 
-I am also thankful for the help and support from members of the SomthingAwful forums: babyeatingpsychopath, cakesmith handyman, Seat Safety Switch, Granite Octopus, Sgt Fox, ihafarm, HazCat, BlackTie, and many more.
+I am also thankful for the help and support from members of the SomthingAwful forums: babyeatingpsychopath, cakesmith handyman/bad dragon breath, Seat Safety Switch, Granite Octopus, Sgt Fox, ihafarm, HazCat, BlackTie, and many more.
 
 ## Sponsorship
 
@@ -440,8 +440,85 @@ This was developed on a Raspbian OS (Debian 11/Bullseye) running on a Raspberry 
 
 ### Driver development
 
-TBD
+The software component of getting the MIPI DSI screens working consists of two main parts:
 
-### Usage
+1. Changes needed for the device tree
+1. Making sure a compatible driver is loaded into the OS
 
-TBD
+Unfortunately, these items must be individually implemented on every different operating system or distribution with varying degrees of code reuse. For this project, we are aiming to having this running on a Raspberry Pi CM3 (which influences the device tree part) and with Raspberry Pi OS (the driver part).
+
+Software related files can be found in the `driver` subfolder and split by screen part. Within each screen, there are files split between device tree and driver source code.
+
+```
+drivers
+├── attiny-i2c-pwm-bl
+│   ├── attiny-i2c-pwm-bl.c
+│   └── Makefile
+└── tst043wvbi-130c
+    ├── device_tree
+    │   ├── Makefile
+    │   └── tst043wvbi-overlay.dts
+    └── driver_mod
+        ├── Makefile
+        └── panel-tst043wvbi.c
+```
+
+#### attiny-i2c-pwm-bl
+
+This is not a screen driver, but a driver for the attiny i2c pwm generator that controls the brightness on each screen.
+
+This driver needs to be installed alongside the other 4 screen drivers so you can control screen brightness from linux userspace or at least with higher level file operations. Once this driver is in place, it should be possible to change the brightness of the display by writing a number between 0 and 65535 to the `/sys/class/backlight/<device id>/brightness` file, no superuser permissions required.
+
+#### TST043WVBI-130C
+
+The 4.3 inch DSI screen uses the ILI9806e driver chip. Luckily this is a common part for small LCD screens of similar size. This also means there is an [existing ILI9806e driver in the linux kernel](https://codebrowser.dev/linux/linux/drivers/gpu/drm/panel/panel-ilitek-ili9806e.c.html) that we can base our driver on. This driver is so similar that the modified driver in this repository only consists of incremental changes to get this particular TST043WVBI screen working.
+
+##### Driver
+
+The `drivers/tst043wvbi-130c/driver_mod/panel-tst043wvbi.c` file includes additions for a new supported device with compatibility string "dongguan,tst043wvbi" (I chose the name based on the supplier and part number). Basically we only need to copy all the structs of the two existing screens and add in the parameters for the 4.3 inch DSI screen.
+
+Important sections include the `drm_display_mode` driver, which specify the resolution of the screen and that the clock is at 22000 (this may seem like an odd number, but it is important to set it to this value). The panel description of the tst043wvbi includes the fact that it has 2 lanes and is in RGB888 format.
+
+Lastly, the screen needs its own unique initialization sequence, included in the driver (`tst043wvbi_init`) that is specified by the manufacturer. The original init sequence text provided by the supplier can be found in the `mipi-dsi-breakout/docs` folder in `init_seq_ili9806_boe43.txt`.
+
+##### Device Tree Overlay
+
+The TST043WVBI has several components, thus requiring a more elaborate device tree overlay.
+
+The most prominent part is probably the fragment that contains the DSI device targeting `dsi0`. There is a subsection labeled `dsi_screen` where the device parameters can be set. Note that the compatibility string is set to match what is in the driver.
+
+This screen requires a separate GPIO for reset. The value of this GPIO must be paid careful attention to wire this up from the RPi pin header properly.
+
+There are also two power supply handles as well as a backlight device handle and finally a remote endpoint to associate the inner `dsi_screen` device to the `dsi0` port.
+
+There are two separate sections to describe both voltage regulators. One is for main power input and the other is for digital logic power. In this design, there were no regulators or load switch mechanism planned on the PCB, so we will "fake" the devices by using a `regulator-fixed` type for both. This corresponds nicely to the fact that both of these input pins on our PCB are hardwired to the RPi's 3.3V power rail.
+
+> NOTE: if this were an actual product, it would probably be desirable to add a buck-boost converted in front of the LCD screen's power pins so that it could handle a wide range of input voltages. At the very least, a load switch would work, so you could disconnect the power pins via software. In this case, the electrical complexity and the device descriptors in the device tree overlay would be more complicated.
+
+Next there are two sections that target the gpio to add dsi screen GPIO pins. The first is for the reset GPIO, and the second is to assign GPIO needed for the bundled capacitive touch screen module, which is driven by a Goodix GT911 IC.
+
+The last interest part is the `attiny_backlight` section that describes the attiny pwm generator. Recall, that there is a reference to this section under the `dsi_screen` section assigned to the `backlight` key. This config is simple, only requiring an I2C device address and a compatibility string.
+
+##### Usage
+
+To compile the driver, use the Makefile and run `make && sudo make modules_install` in the `driver_mod` directory. The install command will copy the driver binary into the proper linux module directory and also run depmod, which is important.
+
+You can test to see if the driver will load without issue by using `modprobe panel-tst043wvbi` and checking if it is loaded with `lsmod`.
+
+Don't forget to also compile and install the attiny-i2c-pwm-bl driver with `make && sudo make modules_install` as well.
+
+The device tree overlay compilation is similar:
+
+```
+sudo make
+```
+
+This will compile the `.dts` file into a `.dtbo` binary and then move it into the `/boot/overlays` directory for you.
+
+For debug purposes, you can also dump the current device tree with `make dump`.
+
+Once the device tree overlay is compiled and in the right place, don't forget to add it to the `/boot/firmware/config.txt` file:
+
+```
+dtoverlay=tst043wvbi-overlay
+```
