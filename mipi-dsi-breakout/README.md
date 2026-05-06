@@ -473,6 +473,8 @@ This driver needs to be installed alongside the other 4 screen drivers so you ca
 
 The 4.3 inch DSI screen uses the ILI9806e driver chip. Luckily this is a common part for small LCD screens of similar size. This also means there is an [existing ILI9806e driver in the linux kernel](https://codebrowser.dev/linux/linux/drivers/gpu/drm/panel/panel-ilitek-ili9806e.c.html) that we can base our driver on. This driver is so similar that the modified driver in this repository only consists of incremental changes to get this particular TST043WVBI screen working.
 
+![The TST043WVBI-130C screen module fully working!](/images/mipi-dsi-breakout/tst043-working.jpg?raw=true)
+
 ##### Driver
 
 The `drivers/tst043wvbi-130c/driver_mod/panel-tst043wvbi.c` file includes additions for a new supported device with compatibility string "dongguan,tst043wvbi" (I chose the name based on the supplier and part number). Basically we only need to copy all the structs of the two existing screens and add in the parameters for the 4.3 inch DSI screen.
